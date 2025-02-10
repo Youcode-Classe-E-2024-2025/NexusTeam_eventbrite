@@ -15,4 +15,5 @@ return array(
     'c7baa00073ee9c61edf148c51917cfb4' => $vendorDir . '/twig/twig/src/Resources/escaper.php',
     'f844ccf1d25df8663951193c3fc307c8' => $vendorDir . '/twig/twig/src/Resources/string_loader.php',
     'cea98799a362ab48d08b30c6896f078a' => $baseDir . '/App/Config/config.php',
+    '7166b6cfea6cf44f740814aed3104b73' => $baseDir . '/App/Helpers/dd.php',
 );

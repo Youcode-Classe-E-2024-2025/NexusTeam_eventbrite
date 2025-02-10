@@ -5,7 +5,7 @@ namespace App\Core;
 class Request
 {
 
-    private array $data;
+    private array $data = [];
 
     public function __construct()
     {
@@ -19,7 +19,8 @@ class Request
 
     }
 
-    public function merge(array $data){
+    public function merge(array $data): void
+    {
         $this->data = array_merge($this->data, $data);
     }
 
@@ -27,11 +28,17 @@ class Request
         return $this->data[$key];
     }
 
-    public function isPost(){
+    public function all(): array{
+        return $this->data;
+    }
+
+    public function isPost(): bool
+    {
         return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
-    public function isGet(){
+    public function isGet(): bool
+    {
         return $_SERVER['REQUEST_METHOD'] === 'GET';
     }
 

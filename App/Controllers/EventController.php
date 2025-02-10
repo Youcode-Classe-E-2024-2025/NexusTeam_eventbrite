@@ -26,4 +26,18 @@ class EventController
         View::render("Events/evv", ['event' => $data]);
     }
 
+    public function store(Request $request): void {
+        if ($request->isPost()){
+            $event = new Event();
+            $event->fill($request->all());
+
+            if ($event->create()){
+                echo 'EVENT CREATED';
+            } else {
+                echo 'HAPPENED';
+            }
+            exit;
+        }
+    }
+
 }

@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Models;
 
 use App\Core\Database;
 use DateTime;
 
-class Event {
+class Event
+{
 
     private int $id;
     private string $title;
@@ -18,7 +20,8 @@ class Event {
 
     private readonly Database $pdo;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->pdo = Database::getInstance();
         $this->id = 0;
         $this->title = "";
@@ -82,9 +85,9 @@ class Event {
         return $this->date;
     }
 
-    public function setDate(DateTime $date): Event
+    public function setDate(string $date): Event
     {
-        $this->date = $date;
+        $this->date = new DateTime($date);
         return $this;
     }
 
@@ -137,9 +140,14 @@ class Event {
         return $this->is_sponsored;
     }
 
-    public function setIsSponsored(bool $is_sponsored): Event
+    public function setIsSponsored(string $is_sponsored): Event
     {
-        $this->is_sponsored = $is_sponsored;
+        if ($is_sponsored === 'on'){
+            $this->is_sponsored = true;
+        } else {
+            $this->is_sponsored = false;
+        }
+
         return $this;
     }
 
@@ -147,12 +155,14 @@ class Event {
     /**
      * @throws \Exception
      */
-    public function getAll(): array{
+    public function getAll(): array
+    {
         $sql = "SELECT * FROM events";
         return $this->pdo->fetchAll($sql);
     }
 
-    public function getById(): self {
+    public function getById(): self
+    {
         $sql = "SELECT * FROM events WHERE id = :id";
         $result = $this->pdo->fetch($sql, [":id" => $this->id]);
 
@@ -161,5 +171,19 @@ class Event {
         return $event;
     }
 
+    public function create(): bool
+    {
+        $sql = "INSERT INTO events (title, description, event_date, location, price, capacity, status, is_sponsored) 
+        VALUES (:title, :description, :date, :location, :price, :capacity, :status, :is_sponsored)";
+        $params = [":title" => $this->title,
+            ":description" => $this->description,
+            ":date" => $this->date->format('Y-m-d H:i:s'),
+            ":location" => $this->location,
+            ":price" => $this->price,
+            ":capacity" => $this->capacity,
+            ":status" => $this->status,
+            ":is_sponsored" => $this->is_sponsored];
+        return (bool)$this->pdo->execute($sql, $params);
+    }
 
 }
