@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\Request;
 use App\Core\View;
 use App\Models\Event;
 
@@ -13,13 +14,13 @@ class EventController
         $event = new Event();
         $data = $event->getAll();
 
-        View::render("Events/event", ['events' => $data]);
+        View::render("Events/addEvent", ['events' => $data]);
     }
 
-    public function show($id): void {
+    public function show(Request $request): void {
 
         $event = new Event();
-        $event->setId($id);
+        $event->setId($request->get('id'));
         $data = $event->getById();
 
         View::render("Events/evv", ['event' => $data]);

@@ -41,8 +41,10 @@ class Router
                 $methodName = $handlerName[1];
 
                 if (class_exists($className) && method_exists($className, $methodName)) {
+                    $request = new Request();
+                    $request->merge($args);
                     $controller = new $className();
-                    $controller->$methodName(...$args);
+                    $controller->$methodName($request);
                     return;
                 } else {
                     throw new RuntimeException("Controller or method not found: $className@$methodName");
