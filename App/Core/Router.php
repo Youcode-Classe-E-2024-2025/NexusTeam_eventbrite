@@ -8,6 +8,7 @@ class Router
 {
     private array $routes = [];
     private string $namespace = 'App\Controllers\\';
+    private Request $request;
 
     public function add($method, $path, $handler): void
     {
@@ -16,6 +17,8 @@ class Router
             'path' => $path,
             'handler' => $handler
         ];
+
+        $this->request = new Request();
     }
 
     public function dispatch(): void
@@ -41,8 +44,9 @@ class Router
                 $methodName = $handlerName[1];
 
                 if (class_exists($className) && method_exists($className, $methodName)) {
+                    $this->request->merge($args);
                     $controller = new $className();
-                    $controller->$methodName(...$args);
+                    $controller->$methodName($this->request);
                     return;
                 } else {
                     throw new RuntimeException("Controller or method not found: $className@$methodName");
