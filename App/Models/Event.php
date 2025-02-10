@@ -37,6 +37,19 @@ class Event {
         $this->is_sponsored = false;
     }
 
+
+    public function fill(array $data): void
+    {
+        foreach ($data as $key => $value) {
+            $setter = 'set' . ucfirst($key);
+            if (method_exists($this, $setter)) {
+                $this->$setter($value);
+            } else {
+                $this->$key = $value;
+            }
+        }
+    }
+
     public function getId(): int
     {
         return $this->id;
