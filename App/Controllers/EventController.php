@@ -13,7 +13,7 @@ class EventController
         $event = new Event();
         $data = $event->getAll();
 
-        View::render("event", ['events' => $data]);
+        View::render("Events/event", ['events' => $data]);
     }
 
     public function show($id): void {
@@ -22,7 +22,7 @@ class EventController
         $event->setId($id);
         $data = $event->getById();
 
-        View::render("evv", ['event' => $data]);
+        View::render("Events/evv", ['event' => $data]);
     }
 
 }

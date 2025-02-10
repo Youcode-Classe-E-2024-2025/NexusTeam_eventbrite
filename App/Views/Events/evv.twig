@@ -1,0 +1,9 @@
+{# Views/Events/evv.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Event Details{% endblock %}
+
+{% block content %}
+    <h2>{{ event.getTitle() }}</h2>
+    <p>{{ event.getDescription() }}</p>
+{% endblock %}
