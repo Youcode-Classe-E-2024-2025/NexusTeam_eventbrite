@@ -7,6 +7,7 @@ use RuntimeException;
 class Router
 {
     private array $routes = [];
+    private string $namespace = 'App\Controllers\\';
 
     public function add($method, $path, $handler): void
     {
@@ -36,12 +37,12 @@ class Router
                     throw new RuntimeException("Invalid handler format. Expected 'Controller@method'.");
                 }
 
-                $className = ucfirst($handlerName[0]) . 'Controller';
+                $className = $this->namespace . $handlerName[0];
                 $methodName = $handlerName[1];
 
                 if (class_exists($className) && method_exists($className, $methodName)) {
                     $controller = new $className();
-                    return call_user_func_array([$controller, $methodName], $args);
+                    $controller->$methodName(...$args);
                 } else {
                     throw new RuntimeException("Controller or method not found: $className@$methodName");
                 }
