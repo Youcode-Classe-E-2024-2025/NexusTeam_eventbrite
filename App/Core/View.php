@@ -8,17 +8,22 @@ use Twig\Error\SyntaxError;
 
 class View
 {
-    /**
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws LoaderError
-     */
+    private static $path = __DIR__ . "/../Views";
+
     public static function render($view, $data = []): void
     {
-        $loader  = new \Twig\Loader\FilesystemLoader(__DIR__ . "/../../Views");
-        $twig = new \Twig\Environment($loader);
+        $loader  = new \Twig\Loader\FilesystemLoader(self::$path);
+        $twig = new \Twig\Environment($loader, [
+            'debug' => true,
+        ]);
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
+
         $view = "$view.twig";
 
-        echo $twig->render($view, $data);
+        if (file_exists(self::$path . "/$view")) {
+            echo $twig->render($view, $data);
+        } else {
+            echo $twig->render('404.twig', []);
+        }
     }
 }

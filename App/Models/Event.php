@@ -4,12 +4,6 @@ namespace App\Models;
 use App\Core\Database;
 use DateTime;
 
-Enum Status: string {
-    case PENDING = "pending";
-    case APPROVED = "approved";
-    case REJECTED = "rejected";
-}
-
 class Event {
 
     private int $id;
@@ -19,7 +13,7 @@ class Event {
     private string $location;
     private int $price;
     private int $capacity;
-    private Status $status;
+    private string $status;
     private bool $is_sponsored;
 
     private readonly Database $pdo;
@@ -33,7 +27,7 @@ class Event {
         $this->location = "";
         $this->price = 0;
         $this->capacity = 0;
-        $this->status = Status::PENDING;
+        $this->status = 'pending';
         $this->is_sponsored = false;
     }
 
@@ -127,12 +121,12 @@ class Event {
         return $this;
     }
 
-    public function getStatus(): Status
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(Status $status): Event
+    public function setStatus(string $status): Event
     {
         $this->status = $status;
         return $this;
@@ -156,6 +150,15 @@ class Event {
     public function getAll(): array{
         $sql = "SELECT * FROM events";
         return $this->pdo->fetchAll($sql);
+    }
+
+    public function getById(): self {
+        $sql = "SELECT * FROM events WHERE id = :id";
+        $result = $this->pdo->fetch($sql, [":id" => $this->id]);
+
+        $event = new Event();
+        $event->fill($result);
+        return $event;
     }
 
 
