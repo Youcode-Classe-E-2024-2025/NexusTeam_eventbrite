@@ -9,6 +9,7 @@ class ComposerStaticInit1dbe2d2a104405bc921c4e09da7b7496
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'cea98799a362ab48d08b30c6896f078a' => __DIR__ . '/../..' . '/App/Config/config.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -21,9 +22,9 @@ class ComposerStaticInit1dbe2d2a104405bc921c4e09da7b7496
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
-        'K' => 
+        'A' => 
         array (
-            'Kyojin\\Eventbrite\\' => 18,
+            'App\\' => 4,
         ),
     );
 
@@ -40,9 +41,9 @@ class ComposerStaticInit1dbe2d2a104405bc921c4e09da7b7496
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Kyojin\\Eventbrite\\' => 
+        'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 
