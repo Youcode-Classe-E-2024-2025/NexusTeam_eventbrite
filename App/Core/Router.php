@@ -18,7 +18,7 @@ class Router
         ];
     }
 
-    public function dispatch()
+    public function dispatch(): void
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -43,6 +43,7 @@ class Router
                 if (class_exists($className) && method_exists($className, $methodName)) {
                     $controller = new $className();
                     $controller->$methodName(...$args);
+                    return;
                 } else {
                     throw new RuntimeException("Controller or method not found: $className@$methodName");
                 }
