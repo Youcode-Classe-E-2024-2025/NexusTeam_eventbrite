@@ -1,5 +1,18 @@
 {
-    "require": {
-        "twig/twig": "3.7"
-    }
+    "name": "kyojin/eventbrite",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        },
+        "files": [
+            "App/Config/config.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "tahajaiti",
+            "email": "kyojin.rar@gmail.com"
+        }
+    ],
+    "require": {}
 }

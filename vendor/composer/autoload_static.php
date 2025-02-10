@@ -21,6 +21,10 @@ class ComposerStaticInit1dbe2d2a104405bc921c4e09da7b7496
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
+        'K' => 
+        array (
+            'Kyojin\\Eventbrite\\' => 18,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -35,6 +39,10 @@ class ComposerStaticInit1dbe2d2a104405bc921c4e09da7b7496
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Kyojin\\Eventbrite\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
