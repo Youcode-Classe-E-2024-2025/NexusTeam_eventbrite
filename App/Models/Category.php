@@ -55,11 +55,16 @@ class Category
 
     public function getById(){
         $sql = "SELECT * FROM categories WHERE id = :id";
-        $result = $this->db->fetch($sql);
+        $result = $this->db->fetch($sql, [":id" => $this->id]);
 
         $category = new Category();
         $category->fill($result);
         return $category;
+    }
+
+    public function delete(){
+        $sql = "DELETE FROM categories WHERE id = :id";
+        return (bool) $this->db->execute($sql, [":id" => $this->id]);
     }
 
 }
