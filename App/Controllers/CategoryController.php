@@ -13,6 +13,8 @@ class CategoryController
     {
         $categories = (new Category())->getAll();
 
+
+
         Views::render('Category/index', ['categories'=> $categories]);
     }
 
@@ -24,6 +26,10 @@ class CategoryController
         $category->setId($request->get('id'));
 
         $category = $category->getById();
+
+        if ($request->getUri() === "/category/update/" . $request->get('id')){
+            Views::render('Category/edit', ['category'=> $category]);
+        }
 
         Views::render('Category/show', ['category'=> $category]);
     }

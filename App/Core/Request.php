@@ -46,6 +46,9 @@ class Request
         return $_SERVER['REQUEST_METHOD'] === 'GET';
     }
 
-
+    public function getUri(): string
+    {
+        return $_SERVER['REQUEST_URI'];
+    }
 
 }

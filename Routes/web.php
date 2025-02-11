@@ -21,8 +21,8 @@ $router->add("POST", '/event/delete/{id}', 'EventController@destroy');
 $router->add("POST", '/event/update/{id}', 'EventController@edit');
 
 $router->add("GET", '/category', 'CategoryController@index');
-$router->add("GET", '/category/update/{id}', 'CategoryController@index');
-$router->add("POST", '/category/update/{id}', 'CategoryController@index');
+$router->add("GET", '/category/update/{id}', 'CategoryController@show');
+$router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
 $router->dispatch();
