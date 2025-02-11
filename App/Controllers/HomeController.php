@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Controllers;
-use App\core\views;
 
-class HomeController{
+use App\Core\Views;
 
+class HomeController {
     public function index(){
-        views::render('home');
+        Views::render('home');
     }
 }

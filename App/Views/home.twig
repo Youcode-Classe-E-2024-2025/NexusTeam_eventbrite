@@ -1,1 +1,42 @@
-<h1>hello !</h1>
+{# Views/home.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Eventbrite{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<header class="relative h-96 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/1600x900/?event,people');">
+    <div class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center">
+        <h1 class="text-4xl font-bold mb-4">Découvrez des événements incroyables</h1>
+        <input type="text" placeholder="Rechercher un événement" class="p-3 rounded-md w-2/3 text-black">
+    </div>
+</header>
+
+<!-- Section Événements populaires -->
+<section class="container mx-auto py-12">
+    <h2 class="text-2xl font-bold mb-6 text-blue-400">Événements populaires</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img src="https://source.unsplash.com/400x300/?concert" class="w-full">
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-blue-400">Concert Live</h3>
+                <p class="text-gray-400">Paris - 20 Février</p>
+            </div>
+        </div>
+        <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img src="https://source.unsplash.com/400x300/?conference" class="w-full">
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-blue-400">Conférence Tech</h3>
+                <p class="text-gray-400">Lyon - 5 Mars</p>
+            </div>
+        </div>
+        <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img src="https://source.unsplash.com/400x300/?festival" class="w-full">
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-blue-400">Festival d'été</h3>
+                <p class="text-gray-400">Marseille - 15 Juillet</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

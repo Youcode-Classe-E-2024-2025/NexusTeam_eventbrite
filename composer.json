@@ -5,7 +5,8 @@
             "App\\": "App/"
         },
         "files": [
-            "App/Config/config.php"
+            "App/Config/config.php",
+            "App/Helpers/dd.php"
         ]
     },
     "authors": [
@@ -15,6 +16,7 @@
         }
     ],
     "require": {
-        "twig/twig": "3.7"
+        "twig/twig": "^3.19",
+      "ext-gd": "*"
     }
 }
