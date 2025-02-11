@@ -17,6 +17,10 @@ class Request
             $this->data[$key] = $value;
         }
 
+        if (isset($_FILES['image'])){
+            $this->data['files'] = $_FILES['image'];
+        }
+
     }
 
     public function merge(array $data): void
