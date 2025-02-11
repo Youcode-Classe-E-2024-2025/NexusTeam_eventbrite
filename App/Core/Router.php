@@ -4,12 +4,37 @@ namespace App\Core;
 
 use RuntimeException;
 
+/**
+ * Class Router
+ * 
+ * Handles HTTP request routing in the application.
+ */
 class Router
 {
+    /**
+     * @var array $routes Stores the defined routes.
+     */
     private array $routes = [];
-    private string $namespace = 'App\Controllers\\';
+    
+    /**
+     * @var string $namespace Default namespace for controllers.
+     */
+    private string $namespace = 'App\\Controllers\\';
+    
+    /**
+     * @var Request $request The current HTTP request instance.
+     */
     private Request $request;
 
+    /**
+     * Adds a route to the router.
+     *
+     * @param string $method HTTP method (GET, POST, etc.).
+     * @param string $path Route path with optional parameters.
+     * @param string $handler Controller and method in 'Controller@method' format.
+     * 
+     * @return void
+     */
     public function add($method, $path, $handler): void
     {
         $this->routes[] = [
@@ -21,6 +46,13 @@ class Router
         $this->request = new Request();
     }
 
+    /**
+     * Dispatches the request by matching it to a defined route.
+     *
+     * @throws RuntimeException If the handler format is invalid or the controller/method does not exist.
+     * 
+     * @return void
+     */
     public function dispatch(): void
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -30,16 +62,15 @@ class Router
             $pattern = $this->convertToRegex($route['path']);
 
             if ($route['method'] === $requestMethod && preg_match($pattern, $requestUri, $matches)) {
-
                 array_shift($matches);
-
                 $args = array_values($matches);
-
+                
+                // Extract controller and method
                 $handlerName = explode('@', $route['handler']);
                 if (count($handlerName) !== 2) {
                     throw new RuntimeException("Invalid handler format. Expected 'Controller@method'.");
                 }
-
+                
                 $className = $this->namespace . $handlerName[0];
                 $methodName = $handlerName[1];
 
@@ -55,10 +86,16 @@ class Router
         }
 
         http_response_code(404);
-        echo '404 Not found';
+        echo '404 Not Found';
     }
 
-
+    /**
+     * Converts a route path with parameters into a regular expression pattern.
+     *
+     * @param string $path Route path with parameters enclosed in {}.
+     * 
+     * @return string Regular expression pattern for route matching.
+     */
     private function convertToRegex($path): string
     {
         $pattern = preg_replace('/\{([^}]+)\}/', '(?P<\1>[^/]+)', $path);
