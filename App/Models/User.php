@@ -86,4 +86,17 @@ class User {
             'avatar' => $this->avatar
         ]);
     }
+
+
+
+    public function displayUser(){
+        $stmt = $this->pdo->prepare("SELECT * from users");
+        $stmt->execute(); 
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $users ;
+    }
+
+    // public function approveUser(){
+    //     $stmt = $this->pdo
+    // }
 }
