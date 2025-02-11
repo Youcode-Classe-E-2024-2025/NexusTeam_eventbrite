@@ -92,6 +92,7 @@ class EventController
     public function edit(Request $request): void {
         $event = new Event();
         $event->setId($request->get('id'));
+
         $update = $event->getById(); //event to be updated
         $update->fill($request->all());
         $update->setStartDate($request->get('start_date'));
@@ -115,6 +116,7 @@ class EventController
             Session::set('message', 'Event not updated, try again');
         }
 
+        Views::redirect('/event');
     }
 
 }
