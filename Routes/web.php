@@ -3,6 +3,7 @@ use App\Core\Router;
 
 $router = new Router();
 
+//nav routes
 $router->add("GET", "/", "HomeController@index");
 $router->add("GET", "/home", "HomeController@index");
 
@@ -20,6 +21,7 @@ $router->add("POST", '/event', 'EventController@store');
 $router->add("POST", '/event/delete/{id}', 'EventController@destroy');
 $router->add("POST", '/event/update/{id}', 'EventController@edit');
 
+//category routes
 $router->add("GET", '/category', 'CategoryController@index');
 $router->add("GET", '/category/update/{id}', 'CategoryController@show');
 $router->add("POST", '/category/update/{id}', 'CategoryController@update');

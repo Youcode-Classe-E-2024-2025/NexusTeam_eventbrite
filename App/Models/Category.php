@@ -53,7 +53,8 @@ class Category
         return $this->db->fetchAll($sql) ?? [];
     }
 
-    public function getById(){
+    public function getById(): Category
+    {
         $sql = "SELECT * FROM categories WHERE id = :id";
         $result = $this->db->fetch($sql, [":id" => $this->id]);
 
@@ -62,7 +63,14 @@ class Category
         return $category;
     }
 
-    public function delete(){
+
+    public function update(): bool {
+        $sql = "UPDATE categories SET name = :name WHERE id = :id";
+        return (bool) $this->db->execute($sql, [":name" => $this->name, ":id" => $this->id]);
+    }
+
+    public function delete(): bool
+    {
         $sql = "DELETE FROM categories WHERE id = :id";
         return (bool) $this->db->execute($sql, [":id" => $this->id]);
     }
