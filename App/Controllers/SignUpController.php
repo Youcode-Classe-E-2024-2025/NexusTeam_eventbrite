@@ -9,30 +9,34 @@ use App\Models\User;
 use App\Core\Database;
 use Exception;
 
-class SignUpController {
-        private $twig;
-    
-        public function __construct() {
-            $loader = new FilesystemLoader(__DIR__ . '/../Views');
-            $this->twig = new Environment($loader);
-        }
-    
-        public function signUp() {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-    
-            if (!isset($_SESSION['csrf_token'])) {
-                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-            }
-    
-            echo $this->twig->render('signUp.twig', ['csrf_token' => $_SESSION['csrf_token']]);
-        }
-    
-    
-    
+class SignUpController
+{
+    private $twig;
 
-    public function register() {
+    public function __construct()
+    {
+        $loader = new FilesystemLoader(__DIR__ . '/../Views');
+        $this->twig = new Environment($loader);
+    }
+
+    public function signUp()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+
+        echo $this->twig->render('signUp.twig', ['csrf_token' => $_SESSION['csrf_token']]);
+    }
+
+
+
+
+    public function register()
+    {
         try {
             // Démarrer la session si ce n'est pas déjà fait
             if (session_status() === PHP_SESSION_NONE) {
@@ -82,21 +86,22 @@ class SignUpController {
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_role'] = $role;
 
+
                 echo "Inscription réussie. Vous êtes connecté.";
                 // Rediriger selon le rôle
-switch ($_SESSION['user_role']) {
-    case 'admin':
-        header("Location: /admin-dashboard");
-        break;
-    case 'organisateur':
-        header("Location: /organisateur-dashboard");
-        break;
-    case 'participant':
-    default:
-        header("Location: /participant-dashboard");
-        break;
-}
-exit;
+                switch ($_SESSION['user_role']) {
+                    case 'admin':
+                        header("Location: /admin-dashboard");
+                        break;
+                    case 'organisateur':
+                        header("Location: /organisateur-dashboard");
+                        break;
+                    case 'participant':
+                    default:
+                        header("Location: /participant-dashboard");
+                        break;
+                }
+                exit;
 
             } else {
                 throw new Exception("Une erreur est survenue lors de l'inscription.");
