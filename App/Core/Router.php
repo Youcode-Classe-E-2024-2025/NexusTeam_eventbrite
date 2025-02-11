@@ -17,6 +17,8 @@ class Router
         ];
     }
 
+    // 'GET', '/home', 'HomeController@index'
+
     public function dispatch()
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];

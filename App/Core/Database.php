@@ -178,6 +178,8 @@ class Database
         return $stmt->rowCount();
     }
 
+    // select*from users where id = :id, [':id' => 1]
+
     /**
      * Returns the last inserted id into the database
      *
