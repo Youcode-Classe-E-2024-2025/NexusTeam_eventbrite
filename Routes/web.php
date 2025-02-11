@@ -9,7 +9,7 @@ $router->add("POST", "/sign-up", "SignUpController@register");
 $router->add("GET", "/login", "LoginController@login");
 $router->add("POST", "/login", "LoginController@authenticate");
 
-$router->add("GET", "/", "EventController@index");
+$router->add("GET", "/event", "EventController@index");
 $router->add("POST", '/event', 'EventController@store');
 
 $router->dispatch();

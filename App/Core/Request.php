@@ -17,7 +17,9 @@ class Request
             $this->data[$key] = $value;
         }
 
-        $this->data['files'] = $_FILES['image'];
+        if (isset($_FILES['image'])){
+            $this->data['files'] = $_FILES['image'];
+        }
 
     }
 

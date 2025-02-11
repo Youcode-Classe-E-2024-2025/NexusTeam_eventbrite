@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Request;
 use App\Core\Session;
 use App\Core\Upload;
+use App\Core\Validator;
 use App\Core\View;
 use App\Models\Event;
 
@@ -32,6 +33,24 @@ class EventController
     public function store(Request $request): void
     {
         if ($request->isPost()) {
+
+            Validator::make($request->all(), [
+                'title' => 'required',
+                'description' => 'required',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date',
+                'max_capacity' => 'required|numeric',
+                'files' => 'required',
+                'price' => 'required|numeric',
+                'location' => 'required|string',
+            ]);
+
+            if (!empty(Validator::errors())){
+                Session::set('message', Validator::errors()[0]);
+                View::render('Events/addEvent', ['message' => Session::get('message')]);
+            }
+
+
             $event = new Event();
             $event->fill($request->all());
             $event->setStartDate($request->get('start_date'));
