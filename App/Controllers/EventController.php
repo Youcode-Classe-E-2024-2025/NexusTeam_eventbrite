@@ -47,7 +47,7 @@ class EventController
 
             if (!empty(Validator::errors())){
                 Session::set('message', Validator::errors()[0]);
-                Views::render('Events/addEvent', ['message' => Session::get('message')]);
+                Views::render('Events/addEvent');
             }
 
 
@@ -62,7 +62,7 @@ class EventController
             $upload = $upload->save();
             if (!$upload) {
                 Session::set('message', 'Image not uploaded');
-                Views::render('Events/addEvent', ['message' => Session::get('message')]);
+                Views::render('Events/addEvent');
                 return;
             }
 
@@ -73,7 +73,7 @@ class EventController
             } else {
                 Session::set('message', 'Event not created, try again');
             }
-            Views::render('Events/addEvent', ['message' => Session::get('message')]);
+            Views::render('Events/addEvent');
         }
     }
 
@@ -86,7 +86,7 @@ class EventController
         } else {
             Session::set('message', 'Event not deleted, try again');
         }
-        Views::render('Events/addEvent', ['message' => Session::get('message')]);
+        Views::render('Events/addEvent');
     }
 
     public function edit(Request $request): void {
@@ -105,7 +105,7 @@ class EventController
 
             if (!$upload) {
                 Session::set('message', 'Image not uploaded');
-                Views::render('Events/editEvent', ['message' => Session::get('message')]);
+                Views::render('Events/editEvent');
             }
             $update->setPromotionalImage($upload);
         }

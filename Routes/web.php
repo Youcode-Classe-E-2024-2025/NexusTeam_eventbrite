@@ -3,7 +3,9 @@ use App\Core\Router;
 
 $router = new Router();
 
-$router->add("GET", "/", "UserController@index");
+$router->add("GET", "/", "HomeController@index");
+$router->add("GET", "/home", "HomeController@index");
+
 $router->add("GET", "/sign-up", "SignUpController@signUp");
 $router->add("POST", "/sign-up", "SignUpController@register");
 $router->add("GET", "/login", "LoginController@login");
