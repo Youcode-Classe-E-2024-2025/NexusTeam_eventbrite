@@ -94,6 +94,8 @@ class EventController
             $event = new Event();
             $event->setId($request->get('id'));
             $data = $event->getById();
+            dd($data);
+
             View::render('Events/editEvent', ['event' => $data]);
         }
     }

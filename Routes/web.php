@@ -11,6 +11,7 @@ $router->add("POST", "/login", "LoginController@authenticate");
 
 $router->add("GET", "/event", "EventController@index");
 $router->add("POST", '/event', 'EventController@store');
-$router->add("DELETE", '/event/:id', 'EventController@destroy');
+$router->add("DELETE", '/event/{id}', 'EventController@destroy');
+$router->add("GET", '/event/{id}', 'EventController@edit');
 
 $router->dispatch();

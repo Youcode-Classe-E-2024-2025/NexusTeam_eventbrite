@@ -199,6 +199,10 @@ class Event
 
         $event = new Event();
         $event->fill($result);
+        $event->setMaxCapacity($result['max_capacity']);
+        $event->setPromotionalImage($result['promotional_image']);
+        $event->setStartDate($result['start_date']);
+        $event->setEndDate($result['end_date']);
         return $event;
     }
 
