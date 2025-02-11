@@ -15,4 +15,6 @@ $router->add("POST", '/event', 'EventController@store');
 $router->add("DELETE", '/event/{id}', 'EventController@destroy');
 $router->add("POST", '/event/{id}', 'EventController@edit');
 
+$router->add("GET", '/category', 'CategoryController@index');
+
 $router->dispatch();
