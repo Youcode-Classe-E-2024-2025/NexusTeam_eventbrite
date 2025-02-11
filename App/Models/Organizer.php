@@ -5,10 +5,10 @@ use App\core\Model;
 
 class Organizer extends Model
 {
-    public function stat()
+    public function stat(): array
     {
-        $this->table = "stats";
-        print_r($this->findAll());
-        echo 'hhhhhhhhhhhhhhhhhhhhhhhh';
+        $this->primaryKey = "event_id";
+        $this->table = "event_stats";
+        return $this->findAll();
     }
 }

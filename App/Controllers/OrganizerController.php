@@ -7,9 +7,10 @@ class OrganizerController
 {
     public function index()
     {
-        views::render('organizerdash');
         $model = new Organizer();
         $data = $model->stat();
+        // print_r($data);die;
+        views::render('organizerdash');
     }
     public function sales()
     {
