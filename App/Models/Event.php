@@ -235,4 +235,26 @@ class Event
         $sql = "DELETE FROM events WHERE id = :id";
         return (bool)$this->pdo->execute($sql, [":id" => $this->id]);
     }
+
+    public function update(): bool
+    {
+        $sql = "UPDATE events SET title = :title, description = :description, start_date = :start_date, end_date = :end_date, 
+                  location = :location, price = :price, max_capacity = :max_capacity,
+                  state = :state, promotional_image = :promotional_image, category_id = :category_id WHERE id = :id";
+        $params = [
+            ":title" => $this->title,
+            ":description" => $this->description,
+            ":start_date" => $this->start_date->format('Y-m-d'),
+            ":end_date" => $this->end_date->format('Y-m-d'),
+            ":location" => $this->location,
+            ":price" => $this->price,
+            ":max_capacity" => $this->max_capacity,
+            ":state" => $this->state,
+            ":promotional_image" => $this->promotional_image,
+            ":category_id" => $this->category_id,
+            ":id" => $this->id
+        ];
+
+        return (bool)$this->pdo->execute($sql, $params);
+    }
 }
