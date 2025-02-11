@@ -8,9 +8,8 @@ class OrganizerController
     public function index()
     {
         $model = new Organizer();
-        $data = $model->stat();
-        // print_r($data);die;
-        views::render('organizerdash');
+        $data = $model->eventStat();
+        views::render('organizerdash', ["event_stats" => $data]);
     }
     public function sales()
     {
