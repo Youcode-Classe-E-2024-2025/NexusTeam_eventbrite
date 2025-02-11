@@ -13,8 +13,6 @@ class CategoryController
     {
         $categories = (new Category())->getAll();
 
-        dd($categories);
-
         Views::render('Category/index', ['categories'=> $categories]);
     }
 
