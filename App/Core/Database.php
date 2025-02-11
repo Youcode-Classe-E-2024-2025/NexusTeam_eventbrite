@@ -192,4 +192,12 @@ class Database
         }
         return intval($this->pdo->lastInsertId());
     }
+
+    // Nouvelle méthode publique pour accéder à la connexion PDO
+    public function getConnection(): PDO {
+        if ($this->pdo === null) {
+            $this->connect();
+        }
+        return $this->pdo;
+    }
 }
