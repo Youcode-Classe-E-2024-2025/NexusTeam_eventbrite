@@ -1,37 +1,51 @@
 <?php
 
 namespace App\Models;
-
 use App\Core\Database;
-use App\Core\Model;
 use DateTime;
+use Exception;
 
-class Event extends Model
+class Event
 {
-
     private int $id;
     private string $title;
     private string $description;
-    private DateTime $date;
+    private DateTime $start_date;
+    private DateTime $end_date;
     private string $location;
-    private int $price;
-    private int $capacity;
-    private string $status;
-    private int $is_sponsored = 0;
+    private float $price;
+    private int $max_capacity;
+    private int $organizer_id;
+    private string $state;
+    private ?string $promotional_image;
+    private int $category_id;
 
-
+    private Database $pdo;
     public function __construct()
     {
-        parent::__construct();
-        $this->table = 'events';
+        $this->pdo = new Database();
         $this->id = 0;
         $this->title = "";
         $this->description = "";
-        $this->date = new DateTime();
+        $this->start_date = new DateTime();
+        $this->end_date = new DateTime();
         $this->location = "";
-        $this->price = 0;
-        $this->capacity = 0;
-        $this->status = 'pending';
+        $this->price = 0.0;
+        $this->max_capacity = 0;
+        $this->organizer_id = 1;
+        $this->state = 'pending';
+        $this->promotional_image = null;
+        $this->category_id = 1;
+    }
+
+    public function fill(array $data): void
+    {
+        foreach ($data as $key => $value) {
+            $setter = 'set' . ucfirst($key);
+            if (method_exists($this, $setter)) {
+                $this->$setter($value);
+            }
+        }
     }
 
     public function getId(): int
@@ -67,14 +81,25 @@ class Event extends Model
         return $this;
     }
 
-    public function getDate(): DateTime
+    public function getStartDate(): DateTime
     {
-        return $this->date;
+        return $this->start_date;
     }
 
-    public function setDate(string $date): Event
+    public function setStartDate(string $start_date): Event
     {
-        $this->date = new DateTime($date);
+        $this->start_date = new DateTime($start_date);
+        return $this;
+    }
+
+    public function getEndDate(): DateTime
+    {
+        return $this->end_date;
+    }
+
+    public function setEndDate(string $end_date): Event
+    {
+        $this->end_date = new DateTime($end_date);
         return $this;
     }
 
@@ -89,88 +114,115 @@ class Event extends Model
         return $this;
     }
 
-    public function getPrice(): int
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): Event
+    public function setPrice(float $price): Event
     {
         $this->price = $price;
         return $this;
     }
 
-    public function getCapacity(): int
+    public function getMaxCapacity(): int
     {
-        return $this->capacity;
+        return $this->max_capacity;
     }
 
-    public function setCapacity(int $capacity): Event
+    public function setMaxCapacity(int $max_capacity): Event
     {
-        $this->capacity = $capacity;
+        $this->max_capacity = $max_capacity;
         return $this;
     }
 
-    public function getStatus(): string
+    public function getOrganizerId(): int
     {
-        return $this->status;
+        return $this->organizer_id;
     }
 
-    public function setStatus(string $status): Event
+    public function setOrganizerId(int $organizer_id): Event
     {
-        $this->status = $status;
+        $this->organizer_id = $organizer_id;
         return $this;
     }
 
-    public function getIsIsSponsored(): bool
+    public function getState(): string
     {
-        return $this->is_sponsored;
+        return $this->state;
     }
 
-    public function setIsSponsored(string $is_sponsored): Event
+    public function setState(string $state): Event
     {
-        if ($is_sponsored === 'on'){
-            $this->is_sponsored = 1;
-        } else {
-            $this->is_sponsored = 0;
-        }
-
+        $this->state = $state;
         return $this;
     }
 
+    public function getPromotionalImage(): ?string
+    {
+        return $this->promotional_image;
+    }
 
-//    /**
-//     * @throws \Exception
-//     */
-//    public function getAll(): array
-//    {
-//        $sql = "SELECT * FROM events";
-//        return $this->pdo->fetchAll($sql) ?? [];
-//    }
-//
-//    public function getById(): self
-//    {
-//        $sql = "SELECT * FROM events WHERE id = :id";
-//        $result = $this->pdo->fetch($sql, [":id" => $this->id]);
-//
-//        $event = new Event();
-//        $event->fill($result);
-//        return $event;
-//    }
-//
-//    public function create(): bool
-//    {
-//        $sql = "INSERT INTO events (title, description, event_date, location, price, capacity, status, is_sponsored)
-//        VALUES (:title, :description, :date, :location, :price, :capacity, :status, :is_sponsored)";
-//        $params = [":title" => $this->title,
-//            ":description" => $this->description,
-//            ":date" => $this->date->format('Y-m-d H:i:s'),
-//            ":location" => $this->location,
-//            ":price" => $this->price,
-//            ":capacity" => $this->capacity,
-//            ":status" => $this->status,
-//            ":is_sponsored" => $this->is_sponsored];
-//        return (bool)$this->pdo->execute($sql, $params);
-//    }
+    public function setPromotionalImage(?string $promotional_image): Event
+    {
+        $this->promotional_image = $promotional_image;
+        return $this;
+    }
 
+    public function getCategoryId(): int
+    {
+        return $this->category_id;
+    }
+
+    public function setCategoryId(int $category_id): Event
+    {
+        $this->category_id = $category_id;
+        return $this;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->created_at;
+    }
+
+
+    public function getAll(): array
+    {
+        $sql = "SELECT * FROM events";
+        return $this->pdo->fetchAll($sql) ?? [];
+    }
+
+    public function getById(): self
+    {
+        $sql = "SELECT * FROM events WHERE id = :id";
+        $result = $this->pdo->fetch($sql, [":id" => $this->id]);
+
+        $event = new Event();
+        $event->fill($result);
+        return $event;
+    }
+
+    public function create(): bool
+    {
+        $sql = "INSERT INTO events (
+                title, description, start_date, end_date, location, price, max_capacity, organizer_id, state, promotional_image, category_id            
+        ) VALUES (
+                  :title, :description, :start_date, :end_date, :location, :price, :max_capacity, :organizer_id, :state, :promotional_image, :category_id
+        )";
+
+        $params = [
+            ":title" => $this->title,
+            ":description" => $this->description,
+            ":start_date" => $this->start_date->format('Y-m-d'),
+            ":end_date" => $this->end_date->format('Y-m-d'),
+            ":location" => $this->location,
+            ":price" => $this->price,
+            ":max_capacity" => $this->max_capacity,
+            ":organizer_id" => $this->organizer_id,
+            ":state" => $this->state,
+            ":promotional_image" => $this->promotional_image,
+            ":category_id" => $this->category_id,
+        ];
+        return (bool)$this->pdo->execute($sql, $params);
+    }
 }

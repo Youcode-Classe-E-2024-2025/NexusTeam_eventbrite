@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48181d9d-9188-4876-8c96-d3d619cfaf2b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Core/Model.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Core/Views.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/Events/addEvent.twig" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Events/addEvent.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CSS/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CSS/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
@@ -206,7 +208,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging events__crud",
+    "git-widget-placeholder": "events__crud",
     "last_opened_file_path": "/home/kyojin/Documents/eventbrite",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

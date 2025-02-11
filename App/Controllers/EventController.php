@@ -31,9 +31,14 @@ class EventController
         if ($request->isPost()){
             $event = new Event();
             $event->fill($request->all());
+            $event->setStartDate($request->get('start_date'));
+            $event->setEndDate($request->get('end_date'));
+            $event->setMaxCapacity($request->get('max_capacity'));
 
 
-            if ($event->insert($request->all())){
+
+
+            if ($event->create()){
                 Session::set('message', 'Event created successfully');
             } else {
                 Session::set('message', 'Event not created, try again');
