@@ -13,4 +13,6 @@ $router->add("GET", "/event", "EventController@index");
 $router->add("POST", '/event', 'EventController@store');
 $router->add("DELETE", '/event/:id', 'EventController@destroy');
 
+$router->add("GET", "/Users_management" , "Users_management@index");
+
 $router->dispatch();
