@@ -225,4 +225,10 @@ class Event
         ];
         return (bool)$this->pdo->execute($sql, $params);
     }
+
+    public function delete(): bool
+    {
+        $sql = "DELETE FROM events WHERE id = :id";
+        return (bool)$this->pdo->execute($sql, [":id" => $this->id]);
+    }
 }

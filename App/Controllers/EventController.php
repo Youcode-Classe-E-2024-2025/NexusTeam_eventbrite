@@ -77,4 +77,25 @@ class EventController
         }
     }
 
+    public function delete(Request $request): void {
+        $event = new Event();
+        $event->setId($request->get('id'));
+
+        if ($event->delete()) {
+            Session::set('message', 'Event deleted successfully');
+        } else {
+            Session::set('message', 'Event not deleted, try again');
+        }
+        View::render('Events/addEvent', ['message' => Session::get('message')]);
+    }
+
+    public function edit(Request $request): void {
+        if ($request->isGet()){
+            $event = new Event();
+            $event->setId($request->get('id'));
+            $data = $event->getById();
+            View::render('Events/editEvent', ['event' => $data]);
+        }
+    }
+
 }
