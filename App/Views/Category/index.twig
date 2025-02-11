@@ -4,31 +4,31 @@
 {% block title %}Category{% endblock %}
 
 {% block content %}
-    <div class="ml-64 flex-1 min-h-screen bg-gray-800 text-gray-200">
-        <main class="p-6">
-            <div class="bg-gray-900 rounded-lg shadow-md p-6">
+    <div class="flex justify-center items-center h-full bg-gray-700 text-gray-200">
+        <main class="w-full max-w-4xl p-6">
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-semibold">Category List</h2>
+                    <h2 class="text-2xl font-semibold">Category List</h2>
                     <button class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition duration-200">
                         Add New Category
                     </button>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-gray-800 text-gray-300">
-                        <thead class="bg-gray-700">
+                    <table class="w-full bg-gray-700 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-600 text-gray-300">
                         <tr>
                             <th class="py-3 px-4 text-left">ID</th>
                             <th class="py-3 px-4 text-left">Name</th>
                             <th class="py-3 px-4 text-left">Actions</th>
                         </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-700">
+                        <tbody class="divide-y divide-gray-600">
                         {% if categories is defined and categories|length > 0 %}
                             {% for category in categories %}
-                                <tr>
-                                    <td class="py-3 px-4 whitespace-nowrap">{{ category.id }}</td>
-                                    <td class="py-3 px-4 whitespace-nowrap">{{ category.name }}</td>
-                                    <td class="py-3 px-4 whitespace-nowrap">
+                                <tr class="hover:bg-gray-600 transition">
+                                    <td class="py-3 px-4">{{ category.id }}</td>
+                                    <td class="py-3 px-4">{{ category.name }}</td>
+                                    <td class="py-3 px-4">
                                         <a href="#" class="text-primary-400 hover:text-primary-500">Edit</a>
                                         <a href="/category" class="text-red-400 hover:text-red-500 ml-4">Delete</a>
                                     </td>
@@ -36,7 +36,7 @@
                             {% endfor %}
                         {% else %}
                             <tr>
-                                <td colspan="3" class="py-3 px-4 text-center">No categories available</td>
+                                <td colspan="3" class="py-4 text-center text-gray-400">No categories available</td>
                             </tr>
                         {% endif %}
                         </tbody>
