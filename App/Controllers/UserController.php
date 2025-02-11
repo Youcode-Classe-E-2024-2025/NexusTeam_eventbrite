@@ -3,11 +3,11 @@ namespace App\Controllers;
 
 use App\Core\Views;
 
-class UserController{
+
+class UserController {
 
     public function index(){
-        Views::render("index");
-    }
-
-
+        echo 'hey its working';
+        Views::render('users_management');
+    }   
 }

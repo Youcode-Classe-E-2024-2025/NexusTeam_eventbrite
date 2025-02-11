@@ -51,6 +51,7 @@ class Database
         return self::$instance;
     }
 
+
     /**
      * Initializes the database by checking if a database with the defined name exists
      * If not, it creates a new one and connects to it
@@ -192,5 +193,13 @@ class Database
             $this->connect();
         }
         return intval($this->pdo->lastInsertId());
+    }
+
+    // Nouvelle méthode publique pour accéder à la connexion PDO
+    public function getConnection(): PDO {
+        if ($this->pdo === null) {
+            $this->connect();
+        }
+        return $this->pdo;
     }
 }

@@ -11,7 +11,7 @@ class Model
 {
     protected string $table = "";
     protected string $primaryKey = "id";
-    protected Database $db;
+    protected readonly Database $db;
 
     /**
      * Constructor initializes the database instance.
@@ -19,6 +19,25 @@ class Model
     public function __construct()
     {
         $this->db = Database::getInstance();
+    }
+
+    /**
+     * Fills the model using its setters
+     *
+     * @param array $data the data to be inserted
+     * @return void returns nothing as it just sets the data
+     */
+
+    public function fill(array $data): void
+    {
+        foreach ($data as $key => $value) {
+            $setter = 'set' . ucfirst($key);
+            if (method_exists($this, $setter)) {
+                $this->$setter($value);
+            } else {
+                $this->$key = $value;
+            }
+        }
     }
 
     /**
