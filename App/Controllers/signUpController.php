@@ -61,7 +61,6 @@ class SignUpController {
             }
 
             // Sécuriser le mot de passe
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
             // Instancier le modèle User
             $user = new User(Database::getInstance()->getConnection());
@@ -74,7 +73,7 @@ class SignUpController {
             // Définir les propriétés de l'utilisateur
             $user->setFullName($fullName);
             $user->setEmail($email);
-            $user->setPassword($hashedPassword);
+            $user->setPassword(password_hash($password, PASSWORD_BCRYPT)); // Hasher ici une seule fois
             $user->setRole($role);
 
             // Créer l'utilisateur dans la base de données
