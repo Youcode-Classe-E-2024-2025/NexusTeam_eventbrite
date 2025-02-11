@@ -23,24 +23,24 @@ class Upload
         }
 
         $fileExt = strtolower(pathinfo($this->file['name'], PATHINFO_EXTENSION));
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif']; // Allowed types for conversion
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
         if (!in_array($fileExt, $allowedTypes)) {
             return false;
         }
 
-        $safeFileName = bin2hex(random_bytes(4)) . '.webp';
-        $destination = $this->path . $safeFileName;
+        $fileName = bin2hex(random_bytes(4)) . '.webp';
+        $destination = $this->path . $fileName;
 
-        if ($this->convertToWebP($this->file['tmp_name'], $destination)) {
+        if ($this->convertToWebP($this->file['tmp_name'], $destination, $fileExt)) {
             return $destination;
         }
 
         return false;
     }
 
-    private function convertToWebP($source, $destination): bool{
+    private function convertToWebP($source, $destination, $fileExt): bool{
         $img = null;
-        $fileExt = strtolower(pathinfo($source, PATHINFO_EXTENSION));
+
 
         switch ($fileExt) {
             case 'jpeg':

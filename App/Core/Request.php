@@ -17,7 +17,7 @@ class Request
             $this->data[$key] = $value;
         }
 
-        $this->data['files'] = $_FILES;
+        $this->data['files'] = $_FILES['image'];
 
     }
 

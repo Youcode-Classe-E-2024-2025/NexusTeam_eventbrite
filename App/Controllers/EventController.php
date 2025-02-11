@@ -38,8 +38,6 @@ class EventController
             $event->setEndDate($request->get('end_date'));
             $event->setMaxCapacity($request->get('max_capacity'));
 
-            dd($request->get('files'));
-
 
             $upload = new Upload($request->get('files'));
             $upload = $upload->save();
