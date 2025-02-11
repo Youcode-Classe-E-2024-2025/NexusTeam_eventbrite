@@ -26,4 +26,9 @@ class Views
             echo $twig->render('404.twig', []);
         }
     }
+
+    public static function redirect($url): void
+    {
+        header("Location: $url");
+    }
 }
