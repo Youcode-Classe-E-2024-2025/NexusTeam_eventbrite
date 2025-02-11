@@ -1,10 +1,11 @@
 <?php
 namespace App\Controllers;
+use App\Core\Views;
 
 class UserController{
 
     public function index(){
-        require_once __DIR__ . "/../Views/home.twig";
+        Views::render('home');
     }
 
 
