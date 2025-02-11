@@ -27,8 +27,10 @@ class User {
     public function setEmail($email) { $this->email = filter_var(trim($email), FILTER_SANITIZE_EMAIL); }
     public function getEmail() { return $this->email; }
 
-    public function setPassword($password) { $this->password = password_hash($password, PASSWORD_BCRYPT); }
-    public function getPassword() { return $this->password; }
+    public function setPassword($password) { 
+        $this->password = $password; // Ne pas re-hasher ici
+    }
+        public function getPassword() { return $this->password; }
 
     public function setRole($role) { $this->role = in_array($role, ['participant', 'organisateur', 'admin']) ? $role : 'participant'; }
     public function getRole() { return $this->role; }
