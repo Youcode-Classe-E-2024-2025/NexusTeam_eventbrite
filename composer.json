@@ -14,5 +14,7 @@
             "email": "kyojin.rar@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "3.7"
+    }
 }
