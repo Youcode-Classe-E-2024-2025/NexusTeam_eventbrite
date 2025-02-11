@@ -4,10 +4,10 @@ namespace App\Controllers;
 use App\Core\Views;
 
 
-class Users_management{
+class TagsController{
 
     public function index(){
         echo 'hey its working';
-        Views::render('users_management');
+        Views::render('tags_management');
     }   
 }
