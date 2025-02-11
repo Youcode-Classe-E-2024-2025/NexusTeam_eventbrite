@@ -27,10 +27,4 @@ class View
             echo $twig->render('404.twig', []);
         }
     }
-
-    #[NoReturn] public static function redirect($url): void
-    {
-        header("Location: $url");
-        exit;
-    }
 }

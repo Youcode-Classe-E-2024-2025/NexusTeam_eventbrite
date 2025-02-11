@@ -16,7 +16,7 @@ class Event
     private int $price;
     private int $capacity;
     private string $status;
-    private bool $is_sponsored;
+    private int $is_sponsored = 0;
 
     private readonly Database $pdo;
 
@@ -31,7 +31,6 @@ class Event
         $this->price = 0;
         $this->capacity = 0;
         $this->status = 'pending';
-        $this->is_sponsored = false;
     }
 
 
@@ -135,7 +134,7 @@ class Event
         return $this;
     }
 
-    public function isIsSponsored(): bool
+    public function getIsIsSponsored(): bool
     {
         return $this->is_sponsored;
     }
@@ -143,9 +142,9 @@ class Event
     public function setIsSponsored(string $is_sponsored): Event
     {
         if ($is_sponsored === 'on'){
-            $this->is_sponsored = true;
+            $this->is_sponsored = 1;
         } else {
-            $this->is_sponsored = false;
+            $this->is_sponsored = 0;
         }
 
         return $this;

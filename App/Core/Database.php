@@ -51,6 +51,7 @@ class Database
         return self::$instance;
     }
 
+
     /**
      * Initializes the database by checking if a database with the defined name exists
      * If not, it creates a new one and connects to it

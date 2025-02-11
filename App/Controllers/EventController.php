@@ -32,12 +32,13 @@ class EventController
             $event = new Event();
             $event->fill($request->all());
 
+
             if ($event->create()){
                 Session::set('message', 'Event created successfully');
             } else {
                 Session::set('message', 'Event not created, try again');
             }
-            View::redirect('/events');
+            View::render('Events/addEvent', ['message' => Session::get('message')]);
         }
     }
 

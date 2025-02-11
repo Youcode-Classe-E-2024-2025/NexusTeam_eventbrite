@@ -8,8 +8,10 @@
     <title>{% block title %}My Application{% endblock %}</title>
 </head>
 <body class="bg-gray-800 text-white h-screen flex flex-col justify-between">
-
+    {% include 'Partials/header.twig' %}
     <main>
+        {% include'Partials/message.twig' %}
+
         {% block content %}{% endblock %}
     </main>
 
