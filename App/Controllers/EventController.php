@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Request;
+use App\Core\Session;
 use App\Core\View;
 use App\Models\Event;
 
@@ -32,11 +33,11 @@ class EventController
             $event->fill($request->all());
 
             if ($event->create()){
-                echo 'EVENT CREATED';
+                Session::set('message', 'Event created successfully');
             } else {
-                echo 'HAPPENED';
+                Session::set('message', 'Event not created, try again');
             }
-            exit;
+            View::redirect('/events');
         }
     }
 

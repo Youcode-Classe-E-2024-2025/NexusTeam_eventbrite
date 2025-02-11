@@ -158,7 +158,7 @@ class Event
     public function getAll(): array
     {
         $sql = "SELECT * FROM events";
-        return $this->pdo->fetchAll($sql);
+        return $this->pdo->fetchAll($sql) ?? [];
     }
 
     public function getById(): self

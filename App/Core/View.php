@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use JetBrains\PhpStorm\NoReturn;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -25,5 +26,11 @@ class View
         } else {
             echo $twig->render('404.twig', []);
         }
+    }
+
+    #[NoReturn] public static function redirect($url): void
+    {
+        header("Location: $url");
+        exit;
     }
 }
