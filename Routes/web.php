@@ -27,4 +27,11 @@ $router->add("GET", '/category/update/{id}', 'CategoryController@show');
 $router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
+
+
+//admin dashboard
+$router->add("GET", '/DashboardController','DashboardController@index'); 
+
+
+
 $router->dispatch();
