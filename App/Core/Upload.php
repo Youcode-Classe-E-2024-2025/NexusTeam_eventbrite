@@ -17,15 +17,15 @@ class Upload
         }
     }
 
-    public function save(): ?string{
+    public function save(): string|false{
         if (!isset($this->file['tmp_name']) || !is_uploaded_file($this->file['tmp_name'])) {
-            return null;
+            return false;
         }
 
         $fileExt = strtolower(pathinfo($this->file['name'], PATHINFO_EXTENSION));
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif']; // Allowed types for conversion
         if (!in_array($fileExt, $allowedTypes)) {
-            return null;
+            return false;
         }
 
         $safeFileName = bin2hex(random_bytes(4)) . '.webp';
@@ -35,7 +35,7 @@ class Upload
             return $destination;
         }
 
-        return null;
+        return false;
     }
 
     private function convertToWebP($source, $destination): bool{

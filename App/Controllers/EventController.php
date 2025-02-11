@@ -38,13 +38,18 @@ class EventController
             $event->setEndDate($request->get('end_date'));
             $event->setMaxCapacity($request->get('max_capacity'));
 
-            dd($request);
+            dd($request->get('files'));
 
-            $upload = new Upload($_FILES['image']);
+
+            $upload = new Upload($request->get('files'));
             $upload = $upload->save();
-            if ($upload) {
-                $event->setPromotionalImage($upload);
+            if (!$upload) {
+                Session::set('message', 'Image not uploaded');
+                View::render('Events/addEvent', ['message' => Session::get('message')]);
+                return;
             }
+
+            $event->setPromotionalImage($upload);
 
             if ($event->create()) {
                 Session::set('message', 'Event created successfully');

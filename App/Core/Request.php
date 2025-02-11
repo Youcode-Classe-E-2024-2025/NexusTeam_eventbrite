@@ -17,6 +17,8 @@ class Request
             $this->data[$key] = $value;
         }
 
+        $this->data['files'] = $_FILES;
+
     }
 
     public function merge(array $data): void
