@@ -30,7 +30,9 @@
                                     <td class="py-3 px-4">{{ category.name }}</td>
                                     <td class="py-3 px-4">
                                         <a href="#" class="text-primary-400 hover:text-primary-500">Edit</a>
-                                        <a href="/category" class="text-red-400 hover:text-red-500 ml-4">Delete</a>
+                                        <form action="category/delete/{{ category.id }}" method="post" class="inline">
+                                            <button type="submit" class="text-red-400 hover:text-red-500">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             {% endfor %}

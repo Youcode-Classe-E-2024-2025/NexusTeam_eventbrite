@@ -28,13 +28,13 @@ class CategoryController
         Views::render('Category/show', ['category'=> $category]);
     }
 
-    public function delete(Request $request): void
+    public function destroy(Request $request): void
     {
         $category = new Category();
         $category->setId($request->get('id'));
 
         if ($category->delete()){
-            Sesssion::set('message', 'Category deleted successfully');
+            Session::set('message', 'Category deleted successfully');
         } else {
             Session::set('message', 'Category not deleted, try again');
         }
