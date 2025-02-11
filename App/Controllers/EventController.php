@@ -33,7 +33,7 @@ class EventController
             $event->fill($request->all());
 
 
-            if ($event->create()){
+            if ($event->insert($request->all())){
                 Session::set('message', 'Event created successfully');
             } else {
                 Session::set('message', 'Event not created, try again');

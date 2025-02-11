@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Core\Database;
+use App\Core\Model;
 use DateTime;
 
-class Event
+class Event extends Model
 {
 
     private int $id;
@@ -18,11 +19,11 @@ class Event
     private string $status;
     private int $is_sponsored = 0;
 
-    private readonly Database $pdo;
 
     public function __construct()
     {
-        $this->pdo = Database::getInstance();
+        parent::__construct();
+        $this->table = 'events';
         $this->id = 0;
         $this->title = "";
         $this->description = "";
@@ -31,19 +32,6 @@ class Event
         $this->price = 0;
         $this->capacity = 0;
         $this->status = 'pending';
-    }
-
-
-    public function fill(array $data): void
-    {
-        foreach ($data as $key => $value) {
-            $setter = 'set' . ucfirst($key);
-            if (method_exists($this, $setter)) {
-                $this->$setter($value);
-            } else {
-                $this->$key = $value;
-            }
-        }
     }
 
     public function getId(): int
@@ -151,38 +139,38 @@ class Event
     }
 
 
-    /**
-     * @throws \Exception
-     */
-    public function getAll(): array
-    {
-        $sql = "SELECT * FROM events";
-        return $this->pdo->fetchAll($sql) ?? [];
-    }
-
-    public function getById(): self
-    {
-        $sql = "SELECT * FROM events WHERE id = :id";
-        $result = $this->pdo->fetch($sql, [":id" => $this->id]);
-
-        $event = new Event();
-        $event->fill($result);
-        return $event;
-    }
-
-    public function create(): bool
-    {
-        $sql = "INSERT INTO events (title, description, event_date, location, price, capacity, status, is_sponsored) 
-        VALUES (:title, :description, :date, :location, :price, :capacity, :status, :is_sponsored)";
-        $params = [":title" => $this->title,
-            ":description" => $this->description,
-            ":date" => $this->date->format('Y-m-d H:i:s'),
-            ":location" => $this->location,
-            ":price" => $this->price,
-            ":capacity" => $this->capacity,
-            ":status" => $this->status,
-            ":is_sponsored" => $this->is_sponsored];
-        return (bool)$this->pdo->execute($sql, $params);
-    }
+//    /**
+//     * @throws \Exception
+//     */
+//    public function getAll(): array
+//    {
+//        $sql = "SELECT * FROM events";
+//        return $this->pdo->fetchAll($sql) ?? [];
+//    }
+//
+//    public function getById(): self
+//    {
+//        $sql = "SELECT * FROM events WHERE id = :id";
+//        $result = $this->pdo->fetch($sql, [":id" => $this->id]);
+//
+//        $event = new Event();
+//        $event->fill($result);
+//        return $event;
+//    }
+//
+//    public function create(): bool
+//    {
+//        $sql = "INSERT INTO events (title, description, event_date, location, price, capacity, status, is_sponsored)
+//        VALUES (:title, :description, :date, :location, :price, :capacity, :status, :is_sponsored)";
+//        $params = [":title" => $this->title,
+//            ":description" => $this->description,
+//            ":date" => $this->date->format('Y-m-d H:i:s'),
+//            ":location" => $this->location,
+//            ":price" => $this->price,
+//            ":capacity" => $this->capacity,
+//            ":status" => $this->status,
+//            ":is_sponsored" => $this->is_sponsored];
+//        return (bool)$this->pdo->execute($sql, $params);
+//    }
 
 }
