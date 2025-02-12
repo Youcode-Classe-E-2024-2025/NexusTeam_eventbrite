@@ -7,7 +7,7 @@
     <div class="max-w-2xl mx-auto m-10 p-6 bg-white rounded-lg shadow-md text-black">
         <h2 class="text-2xl font-bold mb-4">Create a New Event</h2>
 
-        <form action="/event" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form id="addEvent" action="/event" method="POST" enctype="multipart/form-data" class="space-y-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1" for="title">
                     Title
@@ -114,4 +114,66 @@
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector("#addEvent");
+
+            const inputs = form.querySelectorAll('input, textarea, select');
+
+            const stringFields = ['title', 'description', 'location'];
+            const numberFields = ['price', 'max_capacity'];
+            const dateFields = ['start_date', 'end_date'];
+
+            let isValid = true;
+
+            const validateField = (input) => {
+                let errorMessage = '';
+                if (stringFields.includes(input.name)) {
+                    if (input.value.trim().length < 3) {
+                        errorMessage = 'This field must be at least 3 characters long.';
+                    }
+                } else if (numberFields.includes(input.name)) {
+                    if (input.value <= 0) {
+                        errorMessage = 'This field must be a positive number.';
+                    }
+                } else if (dateFields.includes(input.name)) {
+                    if (new Date(input.value) < new Date()) {
+                        errorMessage = 'The date must be in the future.';
+                    }
+                } else if (input.id === "tags") {
+                    if (input.selectedOptions.length > 3) {
+                        errorMessage = 'You can only select max 3 tags.';
+                    }
+                }
+                input.nextElementSibling.textContent = errorMessage;
+                return errorMessage === '';
+            };
+
+            inputs.forEach(input => {
+                const errorElement = document.createElement('p');
+                errorElement.classList.add('text-red-400', 'mt-2', 'text-sm');
+                input.insertAdjacentElement('afterend', errorElement);
+
+                input.addEventListener('input', () => {
+                    isValid = validateField(input);
+                });
+            });
+
+            form.addEventListener('submit', (e) => {
+                isValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isValid = false;
+                    }
+                });
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
 {% endblock %}
