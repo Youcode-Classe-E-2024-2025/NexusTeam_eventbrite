@@ -19,7 +19,9 @@ class EventController
         $data = $event->getAll();
         $categories = (new Category())->getAll();
 
-        Views::render("Events/addEvent", ['events' => $data, 'categories' => $categories]);
+        dd($data);
+
+        Views::render("Events/index", ['events' => $data, 'categories' => $categories]);
     }
 
     public function show(Request $request): void

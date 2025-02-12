@@ -11,7 +11,7 @@ class Upload
     public function __construct(array $file)
     {
         $this->file = $file;
-        $this->path = __DIR__ . "/../Uploads/";
+        $this->path =  "App/Uploads/";
 
         if (!is_dir($this->path) && !mkdir($concurrentDirectory = $this->path, 0777, true) && !is_dir($concurrentDirectory)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
