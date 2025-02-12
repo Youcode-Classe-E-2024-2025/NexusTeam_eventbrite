@@ -24,7 +24,6 @@ class TicketController {
     public function store() {
         // Vérifier si les données sont présentes dans la requête (par exemple, via POST)
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupérer les données envoyées dans la requête POST
             $eventId = isset($_POST['event_id']) ? (int)$_POST['event_id'] : 0;
             $participantId = isset($_POST['participant_id']) ? (int)$_POST['participant_id'] : 0;
             $ticketType = isset($_POST['ticket_type']) ? $_POST['ticket_type'] : '';
