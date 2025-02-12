@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\Database;
 use App\Core\Request;
 use App\Core\Session;
 use App\Core\Upload;
@@ -9,6 +10,8 @@ use App\Core\Validator;
 use App\Core\Views;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\EventTag;
+use App\Models\Tag;
 
 class EventController
 {
@@ -32,7 +35,6 @@ class EventController
 
     public function show(Request $request): void
     {
-
         $event = new Event();
         $event->setId($request->get('id'));
         $data = $event->getById();
@@ -43,8 +45,9 @@ class EventController
     public function showAdd(): void
     {
         $categories = (new Category())->getAll();
+        $tags = (new Tag())->getAll();
 
-        Views::render('Events/add', ['categories' => $categories]);
+        Views::render('Events/add', ['categories' => $categories, 'tags' => $tags]);
     }
 
     public function store(Request $request): void
@@ -59,13 +62,13 @@ class EventController
                 'max_capacity' => 'required|numeric',
                 'files' => 'required',
                 'price' => 'required|numeric',
-                'location' => 'required|string',
+                'location' => 'required|alphanumeric',
             ]);
 
             if (!empty(Validator::errors())){
                 Session::set('message', Validator::errors()[0]);
-                Views::render('Events/add');
-                exit;
+                Views::redirect('/event/add');
+                return;
             }
 
 
@@ -91,6 +94,19 @@ class EventController
             } else {
                 Session::set('message', 'Event not created, try again');
             }
+
+            $tags = $request->get('tags');
+
+            $eventTag = new EventTag();
+            $eventTag->setEvent($event);
+
+            foreach ($tags as $tag) {
+                $tag = new Tag($tag);
+                $eventTag->setTag($tag);
+                $eventTag->save();
+            }
+
+
             Views::render('Events/add');
         }
     }

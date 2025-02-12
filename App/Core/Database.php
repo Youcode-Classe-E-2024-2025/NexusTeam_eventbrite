@@ -185,12 +185,11 @@ class Database
      * @return int
      * @throws Exception
      */
-    public function lastInsertId(): int
+    public static function lastInsertId(): int
     {
-        if ($this->pdo === null) {
-            $this->connect();
-        }
-        return intval($this->pdo->lastInsertId());
+        $db = self::getInstance();
+
+        return (int) $db->pdo->lastInsertId();
     }
 
     // Nouvelle méthode publique pour accéder à la connexion PDO

@@ -41,7 +41,17 @@ class Tag
 
     public function getAll(): array {
         $sql = "SELECT * FROM tags";
-        return $this->db->fetchAll($sql) ?? [];
+
+        $result = $this->db->fetchAll($sql);
+
+        $tags = [];
+
+        foreach ($result as $tag){
+            $new = new Tag($tag['id'], $tag['name']);
+            $tags[] = $new;
+        }
+
+        return $tags;
     }
 
     public function getById(): Tag {

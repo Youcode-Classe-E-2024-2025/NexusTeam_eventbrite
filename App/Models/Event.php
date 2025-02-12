@@ -231,7 +231,7 @@ class Event
                 title, description, start_date, end_date, location, price, max_capacity, organizer_id, state, promotional_image, category_id            
         ) VALUES (
                   :title, :description, :start_date, :end_date, :location, :price, :max_capacity, :organizer_id, :state, :promotional_image, :category_id
-        )";
+        ) RETURNING id";
 
         $params = [
             ":title" => $this->title,
@@ -246,7 +246,12 @@ class Event
             ":promotional_image" => $this->promotional_image,
             ":category_id" => $this->category->getId(),
         ];
-        return (bool)$this->pdo->execute($sql, $params);
+        $stmt = $this->pdo->getConnection()->prepare($sql);
+        if ($stmt->execute($params)) {
+            $this->id = $stmt->fetchColumn();
+            return true;
+        }
+        return false;
     }
 
     public function delete(): bool

@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
+use App\Core\Database;
+
 class EventTag
 {
 
     private Event $event;
     private Tag $tag;
 
+    private Database $db;
+
 
     public function __construct()
     {
         $this->event = new Event();
         $this->tag = new Tag();
+        $this->db = Database::getInstance();
     }
 
     public function getEvent(): Event
