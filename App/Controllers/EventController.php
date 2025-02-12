@@ -7,6 +7,7 @@ use App\Core\Session;
 use App\Core\Upload;
 use App\Core\Validator;
 use App\Core\Views;
+use App\Models\Category;
 use App\Models\Event;
 
 class EventController
@@ -30,6 +31,13 @@ class EventController
         Views::render("Events/editEvent", ['event' => $data]);
     }
 
+    public function showAdd(): void
+    {
+        $categories = (new Category())->getAll();
+
+        Views::render('Events/add', ['categories' => $categories]);
+    }
+
     public function store(Request $request): void
     {
         if ($request->isPost()) {
@@ -47,7 +55,8 @@ class EventController
 
             if (!empty(Validator::errors())){
                 Session::set('message', Validator::errors()[0]);
-                Views::render('Events/addEvent');
+                Views::render('Events/add');
+                exit;
             }
 
 
@@ -62,7 +71,7 @@ class EventController
             $upload = $upload->save();
             if (!$upload) {
                 Session::set('message', 'Media not uploaded');
-                Views::render('Events/addEvent');
+                Views::render('Events/add');
                 return;
             }
 
@@ -73,7 +82,7 @@ class EventController
             } else {
                 Session::set('message', 'Event not created, try again');
             }
-            Views::render('Events/addEvent');
+            Views::render('Events/add');
         }
     }
 

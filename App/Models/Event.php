@@ -40,6 +40,10 @@ class Event
     public function fill(array $data): void
     {
         foreach ($data as $key => $value) {
+            if ($key === 'id') {
+                continue;
+            }
+
             $setter = 'set' . ucfirst($key);
             if (method_exists($this, $setter)) {
                 $this->$setter($value);

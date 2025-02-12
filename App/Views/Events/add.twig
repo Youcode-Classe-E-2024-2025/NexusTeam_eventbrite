@@ -1,10 +1,10 @@
-{# Views/Events/addEvent.twig #}
+{# Views/Events/add.twig #}
 {% extends "base.twig" %}
 
 {% block title %}Add Event{% endblock %}
 
 {% block content %}
-    <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md text-black">
+    <div class="max-w-2xl mx-auto m-10 p-6 bg-white rounded-lg shadow-md text-black">
         <h2 class="text-2xl font-bold mb-4">Create a New Event</h2>
 
         <form action="/event" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -84,7 +84,7 @@
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     {% if categories is defined %}
                         {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            <option value="{{ category.getId() }}">{{ category.getName() }}</option>
                         {% endfor %}
                     {% endif %}
                 </select>
@@ -99,14 +99,5 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md text-black">
-        <h2 class="text-xl font-semibold mb-4">Existing Events</h2>
-        <ul class="divide-y divide-gray-200">
-            {% for event in events %}
-                <li class="py-2">{{ event.title }}</li>
-            {% endfor %}
-        </ul>
     </div>
 {% endblock %}

@@ -26,11 +26,11 @@
                         {% if categories is defined and categories|length > 0 %}
                             {% for category in categories %}
                                 <tr class="hover:bg-gray-600 transition">
-                                    <td class="py-3 px-4">{{ category.id }}</td>
-                                    <td class="py-3 px-4">{{ category.name }}</td>
+                                    <td class="py-3 px-4">{{ category.getId() }}</td>
+                                    <td class="py-3 px-4">{{ category.getName() }}</td>
                                     <td class="py-3 px-4">
-                                        <a href="category/update/{{ category.id }}" class="text-primary-400 hover:text-primary-500">Edit</a>
-                                        <form action="category/delete/{{ category.id }}" method="post" class="inline">
+                                        <a href="category/update/{{ category.getId() }}" class="text-primary-400 hover:text-primary-500">Edit</a>
+                                        <form action="category/delete/{{ category.getId() }}" method="post" class="inline">
                                             <button type="submit" class="text-red-400 hover:text-red-500">Delete</button>
                                         </form>
                                     </td>
