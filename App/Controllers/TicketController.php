@@ -35,7 +35,6 @@ class TicketController {
                 try {
                     $result = $this->ticketModel->createTicket($eventId, $participantId, $ticketType, $price, $qrCodePath);
 
-                    // Vérifier si l'insertion a réussi
                     if ($result) {
                         echo "Ticket créé avec succès !";
                     } else {
