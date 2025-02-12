@@ -16,7 +16,6 @@
         }
     ],
     "require": {
-        "twig/twig": "^3.19",
-      "ext-gd": "*"
+        "twig/twig": "3.7"
     }
 }
