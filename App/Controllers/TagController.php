@@ -46,10 +46,32 @@ class TagController{
         } else {
             Session::set('message', "All tags saved successfully");
         }
+        Views::redirect('/tags');
+    }
 
+    public function destroy(Request $request): void
+    {
+        $tag = new Tag($request->get('id'));
+
+        if ($tag->delete()){
+            Session::set('message', 'Tag deleted successfully');
+        } else {
+            Session::set('message', 'Tag not deleted, try again');
+        }
 
         Views::redirect('/tags');
+    }
 
+    public function update(Request $request): void
+    {
+        $tag = new Tag($request->get('id'), $request->get('name'));
 
+        if ($tag->update()){
+            Session::set('message', 'Tag updated successfully');
+        } else {
+            Session::set('message', 'Tag not updated, try again');
+        }
+
+        Views::redirect('/tags');
     }
 }
