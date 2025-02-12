@@ -7,33 +7,30 @@ use App\Core\Request;
 
 class OrganizerController
 {
+    private Organizer $model;
+
+    public function __construct()
+    {
+        $this->model = new Organizer();
+    }
     public function index()
     {
-        $model = new Organizer();
         $data = 3;
         views::render('organizer/organizerdash', ["event_stats" => $data]);
     }
     public function eventstats(Request $request)
     {
-        $model = new Organizer();
-        $data = $model->eventStats($request->get('id'));
+        $data = $this->model->eventStats($request->get('id'));
         views::render('organizer/organizerdash', ["eventstats" => $data]);
-    }
-
-    public function sales()
-    {
-        views::render('home');
     }
     public function MyEvents()
     {
-        $model = new Organizer();
-        $data = $model->eventList();
+        $data = $this->model->eventList();
         views::render('organizer/organizerdash', ["events" => $data]);
     }
     public function participant(Request $request)
     {
-        $model = new Organizer();
-        $data = $model->participantList($request->get('id'));
+        $data = $this->model->participantList($request->get('id'));
         views::render('organizer/organizerdash', ["participants" => $data]);
     }
     public function promo()
