@@ -30,7 +30,8 @@ $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
 
 //admin dashboard
-$router->add("GET", '/DashboardController','DashboardController@index'); 
+$router->add("GET", '/DashboardController','DashboardController@index');
+$router->add("POST" , '/deleteUser' , "DashboardController@index" ) ; 
 
 
 

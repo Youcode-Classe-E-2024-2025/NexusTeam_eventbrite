@@ -11,4 +11,18 @@ class DashboardController {
       $data = $model->Display();
       Views::render('users_management', ['users' => $data]);
     }
-}
+
+
+    public function deleteUser(){
+       if($_SERVER['REQUEST_METHOD'] = 'POST' && isset($_POST['id'])){
+            $user_id = intval($_POST['id']);
+            $model = new Dashboard();
+            
+            if($model->deleteUser($user_id)){
+              header ("Location: users_management");
+            }else{
+              echo 'Erreur : utilisateur introuvable ou suppression impossible';
+            }
+       }
+    }
+} 

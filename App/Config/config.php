@@ -17,6 +17,7 @@ CREATE TYPE ticket_status AS ENUM ('active', 'canceled');
 CREATE TYPE payment_method AS ENUM ('PayPal', 'Stripe');
 CREATE TYPE payment_status AS ENUM ('successful', 'failed', 'refunded');
 CREATE TYPE report_status AS ENUM ('pending', 'processed');
+CREATE TYPE user_status AS ENUM ('active', 'banned', 'deleted');
 
 -------------------------------------------------
 -- Users Table
@@ -29,8 +30,9 @@ CREATE TABLE users (
     role user_role NOT NULL DEFAULT 'participant',
     avatar VARCHAR(255),
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ALTER TABLE users ADD COLUMN status user_status NOT NULL DEFAULT 'active';
 );
-
+ALTER TABLE users ADD COLUMN status BOOLEAN DEFAULT FALSE;
 -------------------------------------------------
 -- Categories Table
 -------------------------------------------------

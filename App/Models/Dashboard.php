@@ -15,6 +15,19 @@ class Dashboard extends Model{
     }
 
 
+    public function deleteUser($userId){
+        $this->primaryKey ="id";
+        $this->table = 'users';
+        $user =$this->find(['id' => $userId]);
+
+        if(!empty($user)){
+            return $this->delete($userId);
+        }else{
+            return false ; 
+        }
+    }
+    
+
     // public function BanUser($id){
     //       $this->
     // }
