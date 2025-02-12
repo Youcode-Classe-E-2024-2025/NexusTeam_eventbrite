@@ -33,7 +33,6 @@ class TicketController {
 
             if ($eventId && $participantId && $ticketType && $price && $qrCodePath) {
                 try {
-                    // Appeler la méthode createTicket du modèle pour insérer un ticket
                     $result = $this->ticketModel->createTicket($eventId, $participantId, $ticketType, $price, $qrCodePath);
 
                     // Vérifier si l'insertion a réussi
