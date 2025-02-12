@@ -20,17 +20,21 @@ class EventController
     {
         $event = new Event();
         $data = $event->getAll();
+        $tags = [];
 
         foreach ($data as $event) {
             $imagePath = $event->getPromotionalImage();
-            if (!file_exists($imagePath) || empty($event->getPromotionalImage())) {
+            if (!file_exists($imagePath) || empty($imagePath)) {
                 $event->imageUrl = '/Assets/default_event.webp';
             } else {
                 $event->imageUrl = $imagePath;
             }
+
+            $tagEvent = (new EventTag())->setEvent($event);
+            $tags[$event->getId()] = $tagEvent->getTagsByEvent();
         }
 
-        Views::render("Events/index", ['events' => $data]);
+        Views::render("Events/index", ['events' => $data, 'tags' => $tags]);
     }
 
     public function show(Request $request): void
@@ -54,6 +58,8 @@ class EventController
     {
         if ($request->isPost()) {
 
+            $tags = $request->get('tags');
+
             Validator::make($request->all(), [
                 'title' => 'required',
                 'description' => 'required',
@@ -67,6 +73,12 @@ class EventController
 
             if (!empty(Validator::errors())){
                 Session::set('message', Validator::errors()[0]);
+                Views::redirect('/event/add');
+                return;
+            }
+
+            if (count($tags) > 3) {
+                Session::set('message', 'You can only select up to 3 tags');
                 Views::redirect('/event/add');
                 return;
             }
@@ -95,8 +107,6 @@ class EventController
                 Session::set('message', 'Event not created, try again');
             }
 
-            $tags = $request->get('tags');
-
             $eventTag = new EventTag();
             $eventTag->setEvent($event);
 
@@ -107,7 +117,7 @@ class EventController
             }
 
 
-            Views::render('Events/add');
+            Views::redirect('/event');
         }
     }
 

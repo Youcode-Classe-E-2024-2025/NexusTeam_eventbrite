@@ -199,6 +199,7 @@ class Event
         foreach ($results as $result) {
             $event = new Event();
             $event->fill($result);
+            $event->setId($result['id']);
             $event->setMaxCapacity($result['max_capacity']);
             $event->setPromotionalImage($result['promotional_image']);
             $event->setStartDate($result['start_date']);

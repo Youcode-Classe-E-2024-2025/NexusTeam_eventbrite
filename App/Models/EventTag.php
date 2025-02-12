@@ -48,4 +48,22 @@ class EventTag
         return $this->db->execute($sql, [':event_id' => $this->event->getId(), ':tag_id' => $this->tag->getId()]);
     }
 
+    public function getTagsByEvent(): array
+    {
+        $sql = "SELECT * FROM  tags WHERE id IN (SELECT tag_id FROM events_tags WHERE event_id = :event_id)";
+        $result = $this->db->fetchAll($sql, [':event_id' => $this->event->getId()]);
+
+        $tags = [];
+
+        foreach ($result as $tag) {
+            $new = new Tag($tag['id'], $tag['name']);
+
+            $tags[] = $new;
+        }
+
+        dd($this->event->getId());
+
+        return $tags;
+    }
+
 }

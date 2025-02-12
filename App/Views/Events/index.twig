@@ -94,6 +94,17 @@
                                 </svg>
                                 <span class="text-sm">{{ event.getMaxCapacity() }} spots</span>
                             </div>
+
+                            <!-- Tags Section -->
+                            <div class="flex flex-wrap gap-2">
+                                {% if tags[event.getId()] is defined %}
+                                    {% for tag in tags[event.getId()] %}
+                                        <span class="px-3 py-1 text-sm font-semibold bg-indigo-600/50 text-white rounded-lg">
+                                            {{ tag.getName() }}
+                                        </span>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
 
                         <!-- Action Button -->
