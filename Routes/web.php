@@ -34,4 +34,12 @@ $router->add("POST", '/category/create', 'CategoryController@store');
 $router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
+//tag routes
+
+$router->add("GET", '/tags', 'TagController@index');
+$router->add("GET", '/tags/update/{id}', 'TagController@show');
+$router->add("POST", '/tags/create', 'TagController@store');
+$router->add("POST", '/tags/update/{id}', 'TagController@update');
+$router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
+
 $router->dispatch();
