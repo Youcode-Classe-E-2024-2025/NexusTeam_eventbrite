@@ -9,7 +9,7 @@ class OrganizerController
     {
         $model = new Organizer();
         $data = $model->eventStat();
-        views::render('organizerdash', ["event_stats" => $data]);
+        views::render('organizer/organizerdash', ["event_stats" => $data]);
     }
     public function sales()
     {
