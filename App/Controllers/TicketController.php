@@ -10,7 +10,6 @@ class TicketController {
     private $ticketModel;
 
     public function __construct() {
-        // Initialisation du modèle Ticket
         $this->ticketModel = new Ticket();
     }
 
@@ -31,9 +30,7 @@ class TicketController {
             $ticketType = isset($_POST['ticket_type']) ? $_POST['ticket_type'] : '';
             $price = isset($_POST['price']) ? (float)$_POST['price'] : 0.0;
             $qrCodePath = isset($_POST['qr_code']) ? $_POST['qr_code'] : 'code';
-            
 
-            // Valider les données
             if ($eventId && $participantId && $ticketType && $price && $qrCodePath) {
                 try {
                     // Appeler la méthode createTicket du modèle pour insérer un ticket
