@@ -51,4 +51,14 @@ class Tag
         return new Tag($result['id'], $result['name']);
     }
 
+    public function delete(): bool {
+        $sql = "DELETE FROM tags WHERE id = :id";
+        return $this->db->execute($sql, [":id" => $this->id]);
+    }
+
+    public function update(): bool {
+        $sql = "UPDATE tags SET name = :name WHERE id = :id";
+        return $this->db->execute($sql, [":name" => $this->name, ":id" => $this->id]);
+    }
+
 }
