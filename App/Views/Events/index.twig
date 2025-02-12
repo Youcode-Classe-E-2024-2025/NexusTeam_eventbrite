@@ -16,8 +16,10 @@
             {% if events is empty %}
                 <div class="col-span-full min-h-[400px] flex flex-col items-center justify-center p-12 bg-gray-800/30 border border-gray-700 rounded-2xl backdrop-blur-sm">
                     <span class="text-6xl text-gray-400 mb-6 animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 2h12a2 2 0 012 2v16a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z M8 7h8 M8 11h8 M8 15h4" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M6 2h12a2 2 0 012 2v16a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z M8 7h8 M8 11h8 M8 15h4"/>
                         </svg>
                     </span>
                     <p class="text-xl text-gray-400 text-center">No events have been added yet.</p>
@@ -29,11 +31,10 @@
                 <div class="group relative bg-gray-800/90 backdrop-blur-sm rounded-2xl border border-gray-700/50 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:border-indigo-500/50">
                     <!-- Image Container -->
                     <div class="relative h-56 overflow-hidden">
-                        <img
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                src="{{ event.getPromotionalImage() ? event.getPromotionalImage() : '/Assets/default_event.webp' }}"
-                                alt="{{ event.getTitle() }}"
-                        >
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             src="{{ event.imageUrl }}"
+                             alt="{{ event.getTitle() }}">
+
                         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-gray-900/30 to-transparent"></div>
 
                         <!-- Category Badge -->
@@ -62,17 +63,22 @@
                         <div class="space-y-4 mb-6">
                             <!-- Location -->
                             <div class="flex items-center text-gray-400 group/item hover:text-gray-300">
-                                <svg class="w-5 h-5 mr-3 text-gray-500 group-hover/item:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-hover/item:text-indigo-400" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 </svg>
                                 <span class="text-sm truncate">{{ event.getLocation() }}</span>
                             </div>
 
                             <!-- Date -->
                             <div class="flex items-center text-gray-400 group/item hover:text-gray-300">
-                                <svg class="w-5 h-5 mr-3 text-gray-500 group-hover/item:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-hover/item:text-indigo-400" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                                 <span class="text-sm">
                                     {{ event.getStartDate()|date('M d, Y') }} - {{ event.getEndDate()|date('M d, Y') }}
@@ -81,8 +87,10 @@
 
                             <!-- Capacity -->
                             <div class="flex items-center text-gray-400 group/item hover:text-gray-300">
-                                <svg class="w-5 h-5 mr-3 text-gray-500 group-hover/item:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                <svg class="w-5 h-5 mr-3 text-gray-500 group-hover/item:text-indigo-400" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
                                 <span class="text-sm">{{ event.getMaxCapacity() }} spots</span>
                             </div>

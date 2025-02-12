@@ -18,6 +18,15 @@ class EventController
         $event = new Event();
         $data = $event->getAll();
 
+        foreach ($data as $event) {
+            $imagePath = '/App/Uploads/' . $event->getPromotionalImage();
+            if (!file_exists($imagePath) || empty($event->getPromotionalImage())) {
+                $event->imageUrl = '/Assets/default_event.webp';
+            } else {
+                $event->imageUrl = $imagePath;
+            }
+        }
+
         Views::render("Events/index", ['events' => $data]);
     }
 
