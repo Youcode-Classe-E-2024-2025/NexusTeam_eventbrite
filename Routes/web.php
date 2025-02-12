@@ -22,5 +22,8 @@ $router->add("GET", "/reservation", "TicketController@index");
 $router->add("POST", "/reservation", "TicketController@store");
 
 
+$router->add( "POST" , '/payment/create-session', 'PaymentController@createSession');
+$router->add( "GET" , '/payment/success', 'PaymentController@success');
+$router->add( "GET" , '/payment/cancel', 'PaymentController@cancel');
 
 $router->dispatch();
