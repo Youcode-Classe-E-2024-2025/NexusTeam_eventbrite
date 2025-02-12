@@ -17,6 +17,8 @@
     ],
     "require": {
         "twig/twig": "^3.19",
-      "ext-gd": "*"
+      "ext-gd": "*",
+        "endroid/qr-code": "^6.0",
+        "stripe/stripe-php": "^16.5"
     }
 }

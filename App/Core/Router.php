@@ -42,6 +42,7 @@ class Router
             'path' => $path,
             'handler' => $handler
         ];
+        $this->request = new Request();
     }
 
     // 'GET', '/home', 'HomeController@index'

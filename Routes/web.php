@@ -17,4 +17,10 @@ $router->add("GET", "/UserController" , "UserController@index");
 $router->add("GET" , "/TagsController" , "TagsController@index"); 
 $router->add("GET", "/CategoryController" , "CategoryController@index"); 
 
+
+$router->add("GET", "/reservation", "TicketController@index");
+$router->add("POST", "/reservation", "TicketController@store");
+
+
+
 $router->dispatch();
