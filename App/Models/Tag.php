@@ -39,4 +39,16 @@ class Tag
         return $this->db->execute($sql, [':name' => $this->name]);
     }
 
+    public function getAll(): array {
+        $sql = "SELECT * FROM tags";
+        return $this->db->fetchAll($sql) ?? [];
+    }
+
+    public function getById(): Tag {
+        $sql = "SELECT * FROM tags WHERE id = :id";
+        $result = $this->db->fetch($sql, [":id" => $this->id]);
+
+        return new Tag($result['id'], $result['name']);
+    }
+
 }
