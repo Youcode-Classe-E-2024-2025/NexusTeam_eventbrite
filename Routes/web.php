@@ -40,6 +40,6 @@ $router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
 $router->add("GET", "/dashboard/admin", "DashboardController@index");
 $router->add("POST", "/user/delete/{id}", "DashboardController@DeleteUser");
 $router->add("Post","/user/ban/{id}", "DashboardController@BanUser");
-
+$router->add('POST', '/user/unban/{id}','DashboardController@unbanUser');
 
 $router->dispatch();

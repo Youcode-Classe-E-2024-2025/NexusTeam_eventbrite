@@ -52,4 +52,44 @@ class DashboardController {
         
         Views::redirect('/dashboard/admin');
     }
+
+
+    public function unbanUser(Request $request){
+      if(empty($request->get('id'))){
+        Session::set('message', 'error successfully');
+      }
+      $user_id = $request->get("id");
+      $model = new Dashboard();
+
+      if($model->unbanUser($user_id,'active')){
+
+        Session::set('message', 'actived successfully');
+
+      }else{
+        Session::set('message', 'err successfully');
+      }
+      
+      
+      Views::redirect('/dashboard/admin');
+
+      
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 } 
