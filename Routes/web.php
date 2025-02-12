@@ -5,10 +5,12 @@ $router = new Router();
 
 //nav routes
 $router->add("GET", "/", "HomeController@index");
+$router->add("GET", "/home", "HomeController@index");
+
+//organizer routes
 $router->add("GET", "/organizer", "OrganizerController@index");
 $router->add("GET", "/organizer/sales", "OrganizerController@sales");
 $router->add("GET", "/organizer/events", "OrganizerController@events");
-$router->add("GET", "/home", "HomeController@index");
 
 //auth routes
 $router->add("GET", "/signup", "SignUpController@signUp");
