@@ -24,6 +24,7 @@ $router->add("POST", '/event/update/{id}', 'EventController@edit');
 //category routes
 $router->add("GET", '/category', 'CategoryController@index');
 $router->add("GET", '/category/update/{id}', 'CategoryController@show');
+$router->add("POST", '/category/create', 'CategoryController@store');
 $router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 

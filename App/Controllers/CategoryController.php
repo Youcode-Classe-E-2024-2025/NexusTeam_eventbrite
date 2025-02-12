@@ -13,9 +13,6 @@ class CategoryController
     public function index(): void
     {
         $categories = (new Category())->getAll();
-
-
-
         Views::render('Category/index', ['categories'=> $categories]);
     }
 
@@ -27,12 +24,34 @@ class CategoryController
         $category->setId($request->get('id'));
 
         $category = $category->getById();
-
         if ($request->getUri() === "/category/update/" . $request->get('id')){
             Views::render('Category/edit', ['category'=> $category]);
         }
 
         Views::render('Category/show', ['category'=> $category]);
+    }
+
+    public function store(Request $request): void {
+        Validator::make($request->all(), [
+            'name' => 'required|string|min:3|max:40',
+        ]);
+
+        if (!empty(Validator::errors())){
+            Session::set('message', Validator::errors()[0]);
+            Views::redirect('/category');
+            exit;
+        }
+
+        $category = new Category();
+        $category->setName($request->get('name'));
+
+        if ($category->create()){
+            Session::set('message', 'Category created successfully');
+        } else {
+            Session::set('message', 'Category not created, try again');
+        }
+
+        Views::redirect('/category');
     }
 
     public function destroy(Request $request): void

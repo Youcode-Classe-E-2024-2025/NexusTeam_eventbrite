@@ -63,6 +63,11 @@ class Category
         return $category;
     }
 
+    public function create(): bool {
+        $sql = "INSERT INTO categories (name) VALUES (:name)";
+        return (bool) $this->db->execute($sql, [":name" => $this->name]);
+    }
+
 
     public function update(): bool {
         $sql = "UPDATE categories SET name = :name WHERE id = :id";
