@@ -23,7 +23,7 @@ class Dashboard extends Model{
         if(!empty($user)){
             return $this->delete($userId);
         }else{
-            return false ; 
+            return print_r("failed"); 
         }
     }
     

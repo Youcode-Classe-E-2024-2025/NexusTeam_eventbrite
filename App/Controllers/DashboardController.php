@@ -3,26 +3,32 @@ namespace App\Controllers;
 
 use App\Models\Dashboard;
 use App\Core\Views;
+use App\Core\Request;
+use App\Core\Session;
 
 class DashboardController {
     
     public function index(){
       $model = new Dashboard();
       $data = $model->Display();
-      Views::render('users_management', ['users' => $data]);
+      Views::render('Admin/usersIndex', ['users' => $data]);
     }
 
 
-    public function deleteUser(){
-       if($_SERVER['REQUEST_METHOD'] = 'POST' && isset($_POST['id'])){
-            $user_id = intval($_POST['id']);
+    public function DeleteUser(Request $request){
+            if (empty($request->get('id'))){
+              echo 'err';
+            }
+
+            $user_id = $request->get("id");
             $model = new Dashboard();
             
             if($model->deleteUser($user_id)){
-              header ("Location: users_management");
+              Session::set('message', 'deleted successfully');
             }else{
-              echo 'Erreur : utilisateur introuvable ou suppression impossible';
+              Session::set('message', 'nn');
             }
-       }
+
+            Views::redirect('/dashboard/admin');
     }
 } 

@@ -28,15 +28,6 @@ $router->add("POST", '/category/create', 'CategoryController@store');
 $router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
-<<<<<<< HEAD
-
-
-//admin dashboard
-$router->add("GET", '/DashboardController','DashboardController@index');
-$router->add("POST" , '/deleteUser' , "DashboardController@index" ) ; 
-
-
-=======
 //tag routes
 
 $router->add("GET", '/tags', 'TagController@index');
@@ -44,6 +35,9 @@ $router->add("GET", '/tags/update/{id}', 'TagController@show');
 $router->add("POST", '/tags/create', 'TagController@store');
 $router->add("POST", '/tags/update/{id}', 'TagController@update');
 $router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
->>>>>>> f6617bd9d7bd6c492525fbc4044c442ffe69eb03
+
+
+$router->add("GET", "/dashboard/admin", "DashboardController@index");
+$router->add("POST", "/user/delete/{id}", "DashboardController@DeleteUser");
 
 $router->dispatch();
