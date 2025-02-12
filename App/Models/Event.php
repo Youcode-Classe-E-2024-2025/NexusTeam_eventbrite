@@ -188,7 +188,22 @@ class Event
     public function getAll(): array
     {
         $sql = "SELECT * FROM events";
-        return $this->pdo->fetchAll($sql) ?? [];
+        $results = $this->pdo->fetchAll($sql);
+
+        $events = [];
+
+        foreach ($results as $result) {
+            $event = new Event();
+            $event->fill($result);
+            $event->setMaxCapacity($result['max_capacity']);
+            $event->setPromotionalImage($result['promotional_image']);
+            $event->setStartDate($result['start_date']);
+            $event->setEndDate($result['end_date']);
+            $event->setCategory((new Category())->setId($result['category_id'])->getById());
+            $events[] = $event;
+        }
+
+        return $events;
     }
 
     public function getById(): self
