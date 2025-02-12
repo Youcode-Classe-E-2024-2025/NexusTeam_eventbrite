@@ -3,7 +3,6 @@
 namespace App\Models;
 use App\Core\Database;
 use DateTime;
-use Exception;
 
 class Event
 {
@@ -18,7 +17,7 @@ class Event
     private int $organizer_id;
     private string $state;
     private ?string $promotional_image;
-    private int $category_id;
+    private Category $category;
 
     private Database $pdo;
     public function __construct()
@@ -35,7 +34,7 @@ class Event
         $this->organizer_id = 1;
         $this->state = 'pending';
         $this->promotional_image = null;
-        $this->category_id = 1;
+        $this->category = new Category();
     }
 
     public function fill(array $data): void
@@ -169,14 +168,14 @@ class Event
         return $this;
     }
 
-    public function getCategoryId(): int
+    public function getCategory(): category
     {
-        return $this->category_id;
+        return $this->category;
     }
 
-    public function setCategoryId(int $category_id): Event
+    public function setCategory(Category $category): Event
     {
-        $this->category_id = $category_id;
+        $this->category = $category;
         return $this;
     }
 
@@ -203,6 +202,7 @@ class Event
         $event->setPromotionalImage($result['promotional_image']);
         $event->setStartDate($result['start_date']);
         $event->setEndDate($result['end_date']);
+        $event->setCategory((new Category())->setId($result['category_id'])->getById());
         return $event;
     }
 
@@ -225,7 +225,7 @@ class Event
             ":organizer_id" => $this->organizer_id,
             ":state" => $this->state,
             ":promotional_image" => $this->promotional_image,
-            ":category_id" => $this->category_id,
+            ":category_id" => $this->category->getId(),
         ];
         return (bool)$this->pdo->execute($sql, $params);
     }
@@ -251,7 +251,7 @@ class Event
             ":max_capacity" => $this->max_capacity,
             ":state" => $this->state,
             ":promotional_image" => $this->promotional_image,
-            ":category_id" => $this->category_id,
+            ":category_id" => $this->category->getId(),
             ":id" => $this->id
         ];
 

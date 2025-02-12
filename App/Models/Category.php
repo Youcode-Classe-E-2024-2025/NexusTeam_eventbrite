@@ -27,8 +27,9 @@ class Category
         }
     }
 
-    public function setId(int $id): void{
+    public function setId(int $id): Category{
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): int{

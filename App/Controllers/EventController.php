@@ -7,7 +7,6 @@ use App\Core\Session;
 use App\Core\Upload;
 use App\Core\Validator;
 use App\Core\Views;
-use App\Models\Category;
 use App\Models\Event;
 
 class EventController
@@ -17,11 +16,8 @@ class EventController
     {
         $event = new Event();
         $data = $event->getAll();
-        $categories = (new Category())->getAll();
 
-        dd($data);
-
-        Views::render("Events/index", ['events' => $data, 'categories' => $categories]);
+        Views::render("Events/index", ['events' => $data]);
     }
 
     public function show(Request $request): void
@@ -60,6 +56,7 @@ class EventController
             $event->setStartDate($request->get('start_date'));
             $event->setEndDate($request->get('end_date'));
             $event->setMaxCapacity($request->get('max_capacity'));
+            $event->getCategory()->setId($request->get('category_id'));
 
             $upload = new Upload($request->get('files'));
             $upload = $upload->save();
@@ -101,6 +98,7 @@ class EventController
         $update->setStartDate($request->get('start_date'));
         $update->setEndDate($request->get('end_date'));
         $update->setMaxCapacity($request->get('max_capacity'));
+        $update->getCategory()->setId($request->get('category_id'));
 
         if (!empty($request->get('files')['tmp_name'])){
             $upload = new Upload($request->get('files'));
