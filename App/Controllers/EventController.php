@@ -6,7 +6,8 @@ use App\Core\Request;
 use App\Core\Session;
 use App\Core\Upload;
 use App\Core\Validator;
-use App\Core\View;
+use App\Core\Views;
+use App\Models\Category;
 use App\Models\Event;
 
 class EventController
@@ -16,8 +17,9 @@ class EventController
     {
         $event = new Event();
         $data = $event->getAll();
+        $categories = (new Category())->getAll();
 
-        View::render("Events/addEvent", ['events' => $data]);
+        Views::render("Events/addEvent", ['events' => $data, 'categories' => $categories]);
     }
 
     public function show(Request $request): void
@@ -27,7 +29,7 @@ class EventController
         $event->setId($request->get('id'));
         $data = $event->getById();
 
-        View::render("Events/evv", ['event' => $data]);
+        Views::render("Events/editEvent", ['event' => $data]);
     }
 
     public function store(Request $request): void
@@ -47,7 +49,7 @@ class EventController
 
             if (!empty(Validator::errors())){
                 Session::set('message', Validator::errors()[0]);
-                View::render('Events/addEvent', ['message' => Session::get('message')]);
+                Views::render('Events/addEvent');
             }
 
 
@@ -57,12 +59,11 @@ class EventController
             $event->setEndDate($request->get('end_date'));
             $event->setMaxCapacity($request->get('max_capacity'));
 
-
             $upload = new Upload($request->get('files'));
             $upload = $upload->save();
             if (!$upload) {
-                Session::set('message', 'Image not uploaded');
-                View::render('Events/addEvent', ['message' => Session::get('message')]);
+                Session::set('message', 'Media not uploaded');
+                Views::render('Events/addEvent');
                 return;
             }
 
@@ -73,7 +74,7 @@ class EventController
             } else {
                 Session::set('message', 'Event not created, try again');
             }
-            View::render('Events/addEvent', ['message' => Session::get('message')]);
+            Views::render('Events/addEvent');
         }
     }
 
@@ -86,16 +87,37 @@ class EventController
         } else {
             Session::set('message', 'Event not deleted, try again');
         }
-        View::render('Events/addEvent', ['message' => Session::get('message')]);
+        Views::render('Events/addEvent');
     }
 
     public function edit(Request $request): void {
-        if ($request->isGet()){
-            $event = new Event();
-            $event->setId($request->get('id'));
-            $data = $event->getById();
-            View::render('Events/editEvent', ['event' => $data]);
+        $event = new Event();
+        $event->setId($request->get('id'));
+
+        $update = $event->getById(); //event to be updated
+        $update->fill($request->all());
+        $update->setStartDate($request->get('start_date'));
+        $update->setEndDate($request->get('end_date'));
+        $update->setMaxCapacity($request->get('max_capacity'));
+
+        if (!empty($request->get('files')['tmp_name'])){
+            $upload = new Upload($request->get('files'));
+            $upload = $upload->save();
+
+            if (!$upload) {
+                Session::set('message', 'Image not uploaded');
+                Views::render('Events/editEvent');
+            }
+            $update->setPromotionalImage($upload);
         }
+
+        if ($update->update()) {
+            Session::set('message', 'Event updated successfully');
+        } else {
+            Session::set('message', 'Event not updated, try again');
+        }
+
+        Views::redirect('/event');
     }
 
 }
