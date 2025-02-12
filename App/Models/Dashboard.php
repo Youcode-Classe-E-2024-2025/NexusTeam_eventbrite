@@ -5,6 +5,11 @@ namespace App\Models;
 use App\Core\Model;
 
 class Dashboard extends Model{
+
+    public function __construct(){
+        parent::__construct();
+        $this->table = 'users';
+    }
      
     public function Display(): array{
        
@@ -18,7 +23,7 @@ class Dashboard extends Model{
     public function deleteUser($userId){
         $this->primaryKey ="id";
         $this->table = 'users';
-        $user =$this->find(['id' => $userId]);
+        $user =$this->find(conditions: ['id' => $userId]);
 
         if(!empty($user)){
             return $this->delete($userId);
@@ -28,8 +33,17 @@ class Dashboard extends Model{
     }
     
 
-    // public function BanUser($id){
-    //       $this->
-    // }
+    public function BanUser($user_id , $NewStatus){
+        $this->table = "users";
+        $user =$this->find(['id' => $user_id]);
 
+        if(!empty($user)){
+            return $this->update($user_id, ['status' => $NewStatus]);
+        }else{
+            return false;
+
+        }
+
+
+    }
 }

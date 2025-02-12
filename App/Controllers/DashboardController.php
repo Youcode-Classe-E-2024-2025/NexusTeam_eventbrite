@@ -24,11 +24,32 @@ class DashboardController {
             $model = new Dashboard();
             
             if($model->deleteUser($user_id)){
-              Session::set('message', 'deleted successfully');
+              Session::set('message','deleted successfully');
             }else{
               Session::set('message', 'nn');
             }
 
             Views::redirect('/dashboard/admin');
+    }
+
+
+
+    public function BanUser(Request $request){
+        if(empty($request->get('id'))){
+          Session::set('message', 'error successfully');
+        }
+        $user_id = $request->get("id");
+        $model = new Dashboard();
+
+        if($model->BanUser($user_id,'banned')){
+
+          Session::set('message', 'banned successfully');
+
+        }else{
+          Session::set('message', 'err successfully');
+        }
+        
+        
+        Views::redirect('/dashboard/admin');
     }
 } 
