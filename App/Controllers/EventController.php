@@ -22,7 +22,7 @@ class EventController
         $data = $event->getAll();
 
         foreach ($data as $event) {
-            $imagePath = '/App/Uploads/' . $event->getPromotionalImage();
+            $imagePath = $event->getPromotionalImage();
             if (!file_exists($imagePath) || empty($event->getPromotionalImage())) {
                 $event->imageUrl = '/Assets/default_event.webp';
             } else {
@@ -62,7 +62,7 @@ class EventController
                 'max_capacity' => 'required|numeric',
                 'files' => 'required',
                 'price' => 'required|numeric',
-                'location' => 'required|alphanumeric',
+                'location' => 'required',
             ]);
 
             if (!empty(Validator::errors())){
@@ -83,7 +83,7 @@ class EventController
             $upload = $upload->save();
             if (!$upload) {
                 Session::set('message', 'Media not uploaded');
-                Views::render('Events/add');
+                Views::redirect('/event/add');
                 return;
             }
 
