@@ -62,7 +62,7 @@ class EventController
             $upload = new Upload($request->get('files'));
             $upload = $upload->save();
             if (!$upload) {
-                Session::set('message', 'Image not uploaded');
+                Session::set('message', 'Media not uploaded');
                 Views::render('Events/addEvent');
                 return;
             }
