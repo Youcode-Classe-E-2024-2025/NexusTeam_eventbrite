@@ -12,6 +12,7 @@ $router->add("GET", "/organizer", "OrganizerController@index");
 $router->add("GET", "/organizer/sales", "OrganizerController@sales");
 $router->add("GET", "/organizer/MyEvents", "OrganizerController@MyEvents");
 $router->add("GET", "/organizer/MyEvents/eventStats/{id}", "OrganizerController@eventstats");
+$router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant", "OrganizerController@Participant");
 
 //auth routes
 $router->add("GET", "/signup", "SignUpController@signUp");

@@ -30,9 +30,11 @@ class OrganizerController
         $data = $model->eventList();
         views::render('organizer/organizerdash', ["events" => $data]);
     }
-    public function participant()
+    public function participant(Request $request)
     {
-        
+        $model = new Organizer();
+        $data = $model->participantList($request->get('id'));
+        views::render('organizer/organizerdash', ["participants" => $data]);
     }
     public function promo()
     {

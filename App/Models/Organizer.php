@@ -27,4 +27,16 @@ class Organizer extends Model
         $data += $this->first(["id"=>$id]);
         return $data;
     }
+    public function participantList($id): array
+    {
+        $this->primaryKey = "id";
+        $this->table = "tickets";
+        $data = $this->find(["event_id"=>$id],'ASC');
+        $this->primaryKey = "id";
+        $this->table = "users";
+        foreach ($data as $key => $d) {
+            $data[$key]["participant_name"] = $this->first(["id"=>$d["participant_id"]])["name"];
+        }
+        return $data;
+    }
 }
