@@ -41,7 +41,6 @@ class TicketController {
                         echo "L'insertion du ticket a échoué.";
                     }
                 } catch (Exception $e) {
-                    // Gérer les exceptions en cas d'erreur
                     echo "Erreur lors de l'insertion : " . $e->getMessage();
                 }
             } else {
