@@ -22,6 +22,9 @@ $router->add("POST", '/event', 'EventController@store');
 $router->add("POST", '/event/delete/{id}', 'EventController@destroy');
 $router->add("POST", '/event/update/{id}', 'EventController@edit');
 
+//API EVENT
+$router->add('POST', '/api/event/search', 'EventController@search');
+
 //category routes
 $router->add("GET", '/category', 'CategoryController@index');
 $router->add("GET", '/category/update/{id}', 'CategoryController@show');

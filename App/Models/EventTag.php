@@ -60,9 +60,6 @@ class EventTag
 
             $tags[] = $new;
         }
-
-        dd($this->event->getId());
-
         return $tags;
     }
 

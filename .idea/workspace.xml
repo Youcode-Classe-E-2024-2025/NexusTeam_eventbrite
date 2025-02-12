@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="48181d9d-9188-4876-8c96-d3d619cfaf2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/Events/add.twig" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Events/add.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Core/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Core/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/EventTag.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/EventTag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/Events/index.twig" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Events/index.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CSS/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CSS/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +23,13 @@
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,7 +68,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;events__crud&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#11 on events__crud&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/kyojin/Documents/eventbrite&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -95,7 +109,9 @@
       <workItem from="1739186661431" duration="3152000" />
       <workItem from="1739204248797" duration="1978000" />
       <workItem from="1739260959753" duration="2223000" />
-      <workItem from="1739352751979" duration="13616000" />
+      <workItem from="1739352751979" duration="18851000" />
+      <workItem from="1739388682988" duration="198000" />
+      <workItem from="1739388888624" duration="1671000" />
     </task>
     <servers />
   </component>

@@ -164,4 +164,13 @@ class EventController
         Views::redirect('/event');
     }
 
+    public function search(Request $request) {
+
+        $data = Event::search($request->get('search'));
+
+        http_response_code(200);
+        header('Content-Type: application/json');
+        echo json_encode($data, JSON_THROW_ON_ERROR);
+    }
+
 }
