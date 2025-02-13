@@ -44,5 +44,6 @@ $router->add("POST", "/reservation", "TicketController@store");
 $router->add( "POST" , '/payment/create-session', 'PaymentController@createSession');
 $router->add( "GET" , '/payment/success', 'PaymentController@success');
 $router->add( "GET" , '/payment/cancel', 'PaymentController@cancel');
+$router->add( "GET","/payment", "PaymentController@pay");
 
 $router->dispatch();

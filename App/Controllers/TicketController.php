@@ -23,6 +23,7 @@ class TicketController {
         Views::render('reservation_form'); 
     }
     public function store() {
+        session_start();
         // Vérifier si les données sont présentes dans la requête (par exemple, via POST)
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupérer les données envoyées dans la requête POST
@@ -38,10 +39,14 @@ class TicketController {
                 try {
                     // Appeler la méthode createTicket du modèle pour insérer un ticket
                     $result = $this->ticketModel->createTicket($eventId, $participantId, $ticketType, $price, $qrCodePath);
-
+                    $_SESSION["reservation_id"] = $result;
+                    $_SESSION["price"] = $price;
                     // Vérifier si l'insertion a réussi
                     if ($result) {
-                        echo "Ticket créé avec succès !";
+                        // echo "Ticket créé avec succès !";
+                        header("Location: /payment");
+
+
                     } else {
                         echo "L'insertion du ticket a échoué.";
                     }

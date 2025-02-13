@@ -1,46 +1,46 @@
 <?php
+
 namespace App\Controllers;
 
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
-use App\Models\Payment;
 
-class PaymentController{
-    public function createSession() {
-        require_once __DIR__ . '/../../vendor/autoload.php';
+class PaymentController {
+    public function pay() {
+        session_start();
+        
+        if (!isset($_SESSION["reservation_id"]) || !isset($_SESSION["price"])) {
+            die("Réservation introuvable.");
+        }
 
-        Stripe::setApiKey('sk_test_ta_cle_secrete');
+        $price = $_SESSION["price"];
+        $reservation_id = $_SESSION["reservation_id"];
 
-        $ticketId = $_POST['ticket_id']; 
-        $amount = $_POST['amount']; 
+        // Charger la configuration
+        $config = require __DIR__ . "/../Config/config.php";
+        Stripe::setApiKey($config["STRIPE_SECRET_KEY"]);
 
         try {
             $session = Session::create([
-                'payment_method_types' => ['card'],
-                'line_items' => [[
-                    'price_data' => [
-                        'currency' => 'usd',
-                        'product_data' => ['name' => 'Ticket Event'],
-                        'unit_amount' => $amount * 100, 
+                "mode" => "payment",
+                "success_url" => "http://localhost/success?reservation_id=" . $reservation_id,
+                "cancel_url" => "http://localhost/cancel",
+                "line_items" => [[
+                    "quantity" => 1,
+                    "price_data" => [
+                        "currency" => "usd",
+                        "unit_amount" => $price * 100, // Correction : conversion en cents
+                        "product_data" => [
+                            "name" => "Réservation Événement",
+                        ],
                     ],
-                    'quantity' => 1,
                 ]],
-                'mode' => 'payment',
-                'success_url' => 'http://localhost/payment/success?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => 'http://localhost/payment/cancel',
             ]);
 
-            echo json_encode(['id' => $session->id]);
-        } catch (\Exception $e) {
-            echo json_encode(['error' => $e->getMessage()]);
+            header("Location: " . $session->url);
+            exit();
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            echo "Erreur de paiement : " . $e->getMessage();
         }
-    }
-
-    public function success() {
-        echo "Paiement réussi !";
-    }
-
-    public function cancel() {
-        echo "Paiement annulé.";
     }
 }
