@@ -30,7 +30,6 @@ class Views
         if (isset($_SESSION['user'])){
             $data['user'] = $_SESSION['user'];
         }
-
         if (file_exists(self::$path . "/$view")) {
             echo $twig->render($view, $data);
         } else {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class Dashboard extends Model
+class DashboardUser extends Model
 {
 
     public function __construct()
@@ -59,6 +59,14 @@ class Dashboard extends Model
         }
     
     }
+
+
+
+    // public function displayEvents(){
+    //     $this->primaryKey = "id";
+    //     $this->table = "events";
+    //     return $this->findAll();
+    // }
 
 
 }

@@ -1,4 +1,5 @@
 <?php
+use App\Controllers\EventController;
 use App\Core\Router;
 
 $router = new Router();
@@ -37,9 +38,10 @@ $router->add("POST", '/tags/update/{id}', 'TagController@update');
 $router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
 
 
-$router->add("GET", "/dashboard/admin", "DashboardController@index");
-$router->add("POST", "/user/delete/{id}", "DashboardController@DeleteUser");
-$router->add("Post","/user/ban/{id}", "DashboardController@BanUser");
-$router->add('POST', '/user/unban/{id}','DashboardController@unbanUser');
+$router->add("GET", "/dashboard/admin", "DashboardUserController@index");
+$router->add("POST", "/user/delete/{id}", "DashboardUserController@DeleteUser");
+$router->add("Post","/user/ban/{id}", "DashboardUserController@BanUser");
+$router->add('POST', '/user/unban/{id}','DashboardUserController@unbanUser');
+$router->add('GET', '/events/admin','DashboardEventsController@index');
 
 $router->dispatch();

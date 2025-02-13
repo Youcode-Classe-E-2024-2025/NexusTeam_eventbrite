@@ -1,17 +1,19 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\Dashboard;
+use App\Models\DashboardUser;
 use App\Core\Views;
 use App\Core\Request;
 use App\Core\Session;
 
-class DashboardController {
+class DashboardUserController {
     
     public function index(){
-      $model = new Dashboard();
+      $model = new DashboardUser();
       $data = $model->Display();
       Views::render('Admin/usersIndex', ['users' => $data]);
+      // Views::render('Admin/eventIndex',['events'=>$data]);
+
     }
 
 
@@ -21,7 +23,7 @@ class DashboardController {
             }
 
             $user_id = $request->get("id");
-            $model = new Dashboard();
+            $model = new DashboardUser();
             
             if($model->deleteUser($user_id)){
               Session::set('message','deleted successfully');
@@ -39,7 +41,7 @@ class DashboardController {
           Session::set('message', 'error successfully');
         }
         $user_id = $request->get("id");
-        $model = new Dashboard();
+        $model = new DashboardUser();
 
         if($model->BanUser($user_id,'banned')){
 
@@ -59,7 +61,7 @@ class DashboardController {
         Session::set('message', 'error successfully');
       }
       $user_id = $request->get("id");
-      $model = new Dashboard();
+      $model = new DashboardUser();
 
       if($model->unbanUser($user_id,'active')){
 
@@ -77,8 +79,13 @@ class DashboardController {
 
 
 
+    // public function displayEvent(){
 
-    
+    // }
+
+
+
+
 
     
 

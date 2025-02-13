@@ -1,0 +1,126 @@
+{# Views/Admin/usersIndex.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Events Management
+{% endblock %}
+
+{% block content %}
+	<div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
+		<div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
+			<div class="flex items-center justify-center h-14 border-b">
+				<div class="text-2xl font-bold text-primary-600">NexusTeam Admin</div>
+			</div>
+			<div class="overflow-y-auto overflow-x-hidden flex-grow">
+				<ul class="flex flex-col py-4 space-y-1">
+					<li class="px-5">
+						<div class="flex flex-row items-center h-8">
+							<div class="text-sm font-light tracking-wide text-gray-500">Menu</div>
+						</div>
+					</li>
+					<li>
+						<a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+							<span class="inline-flex justify-center items-center ml-4">
+								<i class="fas fa-users text-primary-500"></i>
+							</span>
+							<span class="ml-2 text-sm tracking-wide truncate">Users</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-categories.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+							<span class="inline-flex justify-center items-center ml-4">
+								<i class="fas fa-th-large"></i>
+							</span>
+							<span class="ml-2 text-sm tracking-wide truncate">Categories</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-tags.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+							<span class="inline-flex justify-center items-center ml-4">
+								<i class="fas fa-tags"></i>
+							</span>
+							<span class="ml-2 text-sm tracking-wide truncate">Tags</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-courses.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+							<span class="inline-flex justify-center items-center ml-4">
+								<i class="fas fa-book"></i>
+							</span>
+							<span class="ml-2 text-sm tracking-wide truncate">Courses</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-events.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+							<span class="inline-flex justify-center items-center ml-4">
+								<i class="fas fa-calendar-alt"></i>
+							</span>
+							<span class="ml-2 text-sm tracking-wide truncate">Events</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="ml-64 flex-1">
+			<header class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+				<h1 class="text-2xl font-semibold text-gray-800">Manage Events</h1>
+				<div class="flex items-center space-x-4">
+					<span class="text-gray-600">Welcome, Admin</span>
+					<button class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition duration-200">
+						Logout
+					</button>
+				</div>
+			</header>
+			<main class="p-6">
+				<div class="bg-white rounded-lg shadow-md p-6">
+					<div class="flex justify-between items-center mb-6">
+						<h2 class="text-xl font-semibold text-gray-800">Event List</h2>
+					</div>
+					<div class="overflow-x-auto">
+						<table class="min-w-full bg-white">
+							<thead class="bg-gray-100">
+								<tr>
+									<th class="py-3 px-4 text-left">Organizer</th>
+									<th class="py-3 px-4 text-left">Name</th>
+									<th class="py-3 px-4 text-left">Email</th>
+									<th class="py-3 px-4 text-left">Role</th>
+									<th class="py-3 px-4 text-left">Status</th>
+									<th class="py-3 px-4 text-left">Event ID</th>
+									<th class="py-3 px-4 text-left">Title</th>
+									<th class="py-3 px-4 text-left">Description</th>
+									<th class="py-3 px-4 text-left">Start Date</th>
+									<th class="py-3 px-4 text-left">End Date</th>
+									<th class="py-3 px-4 text-left">Location</th>
+									<th class="py-3 px-4 text-left">Price</th>
+									<th class="py-3 px-4 text-left">Max Capacity</th>
+									<th class="py-3 px-4 text-left">State</th>
+									<th class="py-3 px-4 text-left">Category</th>
+									<th class="py-3 px-4 text-left">Created At</th>
+									<th class="py-3 px-4 text-left">Actions</th>
+								</tr>
+							</thead>
+							<tbody class="divide-y divide-gray-200">
+								{% for event in events %}
+									<tr>
+										<td class="py-3 px-4">{{ event.id }}</td>
+										<td class="py-3 px-4">{{ event.title }}</td>
+										<td class="py-3 px-4">{{ event.description }}</td>
+										<td class="py-3 px-4">{{ event.start_date }}</td>
+										<td class="py-3 px-4">{{ event.end_date }}</td>
+										<td class="py-3 px-4">{{ event.location }}</td>
+										<td class="py-3 px-4">{{ event.price }}</td>
+										<td class="py-3 px-4">{{ event.max_capacity }}</td>
+										<td class="py-3 px-4">{{ event.state }}</td>
+										<td class="py-3 px-4">{{ event.category_name }}</td>
+										<td class="py-3 px-4">{{ event.created_at }}</td>
+										<td class="py-3 px-4 flex flex-column gap-4">
+											<form action="/event/delete/{{ event.id }}" method="POST">
+												<button class="text-red-500 hover:text-red-700">Delete Event</button>
+											</form>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+
+					</div>
+				{% endblock %}
