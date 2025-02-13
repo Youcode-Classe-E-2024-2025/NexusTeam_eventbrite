@@ -24,7 +24,7 @@ class Ticket {
         if ($stmt->rowCount() > 0) {
             // Récupérer l'ID du ticket nouvellement créé
             $ticketId = $stmt->fetchColumn();
-            // Sauvegarder l'ID du ticket dans la session
+            // Sauvegarder l'ID du ticket dans la sessio
             $_SESSION["ticket_id"] = $ticketId;
             return $ticketId;
         }
