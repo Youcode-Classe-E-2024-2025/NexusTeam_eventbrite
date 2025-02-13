@@ -27,8 +27,12 @@ class Views
             unset($_SESSION['message']);
         }
 
-        if (isset($_SESSION['user'])){
-            $data['user'] = $_SESSION['user'];
+        if (isset($_SESSION['user_id']) && isset($_SESSION['user_role']) && isset($_SESSION['user_email'])) {
+            $data['user'] = [
+                'id' => $_SESSION['user_id'],
+                'role' => $_SESSION['user_role'],
+                'email' => $_SESSION['user_email']
+            ];
         }
 
         if (file_exists(self::$path . "/$view")) {
