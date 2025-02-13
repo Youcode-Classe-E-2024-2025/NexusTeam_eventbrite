@@ -26,6 +26,7 @@ $router->add("GET", "/facebooksignin", "FacebookSignInController@handle");
 $router->add("GET", "/event", "EventController@index");
 $router->add("GET", '/event/add', 'EventController@showAdd');
 $router->add("GET", '/event/{id}', 'EventController@show');
+$router->add("GET", '/event/update/{id}', 'EventController@showEdit');
 $router->add("POST", '/event', 'EventController@store');
 $router->add("POST", '/event/delete/{id}', 'EventController@destroy');
 $router->add("POST", '/event/update/{id}', 'EventController@edit');

@@ -54,6 +54,17 @@ class EventController
         Views::render('Events/add', ['categories' => $categories, 'tags' => $tags]);
     }
 
+    public function showEdit(Request $request): void {
+        $event = new Event();
+        $event->setId($request->get('id'));
+        $event = $event->getById();
+
+        $categories = (new Category())->getAll();
+        $tags = (new Tag())->getAll();
+
+        Views::render("Events/edit", ['event' => $event, 'categories' => $categories, 'tags' => $tags]);
+    }
+
     public function store(Request $request): void
     {
         if ($request->isPost()) {
@@ -137,8 +148,14 @@ class EventController
         $event = new Event();
         $event->setId($request->get('id'));
 
+        dd($request->all());
+        exit;
+
         $update = $event->getById(); //event to be updated
-        $update->fill($request->all());
+        $update->setTitle($request->get('title'));
+        $update->setDescription($request->get('description'));
+        $update->setPrice($request->get('price'));
+        $update->setLocation($request->get('location'));
         $update->setStartDate($request->get('start_date'));
         $update->setEndDate($request->get('end_date'));
         $update->setMaxCapacity($request->get('max_capacity'));
