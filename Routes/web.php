@@ -22,13 +22,19 @@ $router->add("GET", "/login", "LoginController@login");
 $router->add("GET", "/logout", "LoginController@logout");
 $router->add("POST", "/signup", "SignUpController@register");
 $router->add("POST", "/login", "LoginController@authenticate");
+$router->add("GET", "/googlesignin", "GoogleSignInController@handlegoogle");
+$router->add("GET", "/facebooksignin", "FacebookSignInController@handle");
 
 //event routes
 $router->add("GET", "/event", "EventController@index");
+$router->add("GET", '/event/add', 'EventController@showAdd');
 $router->add("GET", '/event/{id}', 'EventController@show');
 $router->add("POST", '/event', 'EventController@store');
 $router->add("POST", '/event/delete/{id}', 'EventController@destroy');
 $router->add("POST", '/event/update/{id}', 'EventController@edit');
+
+//API EVENT
+$router->add('POST', '/api/event/search', 'EventController@search');
 
 //category routes
 $router->add("GET", '/category', 'CategoryController@index');
@@ -38,7 +44,6 @@ $router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
 //tag routes
-
 $router->add("GET", '/tags', 'TagController@index');
 $router->add("GET", '/tags/update/{id}', 'TagController@show');
 $router->add("POST", '/tags/create', 'TagController@store');

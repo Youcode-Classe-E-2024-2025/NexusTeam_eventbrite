@@ -3,7 +3,6 @@
 namespace App\Models;
 use App\Core\Database;
 use DateTime;
-use Exception;
 
 class Event
 {
@@ -18,7 +17,7 @@ class Event
     private int $organizer_id;
     private string $state;
     private ?string $promotional_image;
-    private int $category_id;
+    private Category $category;
 
     private Database $pdo;
     public function __construct()
@@ -35,12 +34,16 @@ class Event
         $this->organizer_id = 1;
         $this->state = 'pending';
         $this->promotional_image = null;
-        $this->category_id = 1;
+        $this->category = new Category();
     }
 
     public function fill(array $data): void
     {
         foreach ($data as $key => $value) {
+            if ($key === 'id') {
+                continue;
+            }
+
             $setter = 'set' . ucfirst($key);
             if (method_exists($this, $setter)) {
                 $this->$setter($value);
@@ -169,14 +172,14 @@ class Event
         return $this;
     }
 
-    public function getCategoryId(): int
+    public function getCategory(): category
     {
-        return $this->category_id;
+        return $this->category;
     }
 
-    public function setCategoryId(int $category_id): Event
+    public function setCategory(Category $category): Event
     {
-        $this->category_id = $category_id;
+        $this->category = $category;
         return $this;
     }
 
@@ -189,7 +192,23 @@ class Event
     public function getAll(): array
     {
         $sql = "SELECT * FROM events";
-        return $this->pdo->fetchAll($sql) ?? [];
+        $results = $this->pdo->fetchAll($sql);
+
+        $events = [];
+
+        foreach ($results as $result) {
+            $event = new Event();
+            $event->fill($result);
+            $event->setId($result['id']);
+            $event->setMaxCapacity($result['max_capacity']);
+            $event->setPromotionalImage($result['promotional_image']);
+            $event->setStartDate($result['start_date']);
+            $event->setEndDate($result['end_date']);
+            $event->setCategory((new Category())->setId($result['category_id'])->getById());
+            $events[] = $event;
+        }
+
+        return $events;
     }
 
     public function getById(): self
@@ -203,6 +222,7 @@ class Event
         $event->setPromotionalImage($result['promotional_image']);
         $event->setStartDate($result['start_date']);
         $event->setEndDate($result['end_date']);
+        $event->setCategory((new Category())->setId($result['category_id'])->getById());
         return $event;
     }
 
@@ -212,7 +232,7 @@ class Event
                 title, description, start_date, end_date, location, price, max_capacity, organizer_id, state, promotional_image, category_id            
         ) VALUES (
                   :title, :description, :start_date, :end_date, :location, :price, :max_capacity, :organizer_id, :state, :promotional_image, :category_id
-        )";
+        ) RETURNING id";
 
         $params = [
             ":title" => $this->title,
@@ -225,9 +245,14 @@ class Event
             ":organizer_id" => $this->organizer_id,
             ":state" => $this->state,
             ":promotional_image" => $this->promotional_image,
-            ":category_id" => $this->category_id,
+            ":category_id" => $this->category->getId(),
         ];
-        return (bool)$this->pdo->execute($sql, $params);
+        $stmt = $this->pdo->getConnection()->prepare($sql);
+        if ($stmt->execute($params)) {
+            $this->id = $stmt->fetchColumn();
+            return true;
+        }
+        return false;
     }
 
     public function delete(): bool
@@ -251,10 +276,58 @@ class Event
             ":max_capacity" => $this->max_capacity,
             ":state" => $this->state,
             ":promotional_image" => $this->promotional_image,
-            ":category_id" => $this->category_id,
+            ":category_id" => $this->category->getId(),
             ":id" => $this->id
         ];
 
         return (bool)$this->pdo->execute($sql, $params);
+    }
+
+    public static function search(string $searchTerm = '', int $page = 1, int $limit = 8): array
+    {
+        $offset = ($page - 1) * $limit;
+
+        $countQuery = "SELECT COUNT(*) as total FROM events";
+        $dataQuery = "
+                SELECT 
+                    e.id,
+                    e.title,
+                    e.description,
+                    e.start_date,
+                    e.end_date,
+                    e.location,
+                    e.price,
+                    e.max_capacity,
+                    e.organizer_id,
+                    e.state,
+                    e.promotional_image,
+                    c.name AS category_name,
+                    e.created_at,
+                    COALESCE(ARRAY_AGG(t.name) FILTER (WHERE t.id IS NOT NULL), '{}') AS tags
+                FROM events e
+                JOIN categories c ON e.category_id = c.id
+                LEFT JOIN events_tags et ON e.id = et.event_id
+                LEFT JOIN tags t ON et.tag_id = t.id
+                GROUP BY e.id, c.name
+                LIMIT :limit OFFSET :offset;
+            ";
+
+        $db = Database::getInstance();
+
+        $total = $db->fetch($countQuery)['total'] ?? 0;
+
+        $pageCount = (int) ceil($total / $limit);
+
+        $events = $db->fetchAll($dataQuery, [
+            'limit' => $limit,
+            'offset' => $offset
+        ]);
+
+        return [
+            'total' => $total,
+            'page_count' => $pageCount,
+            'current_page' => $page,
+            'events' => $events
+        ];
     }
 }
