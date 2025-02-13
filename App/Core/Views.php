@@ -34,7 +34,6 @@ class Views
                 'email' => $_SESSION['user_email']
             ];
         }
-
         if (file_exists(self::$path . "/$view")) {
             echo $twig->render($view, $data);
         } else {
