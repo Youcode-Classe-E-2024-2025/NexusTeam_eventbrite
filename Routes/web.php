@@ -19,8 +19,8 @@ $router->add("GET", "/login", "LoginController@login");
 $router->add("GET", "/logout", "LoginController@logout");
 $router->add("POST", "/signup", "SignUpController@register");
 $router->add("POST", "/login", "LoginController@authenticate");
-$router->add("GET", "/google-signin", "GoogleSignInController@handlegoogle");
-$router->add("GET", "/facebook-signin", "FacebookSignInController@handle");
+$router->add("GET", "/googlesignin", "GoogleSignInController@handlegoogle");
+$router->add("GET", "/facebooksignin", "FacebookSignInController@handle");
 
 //event routes
 $router->add("GET", "/event", "EventController@index");
