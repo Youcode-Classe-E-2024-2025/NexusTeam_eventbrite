@@ -17,4 +17,16 @@ class DashboardEvent extends Model {
         $this->table = 'events';
         return $this->findAll();
     }
+
+
+
+    public function approveEvent($event_id , $status){
+        $event = $this->find(['id'=> $event_id]);
+
+        if(!empty($event)){
+            return $this->update($event_id , ['state'=> $status]);
+        }else {
+            return false ;
+        }
+    }
 }

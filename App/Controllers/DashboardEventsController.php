@@ -13,4 +13,22 @@ class DashboardEventsController{
         $data = $model->DisplayEvent() ;
         Views::render("Admin/eventsIndex", ['events' => $data]);     
     }
+
+
+
+    public function approveEvent(Request $request){
+        $event_id = $request->get("id");
+        $model = new DashboardEvent();
+
+        if($model->approveEvent($event_id , 'approved')){
+            Session::set('message', 'Approved successfully');
+
+        }else{
+            Session::set('message', 'failed' );
+        }
+
+        Views::redirect('/event/admin');
+
+    }
+    
 }

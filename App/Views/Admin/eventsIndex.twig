@@ -89,13 +89,6 @@
 									<th class="py-3 px-4 text-left">Status</th>
 									<th class="py-3 px-4 text-left">Category</th>
 									<th class="py-3 px-4 text-left">Actions</th>
-									{# <th class="py-3 px-4 text-left">Location</th>
-	                                <th class="py-3 px-4 text-left">Price</th>
-	                                <th class="py-3 px-4 text-left">Max Capacity</th>
-	                                <th class="py-3 px-4 text-left">State</th>
-	                                <th class="py-3 px-4 text-left">Category</th>
-	                                <th class="py-3 px-4 text-left">Created At</th>
-	                                 #}
 								</tr>
 							</thead>
 							<tbody class="divide-y divide-gray-200">
@@ -114,15 +107,15 @@
 										<td class="py-3 px-4">{{ event.category_id}}</td>
 										<td
 											class="py-3 px-4 flex flex-column gap-4">
-											{% if event.state == 'active' %}
+											{# {% if event.state == 'active' %}
 											<form action="" method="POST">
-												<button class="text-orange-500 hover:text-orange-700 mr-2">Ban</button>
+												<button class="text-orange-500 hover:text-orange-700 mr-2">Reject</button>
 											</form>
-											{% endif %}
+											{% endif %} #}
 
-											{% if event.state == 'banned' %}
-											<form action="" method="POST">
-												<button class="text-green-500 hover:text-green-700">Unban</button>
+											{% if event.state == 'pending' %}
+											<form action="/event/approve/{{event.id}}" method="POST">
+												<button class="text-green-500 hover:text-green-700">Approve</button>
 											</form>
 											{% endif %}
 

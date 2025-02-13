@@ -4,6 +4,9 @@ use App\Core\Router;
 
 $router = new Router();
 
+$router->add('GET', '/event/admin','DashboardEventsController@index');
+$router->add('POST', "/event/approve/{id}" ,'DashboardEventsController@approveEvent');
+
 //nav routes
 $router->add("GET", "/", "HomeController@index");
 $router->add("GET", "/home", "HomeController@index");
@@ -53,6 +56,5 @@ $router->add("GET", "/dashboard/admin", "DashboardUserController@index");
 $router->add("POST", "/user/delete/{id}", "DashboardUserController@DeleteUser");
 $router->add("Post","/user/ban/{id}", "DashboardUserController@BanUser");
 $router->add('POST', '/user/unban/{id}','DashboardUserController@unbanUser');
-$router->add('GET', '/events/admin','DashboardEventsController@index');
 
 $router->dispatch();
