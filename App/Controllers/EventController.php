@@ -194,7 +194,7 @@ class EventController
     }
 
     public function search(Request $request) {
-        $data = Event::search($request->get('search'));
+        $data = Event::search($request->get('search') ?? '');
 
         http_response_code(200);
         header('Content-Type: application/json');
