@@ -17,6 +17,10 @@ class Request
             $this->data[$key] = $value;
         }
 
+        if (isset($_FILES['image'])){
+            $this->data['files'] = $_FILES['image'];
+        }
+
     }
 
     public function merge(array $data): void
@@ -42,6 +46,9 @@ class Request
         return $_SERVER['REQUEST_METHOD'] === 'GET';
     }
 
-
+    public function getUri(): string
+    {
+        return $_SERVER['REQUEST_URI'];
+    }
 
 }

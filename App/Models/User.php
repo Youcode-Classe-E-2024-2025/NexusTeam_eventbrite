@@ -76,9 +76,9 @@ class User {
     }
 
     // Créer un nouvel utilisateur dans la base de données
-    public function createUser() {
+    public function createUser(): bool {
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, role, avatar) VALUES (:full_name, :email, :password, :role, :avatar)");
-        return $stmt->execute([
+        return (bool) $stmt->execute([
             'full_name' => $this->fullName,
             'email' => $this->email,
             'password' => $this->password,

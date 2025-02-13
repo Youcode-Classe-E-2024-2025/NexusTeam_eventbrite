@@ -16,4 +16,5 @@ return array(
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'a8d3953fd9959404dd22d3dfcd0a79f0' => $vendorDir . '/google/apiclient/src/aliases.php',
     'cea98799a362ab48d08b30c6896f078a' => $baseDir . '/App/Config/config.php',
+    '7166b6cfea6cf44f740814aed3104b73' => $baseDir . '/App/Helpers/dd.php',
 );

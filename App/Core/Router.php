@@ -75,7 +75,7 @@ class Router
                 $methodName = $handlerName[1];
 
                 if (class_exists($className) && method_exists($className, $methodName)) {
-                    $this->request->merge($args);
+                    $this->request->merge(['id' => $args[0] ?? null]);
                     $controller = new $className();
                     $controller->$methodName($this->request);
                     return;
