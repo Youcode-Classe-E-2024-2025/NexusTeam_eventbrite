@@ -148,9 +148,6 @@ class EventController
         $event = new Event();
         $event->setId($request->get('id'));
 
-        dd($request->all());
-        exit;
-
         $update = $event->getById(); //event to be updated
         $update->setTitle($request->get('title'));
         $update->setDescription($request->get('description'));
@@ -160,6 +157,21 @@ class EventController
         $update->setEndDate($request->get('end_date'));
         $update->setMaxCapacity($request->get('max_capacity'));
         $update->getCategory()->setId($request->get('category_id'));
+
+        $tags = $request->get('tags');
+        if (!empty($tags)) {
+            $eventTag = new EventTag();
+            $eventTag->setEvent($update);
+
+            $eventTag->deleteTagsByEvent();
+
+            foreach ($tags as $tag) {
+                $tag = new Tag($tag);
+                $eventTag->setTag($tag);
+                $eventTag->save();
+            }
+        }
+
 
         if (!empty($request->get('files')['tmp_name'])){
             $upload = new Upload($request->get('files'));

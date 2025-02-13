@@ -63,4 +63,10 @@ class EventTag
         return $tags;
     }
 
+    public function deleteTagsByEvent(): bool
+    {
+        $sql = "DELETE FROM events_tags WHERE event_id = :event_id";
+        return $this->db->execute($sql, [':event_id' => $this->event->getId()]);
+    }
+
 }
