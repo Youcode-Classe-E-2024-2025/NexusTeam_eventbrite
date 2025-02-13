@@ -287,54 +287,38 @@ class Event
     {
         $offset = ($page - 1) * $limit;
 
-        $countQuery = "SELECT COUNT(DISTINCT e.id) as total 
-                   FROM events e
-                   JOIN categories c ON e.category_id = c.id
-                   LEFT JOIN events_tags et ON e.id = et.event_id
-                   LEFT JOIN tags t ON et.tag_id = t.id
-                   WHERE e.title ILIKE :searchTerm 
-                      OR e.description ILIKE :searchTerm 
-                      OR e.location ILIKE :searchTerm 
-                      OR t.name ILIKE :searchTerm";
-
+        $countQuery = "SELECT COUNT(*) as total FROM events";
         $dataQuery = "
-                        SELECT 
-                            e.id,
-                            e.title,
-                            e.description,
-                            e.start_date,
-                            e.end_date,
-                            e.location,
-                            e.price,
-                            e.max_capacity,
-                            e.organizer_id,
-                            e.state,
-                            e.promotional_image,
-                            c.name AS category_name,
-                            e.created_at,
-                            COALESCE(ARRAY_AGG(t.name) FILTER (WHERE t.id IS NOT NULL), '{}') AS tags
-                        FROM events e
-                        JOIN categories c ON e.category_id = c.id
-                        LEFT JOIN events_tags et ON e.id = et.event_id
-                        LEFT JOIN tags t ON et.tag_id = t.id
-                        WHERE e.title ILIKE :searchTerm 
-                           OR e.description ILIKE :searchTerm 
-                           OR e.location ILIKE :searchTerm 
-                           OR t.name ILIKE :searchTerm
-                        GROUP BY e.id, c.name
-                        LIMIT :limit OFFSET :offset;
-                    ";
+                SELECT 
+                    e.id,
+                    e.title,
+                    e.description,
+                    e.start_date,
+                    e.end_date,
+                    e.location,
+                    e.price,
+                    e.max_capacity,
+                    e.organizer_id,
+                    e.state,
+                    e.promotional_image,
+                    c.name AS category_name,
+                    e.created_at,
+                    COALESCE(ARRAY_AGG(t.name) FILTER (WHERE t.id IS NOT NULL), '{}') AS tags
+                FROM events e
+                JOIN categories c ON e.category_id = c.id
+                LEFT JOIN events_tags et ON e.id = et.event_id
+                LEFT JOIN tags t ON et.tag_id = t.id
+                GROUP BY e.id, c.name
+                LIMIT :limit OFFSET :offset;
+            ";
 
         $db = Database::getInstance();
 
-        $searchTerm = '%' . $searchTerm . '%';
-
-        $total = $db->fetch($countQuery, ['searchTerm' => $searchTerm])['total'] ?? 0;
+        $total = $db->fetch($countQuery)['total'] ?? 0;
 
         $pageCount = (int) ceil($total / $limit);
 
         $events = $db->fetchAll($dataQuery, [
-            'searchTerm' => $searchTerm,
             'limit' => $limit,
             'offset' => $offset
         ]);

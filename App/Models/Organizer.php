@@ -9,7 +9,7 @@ class Organizer extends Model
     {
         $this->primaryKey = "id";
         $this->table = "events";
-        $data = $this->find(["organizer_id"=>isset($_SESSION["user_id"])?$_SESSION["user_id"]:2],"ASC",100);
+        $data = $this->find(["organizer_id" =>$_SESSION["user_id"] ?? 2],"ASC",100);
         $this->primaryKey = "id";
         $this->table = "categories";
         foreach ($data as $key => $d) {
@@ -25,6 +25,18 @@ class Organizer extends Model
         $this->primaryKey = "id";
         $this->table = "events";
         $data += $this->first(["id"=>$id]);
+        return $data;
+    }
+    public function participantList($id): array
+    {
+        $this->primaryKey = "id";
+        $this->table = "tickets";
+        $data = $this->find(["event_id"=>$id],'ASC');
+        $this->primaryKey = "id";
+        $this->table = "users";
+        foreach ($data as $key => $d) {
+            $data[$key]["participant_name"] = $this->first(["id"=>$d["participant_id"]])["name"];
+        }
         return $data;
     }
 }
