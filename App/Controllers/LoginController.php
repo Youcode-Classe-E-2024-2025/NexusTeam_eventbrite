@@ -64,25 +64,30 @@ class LoginController {
                 throw new Exception("Identifiants incorrects.");
             }
 
-            // Stocker les infos de l'utilisateur en session
-            $_SESSION['user_id'] = $userData['id_user'];
-            $_SESSION['user_email'] = $userData['email'];
-            $_SESSION['user_role'] = $userData['role'];
+            // Créer une session pour l'utilisateur connecté
+            $_SESSION['user'] = [
+                'id' => $userData['id'], // Utiliser l'ID récupéré de la base
+                'email' => $userData['email'],
+                'role' => $userData['role']
+            ];
+
+            echo "Connexion réussie.";
 
             // Rediriger selon le rôle
-            switch ($_SESSION['user_role']) {
+            switch ($_SESSION['user']['role']) {
                 case 'admin':
                     header("Location: /admin-dashboard");
                     break;
                 case 'organizer':
-                    header("Location: /organisateur-dashboard");
+                    header("Location: /organizer");
                     break;
                 case 'participant':
                 default:
-                    header("Location: /participant-dashboard");
+                    header("Location: /participant");
                     break;
             }
             exit;
+
         } catch (Exception $e) {
             echo "Erreur: " . $e->getMessage();
         }
