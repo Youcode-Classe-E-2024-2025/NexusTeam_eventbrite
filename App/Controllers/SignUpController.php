@@ -95,11 +95,11 @@ class SignUpController
                         header("Location: /admin-dashboard");
                         break;
                     case 'organizer':
-                        header("Location: /organisateur-dashboard");
+                        header("Location: /organizer");
                         break;
                     case 'participant':
                     default:
-                    header("Location: /participant-dashboard");
+                    header("Location: /participant");
                     break;
                 }
                 exit;
