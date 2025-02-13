@@ -90,17 +90,17 @@ class SignUpController
 
                 echo "Inscription réussie. Vous êtes connecté.";
                 // Rediriger selon le rôle
-                switch ($_SESSION['user_role']) {
+                switch ($_SESSION['user']['role']) {
                     case 'admin':
                         header("Location: /admin-dashboard");
                         break;
-                    case 'organisateur':
+                    case 'organizer':
                         header("Location: /organisateur-dashboard");
                         break;
                     case 'participant':
                     default:
-                        header("Location: /participant-dashboard");
-                        break;
+                    header("Location: /participant-dashboard");
+                    break;
                 }
                 exit;
 

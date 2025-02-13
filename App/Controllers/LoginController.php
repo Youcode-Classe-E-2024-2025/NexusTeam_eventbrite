@@ -74,7 +74,7 @@ class LoginController {
                 case 'admin':
                     header("Location: /admin-dashboard");
                     break;
-                case 'organisateur':
+                case 'organizer':
                     header("Location: /organisateur-dashboard");
                     break;
                 case 'participant':
