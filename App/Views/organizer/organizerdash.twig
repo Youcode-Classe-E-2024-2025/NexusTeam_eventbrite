@@ -67,6 +67,15 @@
                     {% elseif participants%}
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-xl font-semibold text-gray-800">Participant List</h2>
+                        <div>
+                            <button id="exportDropdownBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">
+                                Export As ▼
+                            </button>
+                            <div id="exportDropdown" class="hidden bg-white border rounded-lg shadow-lg mt-2">
+                                <a href="participant/csv" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">CSV</a>
+                                <a href="participant/excel" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Excel</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-white text-gray-800">
@@ -91,6 +100,19 @@
                             </tbody>
                         </table>
                     </div>
+                    <script>
+                        // Toggle export dropdown
+                        document.getElementById("exportDropdownBtn").addEventListener("click", function () {
+                            document.getElementById("exportDropdown").classList.toggle("hidden");
+                        });
+
+                        // Close dropdown when clicking outside
+                        document.addEventListener("click", function (event) {
+                            if (!document.getElementById("exportDropdownBtn").contains(event.target)) {
+                                document.getElementById("exportDropdown").classList.add("hidden");
+                            }
+                        });
+                    </script>
                     {% elseif eventstats%}
                         <div class="m-6">
                         <div class="flex flex-wrap -mx-6">

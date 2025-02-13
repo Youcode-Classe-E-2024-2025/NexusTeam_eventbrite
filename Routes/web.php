@@ -13,6 +13,8 @@ $router->add("GET", "/organizer/sales", "OrganizerController@sales");
 $router->add("GET", "/organizer/MyEvents", "OrganizerController@MyEvents");
 $router->add("GET", "/organizer/MyEvents/eventStats/{id}", "OrganizerController@eventstats");
 $router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant", "OrganizerController@Participant");
+$router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant/csv", "OrganizerController@csv");
+$router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant/excel", "OrganizerController@excel");
 
 //auth routes
 $router->add("GET", "/signup", "SignUpController@signUp");

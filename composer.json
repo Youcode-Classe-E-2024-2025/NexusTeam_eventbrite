@@ -16,6 +16,7 @@
         }
     ],
     "require": {
-        "twig/twig": "3.7"
+        "twig/twig": "3.7",
+        "phpoffice/phpspreadsheet": "^4.0"
     }
 }
