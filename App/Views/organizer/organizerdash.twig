@@ -64,10 +64,60 @@
                             </tbody>
                         </table>
                     </div>
-                        {% elseif eventstats%}
+                    {% elseif participants%}
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Participant List</h2>
+                        <div>
+                            <button id="exportDropdownBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">
+                                Export As ▼
+                            </button>
+                            <div id="exportDropdown" class="hidden bg-white border rounded-lg shadow-lg mt-2">
+                                <a href="participant/csv" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">CSV</a>
+                                <a href="participant/excel" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Excel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white text-gray-800">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">ID</th>
+                                    <th class="py-3 px-4 text-left">Participant name</th>
+                                    <th class="py-3 px-4 text-left">Ticket type</th>
+                                    <th class="py-3 px-4 text-left">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                {% for participant in participants %}
+                                    <td class="py-3 px-4">{{participant["id"]}}</td>
+                                    <td class="py-3 px-4">{{participant["participant_name"]}}</td>
+                                    <td class="py-3 px-4">{{participant["ticket_type"]}}</td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 text-green-800 py-1 px-2 rounded-full text-sm">{{participant["status"]}}</span></td>
+                                </tr>
+                                {% endfor %}
+                                <!-- Add more user rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <script>
+                        // Toggle export dropdown
+                        document.getElementById("exportDropdownBtn").addEventListener("click", function () {
+                            document.getElementById("exportDropdown").classList.toggle("hidden");
+                        });
+
+                        // Close dropdown when clicking outside
+                        document.addEventListener("click", function (event) {
+                            if (!document.getElementById("exportDropdownBtn").contains(event.target)) {
+                                document.getElementById("exportDropdown").classList.add("hidden");
+                            }
+                        });
+                    </script>
+                    {% elseif eventstats%}
                         <div class="m-6">
                         <div class="flex flex-wrap -mx-6">
                             <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+                                <a href="{{eventstats["event_id"]}}/participant">
                                 <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-slate-100">
                                     <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
                                         <svg class="h-8 w-8 text-white" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,6 +146,7 @@
                                         <div class="text-gray-500">Participant Count</div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
 
                             <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
@@ -141,7 +192,7 @@
                             </div>
                         </div>
                     </div>
-                        {% endif %}
+                    {% endif %}
                 </div>
             </main>
         </div>
