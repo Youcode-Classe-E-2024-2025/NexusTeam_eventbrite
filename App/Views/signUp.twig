@@ -1,50 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillSwap - Login/Signup</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-</head>
-<body class="bg-gradient-to-br from-blue-900 to-teal-700 min-h-screen flex items-center justify-center overflow-hidden font-poppins">
-    <div class="absolute top-0 left-0 w-full h-full -z-10" id="background-animation"></div>
-    
-    <div class="relative bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl shadow-2xl p-8 max-w-md w-full">
-        <h1 class="text-4xl font-bold text-white text-center">Eventbrite</h1> 
-        <form id="signup-form" class="space-y-4 mt-6" method="POST" action="/signup">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-            <input type="text" name="full_name" placeholder="Full Name" class="w-full px-4 py-2 rounded-md bg-white bg-opacity-20 text-white placeholder-gray-300 focus:ring-2 focus:ring-yellow-400" required>
-            <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 rounded-md bg-white bg-opacity-20 text-white placeholder-gray-300 focus:ring-2 focus:ring-yellow-400" required>
-            <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 rounded-md bg-white bg-opacity-20 text-white placeholder-gray-300 focus:ring-2 focus:ring-yellow-400" required>
-            <input type="password" name="confirm_password" placeholder="Confirm Password" class="w-full px-4 py-2 rounded-md bg-white bg-opacity-20 text-white placeholder-gray-300 focus:ring-2 focus:ring-yellow-400" required>
-            <select name="role" class="w-full px-4 py-2 rounded-md bg-white bg-opacity-20 text-black focus:ring-2 focus:ring-yellow-400" required>
-                <option value="participant">Participant</option>
-                <option value="organisateur">Organisateur</option>
-            </select>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="/googlesignin" class="w-full flex justify-center items-center bg-white text-gray-800 font-bold py-2 rounded-md shadow-md hover:bg-gray-100 transition-transform transform hover:scale-105">
-                    <img src="https://developers.google.com/identity/images/g-logo.png" class="w-5 h-5 mr-2">
-                    Sign Up with Google
-                </a>
+{% extends "base.twig" %}
+
+{% block title %}Join EventHub - Create Account{% endblock %}
+
+{% block content %}
+    <div class="min-h-screen  bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center p-24 bg-gradient-animate">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row bg-white/10 rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.01] transition-all duration-500">
+                {# Left side - Signup form #}
+                <div class="w-full lg:w-1/2 p-8 lg:p-12 backdrop-blur-xl relative">
+                    {# Decorative elements #}
+                    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                        <div class="absolute top-10 left-10 w-32 h-32 bg-orange-500 rounded-full filter blur-3xl"></div>
+                        <div class="absolute bottom-10 right-10 w-32 h-32 bg-pink-500 rounded-full filter blur-3xl"></div>
+                    </div>
+
+                    {# Logo with enhanced animation #}
+                    <div class="flex justify-center lg:justify-start mb-8">
+                        <div class="relative w-14 h-14 bg-gradient-to-tr from-orange-500 to-pink-500 rounded-xl rotate-45 shadow-xl hover:rotate-[225deg] transition-all duration-700 cursor-pointer">
+                            <div class="absolute inset-1.5 bg-gray-900 rounded-lg flex items-center justify-center -rotate-45 hover:rotate-[-225deg] transition-all duration-700">
+                                <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">EH</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-4xl font-bold text-white mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">Create Account</h1>
+                    <p class="text-gray-400 mb-8">Join our community of event enthusiasts</p>
+
+                    <form method="POST" action="/signup" class="space-y-5">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                        {# Enhanced input fields with better visual feedback #}
+                        <div class="relative group">
+                            <input type="text" name="full_name" required
+                                   class="w-full px-12 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/50 transition-all duration-300 group-hover:border-orange-500/50"
+                                   placeholder="Full Name">
+                            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <input type="email" name="email" required
+                                   class="w-full px-12 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/50 transition-all duration-300 group-hover:border-orange-500/50"
+                                   placeholder="Email address">
+                            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <input type="password" name="password" required
+                                   class="w-full px-12 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/50 transition-all duration-300 group-hover:border-orange-500/50"
+                                   placeholder="Password">
+                            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <input type="password" name="confirm_password" required
+                                   class="w-full px-12 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/50 transition-all duration-300 group-hover:border-orange-500/50"
+                                   placeholder="Confirm Password">
+                            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        {# Enhanced role selection #}
+                        <select name="role" required
+                                class="w-full px-12 py-4 bg-white/5 border border-white/10 rounded-xl text-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/50 transition-all duration-300 hover:border-orange-500/50 appearance-none cursor-pointer">
+                            <option value="" disabled selected>Select your role</option>
+                            <option value="participant" class="text-gray-900">Event Participant</option>
+                            <option value="organisateur" class="text-gray-900">Event Organizer</option>
+                        </select>
+
+                        {# Enhanced submit button #}
+                        <button type="submit"
+                                class="w-full mt-6 px-6 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all transform hover:scale-[1.02] duration-300 relative overflow-hidden group">
+                            <span class="relative z-10">Create Account</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-pink-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                    </form>
+
+                    {# Enhanced social buttons #}
+                    <div class="mt-8 space-y-4">
+                        <a href="/googlesignin"
+                           class="flex items-center justify-center w-full px-6 py-4 bg-white/90 rounded-xl hover:bg-white transition-all transform hover:scale-[1.02] duration-300 group">
+                            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="w-5 h-5 mr-3">
+                            <span class="text-gray-800 font-medium group-hover:text-gray-900">Continue with Google</span>
+                        </a>
+
+                        <a href="/facebooksignin"
+                           class="flex items-center justify-center w-full px-6 py-4 bg-[#1877F2] rounded-xl hover:bg-[#1864D6] transition-all transform hover:scale-[1.02] duration-300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="w-5 h-5 mr-3">
+                            <span class="text-white font-medium">Continue with Facebook</span>
+                        </a>
+                    </div>
+
+                    {# Enhanced login link #}
+                    <div class="mt-8 text-center">
+                        <p class="text-gray-400">
+                            Already have an account?
+                            <a href="/login"
+                               class="text-orange-500 hover:text-orange-400 font-medium transition-colors duration-300 relative inline-block group">
+                                Sign in
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                {# Enhanced right side - Image #}
+                <div class="hidden lg:block w-1/2 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-pink-500 opacity-90"></div>
+                    <img src="/Assets/hero_main.webp" alt="EventHub" class="w-full h-full object-cover mix-blend-overlay transform scale-110 hover:scale-100 transition-transform duration-700">
+
+                    {# Enhanced overlay content #}
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-white p-12 bg-black/20">
+                        <h2 class="text-5xl font-bold mb-6 text-center leading-tight">Discover Amazing Events</h2>
+                        <p class="text-xl text-center mb-12 max-w-lg">Join our community and experience unforgettable moments with like-minded people</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
+                            <div class="flex items-center bg-white/10 rounded-xl px-6 py-3 backdrop-blur-sm">
+                                <svg class="w-8 h-8 mr-3 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <div class="flex flex-col">
+                                    <span class="text-2xl font-bold">1000+</span>
+                                    <span class="text-sm text-gray-300">Events</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center bg-white/10 rounded-xl px-6 py-3 backdrop-blur-sm">
+                                <svg class="w-8 h-8 mr-3 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                                <div class="flex flex-col">
+                                    <span class="text-2xl font-bold">500k+</span>
+                                    <span class="text-sm text-gray-300">Users</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="/facebooksignin" class="w-full flex justify-center items-center bg-blue-600 text-white font-bold py-2 rounded-md shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-5 h-5 mr-2">
-                    Sign Up with Facebook
-                </a>
-            </div>            
-            <button type="submit" class="w-full bg-yellow-400 text-blue-900 font-bold py-2 rounded-md hover:bg-yellow-300 transition-transform transform hover:scale-105">Sign Up</button>
-        </form>
-        
-        
-        <div class="mt-4 text-center">
-            I have an account , <a href="/login" class="text-yellow-400 hover:text-yellow-300">Login</a>
         </div>
     </div>
 
-    <script src="../Assets/JS/signup.js"></script>
+    {# Custom styles #}
+    <style>
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .bg-gradient-animate {
+            background-size: 200% 200%;
+            animation: gradientFlow 15s ease infinite;
+        }
+    </style>
+{% endblock %}
 
-</body>
-</html>
