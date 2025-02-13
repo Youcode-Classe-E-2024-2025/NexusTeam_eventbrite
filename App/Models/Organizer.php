@@ -9,7 +9,7 @@ class Organizer extends Model
     {
         $this->primaryKey = "id";
         $this->table = "events";
-        $data = $this->find(["organizer_id"=>isset($_SESSION["user_id"])?$_SESSION["user_id"]:2],"ASC",100);
+        $data = $this->find(["organizer_id" =>$_SESSION["user_id"] ?? 2],"ASC",100);
         $this->primaryKey = "id";
         $this->table = "categories";
         foreach ($data as $key => $d) {
