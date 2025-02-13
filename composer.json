@@ -16,6 +16,6 @@
         }
     ],
     "require": {
-        "twig/twig": "3.7"
+        "twig/twig": "^3.19"
     }
 }

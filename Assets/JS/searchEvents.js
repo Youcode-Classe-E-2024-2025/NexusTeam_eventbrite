@@ -34,25 +34,39 @@ const oldHtml = eventContainer.innerHTML;
 searchEvents.addEventListener('input', debounce(async (e) => {
     const value = e.target.value;
 
-    const data = await fetchData(value);
-    const events = data.events;
-    console.log(data)
-
     if (value === '') {
         eventContainer.innerHTML = oldHtml;
         return;
     }
 
+    const data = await fetchData(value);
+    const events = data.events;
+
     eventContainer.innerHTML = '';
     events.forEach(event => {
+        const tags = event.tags;
+        const tagNames = tags.replace(/[{}]/g, "").split(",");
+
+        const tagHtml = tagNames.map(tagName => {
+            if (tagName === '') return;
+            else
+                return `<span class="px-3 py-1 text-sm font-semibold bg-indigo-600/50 text-white rounded-lg">
+                        ${tagName}
+                    </span>`
+        });
+
+        const getPromotionalImageSrc = (image) => {
+            return image === null ? '/Assets/default_event.webp' : image;
+        };
+
+
         eventContainer.innerHTML += `
-                                    <div class="group relative bg-gray-800 rounded-2xl border border-gray-700/50 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:border-indigo-500/50">
+                   <div class="group relative bg-gray-800 rounded-2xl border border-gray-700/50 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:border-indigo-500/50">
                     <!-- Image Container -->
                     <div class="relative h-56 overflow-hidden">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                             src="${event.promotional_image}"
-                             alt="{{ event.getTitle() }}">
-
+                             src="${getPromotionalImageSrc(event.promotional_image)}"
+                             alt="${event.title}"
                         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-gray-900/30 to-transparent"></div>
 
                         <!-- Category Badge -->
@@ -113,16 +127,10 @@ searchEvents.addEventListener('input', debounce(async (e) => {
                                 <span class="text-sm">${event.max_capacity} spots</span>
                             </div>
 
-<!--                            &lt;!&ndash; Tags Section &ndash;&gt;-->
-<!--                            <div class="flex flex-wrap gap-2">-->
-<!--                                {% if tags[event.getId()] is defined %}-->
-<!--                                    {% for tag in tags[event.getId()] %}-->
-<!--                                        <span class="px-3 py-1 text-sm font-semibold bg-indigo-600/50 text-white rounded-lg">-->
-<!--                                            {{ tag.getName() }}-->
-<!--                                        </span>-->
-<!--                                    {% endfor %}-->
-<!--                                {% endif %}-->
-<!--                            </div>-->
+                            <!-- Tags Section -->
+                            <div class="flex flex-wrap gap-2">
+                                ${tagHtml}
+                            </div>
                         </div>
 
                         <!-- Action Button -->
