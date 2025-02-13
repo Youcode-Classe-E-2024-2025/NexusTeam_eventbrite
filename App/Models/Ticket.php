@@ -10,11 +10,9 @@ class Ticket {
     }
 
     public function createTicket($eventId, $participantId, $ticketType, $price, $qrCodePath) {
-        // Requête SQL pour insérer un ticket
         $query = "INSERT INTO tickets (event_id, participant_id, ticket_type, price, qr_code) 
-                  VALUES (:event_id, :participant_id, :ticket_type, :price, :qr_code)";
+                  VALUES (:event_id, :participant_id, :ticket_type, :price, :qr_code) RETURNING id";
         
-        // Préparation et exécution de la requête
         $stmt = $this->db->prepareExecute($query, [
             ':event_id' => $eventId,
             ':participant_id' => $participantId,
@@ -22,15 +20,23 @@ class Ticket {
             ':price' => $price,
             ':qr_code' => $qrCodePath
         ]);
-
-        // Message de succès
+    
         if ($stmt->rowCount() > 0) {
-            echo "Ticket créé avec succès !\n";
-        } else {
-            echo "L'insertion du ticket a échoué.\n";
+            // Récupérer l'ID du ticket nouvellement créé
+            $ticketId = $stmt->fetchColumn();
+            // Sauvegarder l'ID du ticket dans la session
+            $_SESSION["ticket_id"] = $ticketId;
+            return $ticketId;
         }
-
-        return $stmt->rowCount() > 0;
+    
+        return false;
+    }
+    
+    
+    public function ticketExists($ticketId) {
+        $query = "SELECT COUNT(*) FROM tickets WHERE id = :ticket_id";
+        $stmt = $this->db->prepareExecute($query, [':ticket_id' => $ticketId]);
+        return $stmt->fetchColumn() > 0;
     }
 }
 

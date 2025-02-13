@@ -6,6 +6,10 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Models\Payment;
+use App\Models\Ticket;
+use App\Core\Views;
+
 
 class PaymentController {
     public function pay() {
@@ -46,37 +50,56 @@ class PaymentController {
     }
 
     public function success() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     
-        if (!isset($_SESSION["price"])) {
+        if (!isset($_SESSION["reservation_id"]) || !isset($_SESSION["price"])) {
             die("Erreur : informations de réservation manquantes.");
         }
     
+        $reservationId = $_SESSION["reservation_id"];
         $price = $_SESSION["price"];
+        var_dump($_SESSION);;
+        // Vérifier si le ticket existe
+        if (!isset($_SESSION["ticket_id"])) {
+            die("Erreur : ID de ticket manquant dans la session.");
+        }
     
-        // Configuration de Dompdf
+        $ticketId = $_SESSION["ticket_id"];
+    
+        // Enregistrer le paiement dans la base de données
+        $paymentModel = new Payment();
+        $paymentSaved = $paymentModel->savePayment($ticketId, $price, "Stripe", "successful");
+    
+        if (!$paymentSaved) {
+            error_log("Échec de l'enregistrement du paiement pour la réservation ID: " . $reservationId);
+        }
+
+
+        // Génération du PDF de confirmation
         $options = new Options();
         $options->set('defaultFont', 'Arial');
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
-    
-        // Contenu du PDF
+
         $html = "
             <h1>Confirmation de Réservation</h1>
-            <p><strong>Montant Payé:</strong> $price USD</p>
+            <p><strong>Réservation ID:</strong> $reservationId</p>
+            <p><strong>Montant Payé:</strong> " . number_format($price, 2) . " USD</p>
             <p>Merci pour votre réservation !</p>
         ";
-    
-        // Générer le PDF
+
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        
+
         // Envoie le PDF au navigateur
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="Confirmation_Reservation.pdf"');
         echo $dompdf->output();
         exit();
-        
     }
 }
 
