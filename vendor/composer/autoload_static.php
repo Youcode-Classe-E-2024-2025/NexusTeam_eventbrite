@@ -29,6 +29,10 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         array (
             'phpseclib3\\' => 11,
         ),
+        'Z' => 
+        array (
+            'ZipStream\\' => 10,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -41,16 +45,19 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
             'PhpOption\\' => 10,
+            'PhpOffice\\PhpSpreadsheet\\' => 25,
             'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Matrix\\' => 7,
         ),
         'G' => 
         array (
@@ -71,6 +78,11 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         array (
             'Dotenv\\' => 7,
         ),
+        'C' => 
+        array (
+            'Composer\\Pcre\\' => 14,
+            'Complex\\' => 8,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -81,6 +93,10 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'ZipStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
         ),
         'Twig\\' => 
         array (
@@ -97,6 +113,10 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -119,6 +139,10 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
+        'PhpOffice\\PhpSpreadsheet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
+        ),
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
@@ -126,6 +150,10 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Matrix\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -166,6 +194,14 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'Composer\\Pcre\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/pcre/src',
+        ),
+        'Complex\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
         'App\\' => 
         array (

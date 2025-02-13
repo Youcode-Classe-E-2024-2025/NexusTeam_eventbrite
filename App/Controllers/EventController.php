@@ -165,12 +165,10 @@ class EventController
     }
 
     public function search(Request $request) {
-
         $data = Event::search($request->get('search'));
 
         http_response_code(200);
         header('Content-Type: application/json');
-        header("Access-Control-Allow-Origin: *");
         echo json_encode($data, JSON_THROW_ON_ERROR);
     }
 
