@@ -1,0 +1,123 @@
+{# Views/Admin/usersIndex.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Users Management{% endblock %}
+
+{% block content %}
+
+<div class="h-full flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
+	<div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
+		<div class="flex items-center justify-center h-14 border-b">
+			<div class="text-2xl font-bold text-primary-600">NexusTeam Admin</div>
+		</div>
+		<div class="overflow-y-auto overflow-x-hidden flex-grow">
+			<ul class="flex flex-col py-4 space-y-1">
+				<li class="px-5">
+					<div class="flex flex-row items-center h-8">
+						<div class="text-sm font-light tracking-wide text-gray-500">Menu</div>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fas fa-users text-primary-500"></i>
+						</span>
+						<span class="ml-2 text-sm tracking-wide truncate">Users</span>
+					</a>
+				</li>
+				<li>
+					<a href="admin-categories.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fas fa-th-large"></i>
+						</span>
+						<span class="ml-2 text-sm tracking-wide truncate">Categories</span>
+					</a>
+				</li>
+				<li>
+					<a href="admin-tags.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fas fa-tags"></i>
+						</span>
+						<span class="ml-2 text-sm tracking-wide truncate">Tags</span>
+					</a>
+				</li>
+				<li>
+					<a href="admin-courses.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fas fa-book"></i>
+						</span>
+						<span class="ml-2 text-sm tracking-wide truncate">Courses</span>
+					</a>
+				</li>
+
+				   <li>
+                        <a href="admin-events.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
+                            <span class="inline-flex justify-center items-center ml-4">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                            <span class="ml-2 text-sm tracking-wide truncate">Events</span>
+                        </a>
+                    </li>
+			</ul>
+		</div>
+	</div>
+	<div class="ml-64 flex-1">
+
+		<main class="p-6 min-h-[80vh]">
+			<div class="bg-white rounded-lg shadow-md p-6">
+				<div class="flex justify-between items-center mb-6">
+					<h2 class="text-xl font-semibold text-gray-800">User List</h2>
+
+				</div>
+				<div class="overflow-x-auto">
+					<table class="min-w-full bg-white">
+						<thead class="bg-gray-100">
+							<tr>
+								<th class="py-3 px-4 text-left">ID</th>
+								<th class="py-3 px-4 text-left">Name</th>
+								<th class="py-3 px-4 text-left">Email</th>
+								<th class="py-3 px-4 text-left">Role</th>
+								<th class="py-3 px-4 text-left">Status</th>
+								<th class="py-3 px-4 text-left">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-gray-200">
+							{% for user in users %}
+								<tr>
+									<td class="py-3 px-4">{{ user.id}}</td>
+									<td class="py-3 px-4">{{ user.name}}</td>
+									<td class="py-3 px-4">{{ user.email}}</td>
+									<td class="py-3 px-4">{{ user.role}}</td>
+									<td class="py-3 px-4">
+										<span class="bg-green-100 text-green-800 py-1 px-2 rounded-full text-sm">{{ user.status}}</span>
+									</td>
+									<td class="py-3 px-4 flex flex-column gap-4">
+
+
+										{% if user.status == 'active' %}
+										<form action="/user/ban/{{user.id}}" method="POST">
+											<button class="text-orange-500 hover:text-orange-700 mr-2">Ban</button>
+										</form>
+										{% endif %}
+										
+									     {% if user.status == 'banned' %}
+										<form action="/user/unban/{{user.id}}" method="POST">
+											<button class="text-green-500 hover:text-green-700">Unban</button>
+										</form>
+										{% endif %}
+
+										<form action="/user/delete/{{user.id}}" method="POST">
+											<button class="text-red-500 hover:text-red-700">Delete</button>
+										</form>
+									</td>
+								</tr>
+							</td>
+						</tbody>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}
