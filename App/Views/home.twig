@@ -3,58 +3,58 @@
 {% block title %}Discover Epic Events | EventHub{% endblock %}
 
 {% block content %}
-    {# Announcement Banner with Gradient Animation #}
-    <div class="relative overflow-hidden bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-600 background-animate">
-        <div class="absolute inset-0 bg-grid-white/15 bg-grid-pattern"></div>
+    {# Announcement Banner with Enhanced Animation #}
+    <div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 animate-gradient-x">
+        <div class="absolute inset-0 bg-[url('/Assets/noise.png')] opacity-20"></div>
         <div class="container mx-auto px-4 py-3 text-center relative">
-            <p class="text-white font-medium tracking-wide">
-                <span class="animate-pulse bg-white/20 px-2 py-1 rounded">Limited Time</span>
-                <span class="mx-2">Save 30% on Premium Events</span>
-                <code class="font-mono bg-white/90 text-fuchsia-600 px-3 py-1 rounded-full text-sm font-bold ml-2">PREMIUM30</code>
+            <p class="text-white font-medium tracking-wide flex items-center justify-center gap-3">
+                <span class="animate-pulse bg-white/20 px-3 py-1.5 rounded-full text-sm">Limited Time</span>
+                Save 30% on Premium Events
+                <code class="font-mono bg-white/90 text-purple-600 px-4 py-1.5 rounded-full text-sm font-bold select-all hover:scale-105 transition-transform cursor-pointer">PREMIUM30</code>
             </p>
         </div>
     </div>
 
-    {# Hero Section with Dynamic Background #}
-    <header class="relative min-h-[85vh] flex items-center">
+    {# Enhanced Hero Section with Parallax Effect #}
+    <header class="relative min-h-[90vh] flex items-center overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-900/70 to-transparent z-10"></div>
-            <video autoplay loop muted class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-900/80 to-transparent z-10"></div>
+            <video autoplay loop muted playsinline class="w-full h-full object-cover scale-105 motion-safe:animate-subtle-zoom">
                 <source src="/Assets/hero_video.mp4" type="video/mp4">
             </video>
         </div>
 
         <div class="container mx-auto px-4 relative z-20">
             <div class="max-w-5xl mx-auto text-center">
-                <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                <h1 class="text-6xl md:text-8xl font-black text-white mb-8 leading-tight tracking-tight animate-fade-in">
                     Discover
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 animate-gradient-x">
                         Extraordinary
                     </span>
                     Experiences
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto">
+                <p class="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto font-light animate-fade-in-up">
                     Join millions creating unforgettable moments through unique events worldwide
                 </p>
 
-                {# Enhanced Search Bar #}
-                <div class="max-w-2xl mx-auto backdrop-blur-md bg-white/10 p-2 rounded-2xl shadow-2xl">
-                    <div class="flex flex-col md:flex-row gap-2">
-                        <div class="flex-grow flex items-center bg-white rounded-xl px-4 py-2">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {# Modernized Search Bar #}
+                <div class="max-w-3xl mx-auto backdrop-blur-xl bg-white/10 p-3 rounded-3xl shadow-2xl animate-fade-in-up delay-300">
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <div class="flex-grow flex items-center bg-white/95 rounded-2xl px-5 py-3 shadow-inner">
+                            <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                             <input type="text" placeholder="Search events..."
-                                   class="flex-grow px-3 py-2 bg-transparent focus:outline-none text-gray-800">
+                                   class="flex-grow px-4 py-2 bg-transparent focus:outline-none text-gray-800 placeholder-gray-400">
                         </div>
-                        <div class="flex-shrink-0 flex items-center bg-white rounded-xl px-4 py-2">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex-shrink-0 flex items-center bg-white/95 rounded-2xl px-5 py-3 shadow-inner">
+                            <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
                             <input type="text" placeholder="Location"
-                                   class="w-24 md:w-32 px-3 py-2 bg-transparent focus:outline-none text-gray-800">
+                                   class="w-28 md:w-36 px-4 py-2 bg-transparent focus:outline-none text-gray-800 placeholder-gray-400">
                         </div>
-                        <button class="flex-shrink-0 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button class="flex-shrink-0 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95">
                             Discover Events
                         </button>
                     </div>
@@ -63,15 +63,15 @@
         </div>
     </header>
 
-    {# Quick Categories with Hover Effects #}
-    <div class="bg-white sticky top-0 z-50 shadow-lg backdrop-blur-lg bg-white/90">
+    {# Enhanced Categories Bar with Glass Effect #}
+    <div class="bg-white/80 sticky top-0 z-50 shadow-lg backdrop-blur-xl border-b border-gray-200/50">
         <div class="container mx-auto px-4">
-            <div class="flex items-center gap-8 py-4 overflow-x-auto scrollbar-hide">
+            <div class="flex items-center gap-6 py-4 overflow-x-auto scrollbar-hide">
                 {% for category in ['🔥 Trending', '🎵 Music', '🎨 Arts', '🏃‍♂️ Sports', '💻 Tech', '🍷 Food & Drink', '🎭 Theater', '📚 Education'] %}
-                    <a href="#" class="flex-shrink-0 group">
-                        <div class="px-4 py-2 rounded-full transition-all duration-300
-                                  hover:bg-gradient-to-r hover:from-violet-500/10 hover:to-fuchsia-500/10
-                                  text-gray-600 hover:text-gray-900">
+                    <a href="#" class="flex-shrink-0">
+                        <div class="px-5 py-2.5 rounded-full transition-all duration-300
+                                  hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10
+                                  text-gray-600 hover:text-gray-900 hover:shadow-sm">
                             <span class="text-sm font-medium">{{ category }}</span>
                         </div>
                     </a>
@@ -80,17 +80,17 @@
         </div>
     </div>
 
-    {# Featured Events Grid #}
-    <section class="py-20 bg-gray-50">
+    {# Enhanced Featured Events Grid #}
+    <section class="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-end mb-12">
+            <div class="flex justify-between items-end mb-16">
                 <div>
                     <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Events</h2>
                     <p class="text-gray-600 text-lg">Curated experiences you can't miss</p>
                 </div>
-                <a href="#" class="group flex items-center gap-2 text-violet-600 font-medium">
+                <a href="#" class="group flex items-center gap-2 text-purple-600 font-medium hover:text-purple-700">
                     View all
-                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </a>
@@ -98,15 +98,15 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {% for i in 1..8 %}
-                    <article class="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                    <article class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] overflow-hidden">
                             <img src="https://source.unsplash.com/800x600/?event,festival"
                                  class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 left-4 flex gap-2">
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-violet-500 text-white">Featured</span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white">Limited</span>
+                                <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-500 text-white shadow-lg">Featured</span>
+                                <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-orange-500 text-white shadow-lg">Limited</span>
                             </div>
-                            <button class="absolute top-4 right-4 p-2 rounded-full bg-white/30 backdrop-blur-md hover:bg-white/50 transition-colors">
+                            <button class="absolute top-4 right-4 p-2.5 rounded-full bg-white/30 backdrop-blur-md hover:bg-white/50 transition-colors">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -114,9 +114,9 @@
                             </button>
                         </div>
 
-                        <div class="p-6">
+                        <div class="p-7">
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="flex items-center gap-2 text-violet-600">
+                                <div class="flex items-center gap-2 text-purple-600">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -132,19 +132,19 @@
                                 </div>
                             </div>
 
-                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-violet-600 transition-colors">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
                                 Summer Music Festival 2024
                             </h3>
 
-                            <p class="text-gray-600 mb-4 line-clamp-2">
+                            <p class="text-gray-600 mb-6 line-clamp-2">
                                 Experience an unforgettable night of music under the stars with world-class artists.
                             </p>
 
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-3">
                                     <div class="flex -space-x-3">
                                         {% for j in 1..3 %}
-                                            <img class="w-8 h-8 rounded-full border-2 border-white"
+                                            <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm"
                                                  src="https://source.unsplash.com/50x50/?person" alt="Attendee">
                                         {% endfor %}
                                     </div>
