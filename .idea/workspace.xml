@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="48181d9d-9188-4876-8c96-d3d619cfaf2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/EventController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/Events/index.twig" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Events/index.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/base.twig" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/base.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/home.twig" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/home.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CSS/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CSS/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/JS/searchEvents.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JS/searchEvents.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +127,7 @@
       <workItem from="1739352751979" duration="18851000" />
       <workItem from="1739388682988" duration="198000" />
       <workItem from="1739388888624" duration="1671000" />
-      <workItem from="1739433819148" duration="6598000" />
+      <workItem from="1739433819148" duration="7705000" />
     </task>
     <servers />
   </component>
