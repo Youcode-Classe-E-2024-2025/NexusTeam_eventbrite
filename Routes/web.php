@@ -1,7 +1,12 @@
 <?php
+use App\Controllers\EventController;
 use App\Core\Router;
 
 $router = new Router();
+
+$router->add('GET', '/event/admin','DashboardEventsController@index');
+$router->add('POST', "/event/approve/{id}" ,'DashboardEventsController@approveEvent');
+$router->add('POST', "/event/suspend/{id}" ,'DashboardEventsController@suspendEvent');
 
 //nav routes
 $router->add("GET", "/", "HomeController@index");
@@ -50,5 +55,11 @@ $router->add("GET", '/tags/update/{id}', 'TagController@show');
 $router->add("POST", '/tags/create', 'TagController@store');
 $router->add("POST", '/tags/update/{id}', 'TagController@update');
 $router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
+
+
+$router->add("GET", "/dashboard/admin", "DashboardUserController@index");
+$router->add("POST", "/user/delete/{id}", "DashboardUserController@DeleteUser");
+$router->add("Post","/user/ban/{id}", "DashboardUserController@BanUser");
+$router->add('POST', '/user/unban/{id}','DashboardUserController@unbanUser');
 
 $router->dispatch();

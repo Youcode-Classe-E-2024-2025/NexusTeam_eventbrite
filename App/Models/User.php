@@ -86,4 +86,7 @@ class User {
             'avatar' => $this->avatar
         ]);
     }
+
+
+
 }
