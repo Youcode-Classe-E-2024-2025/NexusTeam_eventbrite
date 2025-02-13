@@ -1,0 +1,15 @@
+<form action="/update-profile-image" method="POST" enctype="multipart/form-data">
+    <h3 class="text-xl font-bold mb-4">Change Profile Picture</h3>
+    
+    <!-- Champ de téléchargement de l'image -->
+    <div class="mb-4">
+        <label for="profile-image" class="block text-gray-700">Choose an image</label>
+        <input type="file" name="profile-image" id="profile-image" class="w-full py-2 px-3 border border-gray-300 rounded-md" accept="image/*" required>
+    </div>
+    
+    <!-- Boutons de soumission -->
+    <div class="flex justify-end">
+        <button type="button" id="close-modal" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Close</button>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg ml-2">Save</button>
+    </div>
+</form>
