@@ -43,7 +43,8 @@ class EventController
         $event->setId($request->get('id'));
         $data = $event->getById();
 
-        Views::render("Events/editEvent", ['event' => $data]);
+
+        Views::render("Events/show", ['event' => $data]);
     }
 
     public function showAdd(): void
@@ -52,6 +53,17 @@ class EventController
         $tags = (new Tag())->getAll();
 
         Views::render('Events/add', ['categories' => $categories, 'tags' => $tags]);
+    }
+
+    public function showEdit(Request $request): void {
+        $event = new Event();
+        $event->setId($request->get('id'));
+        $event = $event->getById();
+
+        $categories = (new Category())->getAll();
+        $tags = (new Tag())->getAll();
+
+        Views::render("Events/edit", ['event' => $event, 'categories' => $categories, 'tags' => $tags]);
     }
 
     public function store(Request $request): void
@@ -138,11 +150,29 @@ class EventController
         $event->setId($request->get('id'));
 
         $update = $event->getById(); //event to be updated
-        $update->fill($request->all());
+        $update->setTitle($request->get('title'));
+        $update->setDescription($request->get('description'));
+        $update->setPrice($request->get('price'));
+        $update->setLocation($request->get('location'));
         $update->setStartDate($request->get('start_date'));
         $update->setEndDate($request->get('end_date'));
         $update->setMaxCapacity($request->get('max_capacity'));
         $update->getCategory()->setId($request->get('category_id'));
+
+        $tags = $request->get('tags');
+        if (!empty($tags)) {
+            $eventTag = new EventTag();
+            $eventTag->setEvent($update);
+
+            $eventTag->deleteTagsByEvent();
+
+            foreach ($tags as $tag) {
+                $tag = new Tag($tag);
+                $eventTag->setTag($tag);
+                $eventTag->save();
+            }
+        }
+
 
         if (!empty($request->get('files')['tmp_name'])){
             $upload = new Upload($request->get('files'));
@@ -164,8 +194,9 @@ class EventController
         Views::redirect('/event');
     }
 
-    public function search(Request $request) {
-        $data = Event::search($request->get('search'));
+    public function search(Request $request): void
+    {
+        $data = Event::search($request->get('search') ?? '');
 
         http_response_code(200);
         header('Content-Type: application/json');
