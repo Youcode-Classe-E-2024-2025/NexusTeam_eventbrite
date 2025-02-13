@@ -43,7 +43,8 @@ class EventController
         $event->setId($request->get('id'));
         $data = $event->getById();
 
-        Views::render("Events/editEvent", ['event' => $data]);
+
+        Views::render("Events/show", ['event' => $data]);
     }
 
     public function showAdd(): void
@@ -193,7 +194,8 @@ class EventController
         Views::redirect('/event');
     }
 
-    public function search(Request $request) {
+    public function search(Request $request): void
+    {
         $data = Event::search($request->get('search') ?? '');
 
         http_response_code(200);
