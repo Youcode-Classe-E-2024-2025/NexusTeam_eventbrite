@@ -29,4 +29,15 @@ class DashboardEvent extends Model {
             return false ;
         }
     }
+
+
+    public function suspendEvent($event_id, $status){
+           $event = $this->find(['id'=> $event_id]);
+
+        if(!empty($event)){
+            return $this->update($event_id , ['state'=> $status]);
+        }else {
+            return false ;
+        }
+    }
 }

@@ -61,12 +61,4 @@ class DashboardUser extends Model
     }
 
 
-
-    // public function displayEvents(){
-    //     $this->primaryKey = "id";
-    //     $this->table = "events";
-    //     return $this->findAll();
-    // }
-
-
 }

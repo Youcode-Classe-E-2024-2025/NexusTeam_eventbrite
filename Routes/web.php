@@ -6,6 +6,7 @@ $router = new Router();
 
 $router->add('GET', '/event/admin','DashboardEventsController@index');
 $router->add('POST', "/event/approve/{id}" ,'DashboardEventsController@approveEvent');
+$router->add('POST', "/event/suspend/{id}" ,'DashboardEventsController@suspendEvent');
 
 //nav routes
 $router->add("GET", "/", "HomeController@index");

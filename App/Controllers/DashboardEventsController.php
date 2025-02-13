@@ -30,5 +30,21 @@ class DashboardEventsController{
         Views::redirect('/event/admin');
 
     }
+
+
+
+    public function suspendEvent(Request $request){
+        $event_id = $request->get("id");
+        $model = new DashboardEvent();
+
+        if($model->suspendEvent($event_id , 'pending')){
+            Session::set('message', 'suspended successfully');
+        }else{
+            Session::set('message', 'failed' );
+        }
+
+        Views::redirect('/event/admin');
+
+    }
     
 }

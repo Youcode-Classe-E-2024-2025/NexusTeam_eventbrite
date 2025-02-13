@@ -107,11 +107,11 @@
 										<td class="py-3 px-4">{{ event.category_id}}</td>
 										<td
 											class="py-3 px-4 flex flex-column gap-4">
-											{# {% if event.state == 'active' %}
-											<form action="" method="POST">
+											{% if event.state == 'approved' %}
+											<form action="/event/suspend/{{event.id}}" method="POST">
 												<button class="text-orange-500 hover:text-orange-700 mr-2">Reject</button>
 											</form>
-											{% endif %} #}
+											{% endif %}
 
 											{% if event.state == 'pending' %}
 											<form action="/event/approve/{{event.id}}" method="POST">
@@ -119,7 +119,7 @@
 											</form>
 											{% endif %}
 
-											<form action="" method="POST">
+											<form action="/event/suspend/{{event.id}}" method="POST">
 												<button class="text-red-500 hover:text-red-700">Delete</button>
 											</form>
 										</td>
