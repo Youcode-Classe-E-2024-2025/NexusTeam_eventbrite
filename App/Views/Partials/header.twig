@@ -9,9 +9,15 @@
     <div class="flex items-center space-x-4">
         {% if user is defined and user %}
             <span class="text-gray-300">Welcome, {{ user.name }}</span>
-            <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-200">
-                Logout
-            </a>
+            <div class="flex items-center space-x-2 gap-3">
+                <a href="/profile" class="text-gray-300 hover:text-white">
+                    <!-- Icône de profil -->
+                    <i class="fa fa-user-circle text-2xl"></i>
+                </a>
+                <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-200">
+                    Logout
+                </a>
+            </div>
         {% else %}
             <a href="/login" class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition duration-200">
                 Login
