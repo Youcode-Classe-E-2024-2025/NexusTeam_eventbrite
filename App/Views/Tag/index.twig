@@ -26,11 +26,11 @@
                         {% if tags is defined and tags|length > 0 %}
                             {% for tag in tags %}
                                 <tr class="hover:bg-gray-600 transition">
-                                    <td class="py-3 px-4">{{ tag.id }}</td>
-                                    <td class="py-3 px-4">{{ tag.name }}</td>
+                                    <td class="py-3 px-4">{{ tag.getId() }}</td>
+                                    <td class="py-3 px-4">{{ tag.getName() }}</td>
                                     <td class="py-3 px-4">
-                                        <a href="tags/update/{{ tag.id }}" class="text-primary-400 hover:text-primary-500">Edit</a>
-                                        <form action="tags/delete/{{ tag.id }}" method="post" class="inline">
+                                        <a href="tags/update/{{ tag.getId() }}" class="text-primary-400 hover:text-primary-500">Edit</a>
+                                        <form action="tags/delete/{{ tag.getId() }}" method="post" class="inline">
                                             <button type="submit" class="text-red-400 hover:text-red-500">Delete</button>
                                         </form>
                                     </td>

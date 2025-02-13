@@ -82,11 +82,9 @@ class SignUpController
 
             // Créer l'utilisateur dans la base de données
             if ($user->createUser()) {
-                $_SESSION['user'] = [
-                    'id' => $user->getId(),
-                    'email' => $user->getEmail(),
-                    'role' => $user->getRole()
-                ];
+                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['user_email'] = $user->getEmail();
+                $_SESSION['user_role'] = $user->getRole();
 
                 echo "Inscription réussie. Vous êtes connecté.";
                 // Rediriger selon le rôle
