@@ -27,8 +27,9 @@ class Category
         }
     }
 
-    public function setId(int $id): void{
+    public function setId(int $id): Category{
         $this->id = $id;
+        return $this;
     }
 
     public function getId(): int{
@@ -50,7 +51,17 @@ class Category
 
     public function getAll(): array {
         $sql = "SELECT * FROM categories";
-        return $this->db->fetchAll($sql) ?? [];
+        $result = $this->db->fetchAll($sql);
+
+        $categories = [];
+
+        foreach ($result as $category) {
+            $categoryObj = new Category();
+            $categoryObj->fill($category);
+            $categories[] = $categoryObj;
+        }
+
+        return $categories;
     }
 
     public function getById(): Category
