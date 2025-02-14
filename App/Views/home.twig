@@ -3,23 +3,26 @@
 {% block title %}Discover Epic Events | EventHub{% endblock %}
 
 {% block content %}
-    {# Enhanced Announcement Banner with Glassmorphism #}
+    {# Premium Announcement Banner with Enhanced Glassmorphism #}
     <div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
-        <div class="absolute inset-0 bg-[url('/Assets/noise.png')] mix-blend-overlay opacity-25"></div>
+        <div class="absolute inset-0 bg-[url('/Assets/noise.png')] mix-blend-overlay opacity-25 animate-subtle-grain"></div>
         <div class="container mx-auto px-4 py-4 text-center relative">
             <p class="text-white font-medium tracking-wide flex items-center justify-center gap-4">
-                <span class="animate-pulse bg-white/20 px-3 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm">New</span>
+                <span class="animate-pulse bg-white/20 px-3 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20">New</span>
                 <span class="text-white/90">Save 30% on Premium Events</span>
-                <code class="font-mono bg-white/95 text-purple-600 px-4 py-1.5 rounded-full text-sm font-bold select-all hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl">PREMIUM30</code>
+                <code class="font-mono bg-white/95 text-purple-600 px-4 py-1.5 rounded-full text-sm font-bold select-all
+                           hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl
+                           hover:bg-white active:scale-95">PREMIUM30</code>
             </p>
         </div>
     </div>
 
-    {# Enhanced Hero Section with Dynamic Parallax #}
+    {# Immersive Hero Section with Enhanced Parallax #}
     <header class="relative min-h-screen flex items-center overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-900/80 to-transparent z-10"></div>
-            <video autoplay loop muted playsinline class="w-full h-full object-cover scale-105 motion-safe:animate-subtle-zoom">
+            <video autoplay loop muted playsinline
+                   class="w-full h-full object-cover scale-105 motion-safe:animate-subtle-zoom">
                 <source src="/Assets/hero_video.mp4" type="video/mp4">
             </video>
         </div>
@@ -28,52 +31,58 @@
             <div class="max-w-6xl mx-auto text-center">
                 <h1 class="text-7xl md:text-9xl font-black text-white mb-8 leading-tight tracking-tighter animate-fade-in">
                     Discover
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 animate-gradient-x inline-block">
-                        Extraordinary
+                    <span class="relative">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400
+                                   animate-gradient-x inline-block">Extraordinary</span>
+                        <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-purple-400 via-pink-400
+                                   to-orange-400 transform scale-x-0 group-hover:scale-x-100 transition-transform
+                                   duration-500"></span>
                     </span>
                     <br class="hidden md:block">
                     Experiences
                 </h1>
-                <p class="text-xl md:text-3xl text-gray-200 mb-16 max-w-3xl mx-auto font-light animate-fade-in-up leading-relaxed">
+                <p class="text-xl md:text-3xl text-gray-200 mb-16 max-w-3xl mx-auto font-light animate-fade-in-up
+                          leading-relaxed">
                     Join millions creating unforgettable moments through unique events worldwide
                 </p>
 
-                {# Modernized Search Bar with Enhanced Glassmorphism #}
-                <div class="max-w-4xl mx-auto backdrop-blur-xl bg-white/10 p-4 rounded-3xl shadow-2xl animate-fade-in-up delay-300 border border-white/20">
+                {# Enhanced Search Bar with Dynamic Glassmorphism #}
+                <div class="max-w-lg mx-auto backdrop-blur-xl bg-white/10 p-4 rounded-3xl shadow-2xl
+                            animate-fade-in-up delay-300 border border-white/20 hover:bg-white/15
+                            transition-all duration-500">
                     <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-grow flex items-center bg-white/95 rounded-2xl px-6 py-4 shadow-inner hover:shadow-lg transition-all duration-300">
-                            <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-                            <input type="text" placeholder="Search events..."
-                                   class="flex-grow px-4 py-2 bg-transparent focus:outline-none text-gray-800 placeholder-gray-400 text-lg">
-                        </div>
-                        <div class="flex-shrink-0 flex items-center bg-white/95 rounded-2xl px-6 py-4 shadow-inner hover:shadow-lg transition-all duration-300">
-                            <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            </svg>
-                            <input type="text" placeholder="Location"
-                                   class="w-32 md:w-40 px-4 py-2 bg-transparent focus:outline-none text-gray-800 placeholder-gray-400 text-lg">
-                        </div>
-                        <button class="flex-shrink-0 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium px-10 py-5 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95 text-lg">
-                            Discover Events
-                        </button>
+                        <a href="/event"
+                           class="flex-shrink-0 w-full bg-gradient-to-r from-purple-600 to-pink-600
+                                  hover:from-purple-700 hover:to-pink-700 text-white font-medium px-10 py-5
+                                  rounded-2xl transition-all duration-300 transform hover:scale-105
+                                  hover:shadow-xl active:scale-95 text-lg relative overflow-hidden group">
+                            <span class="relative z-10">Discover Events</span>
+                            <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full
+                                      group-hover:translate-x-full transition-transform duration-700"></div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    {# Enhanced Categories Bar with Improved Glass Effect #}
+    {# Dynamic Categories Bar with Smooth Scrolling #}
     <div class="bg-white/90 sticky top-0 z-50 shadow-lg backdrop-blur-xl border-b border-gray-200/50">
         <div class="container mx-auto px-4">
             <div class="flex items-center gap-8 py-5 overflow-x-auto scrollbar-hide">
-                {% for category in ['🔥 Trending', '🎵 Music', '🎨 Arts', '🏃‍♂️ Sports', '💻 Tech', '🍷 Food & Drink', '🎭 Theater', '📚 Education'] %}
-                    <a href="#" class="flex-shrink-0">
+                {% for category in categories %}
+                    <a href="/event"
+                       class="flex-shrink-0 group">
                         <div class="px-6 py-3 rounded-full transition-all duration-300
-                                  hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10
-                                  text-gray-600 hover:text-gray-900 hover:shadow-lg">
-                            <span class="text-base font-medium">{{ category }}</span>
+                                  bg-gradient-to-r from-transparent to-transparent
+                                  hover:from-purple-500/10 hover:to-pink-500/10
+                                  text-gray-600 hover:text-gray-900 hover:shadow-lg relative">
+                            <span class="text-base font-medium relative">
+                                {{ category.getName() }}
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r
+                                           from-purple-500 to-pink-500 transform scale-x-0
+                                           group-hover:scale-x-100 transition-transform duration-300"></span>
+                            </span>
                         </div>
                     </a>
                 {% endfor %}
@@ -81,136 +90,170 @@
         </div>
     </div>
 
-    {# Enhanced Featured Events Grid with Modern Cards #}
+    {# Premium Featured Events Grid #}
     <section class="py-32 bg-gradient-to-b from-gray-50 to-white">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-end mb-20">
                 <div>
-                    <h2 class="text-5xl font-bold text-gray-900 mb-6 tracking-tight">Featured Events</h2>
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6 tracking-tight relative inline-block">
+                        Featured Events
+                        <div class="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                    </h2>
                     <p class="text-gray-600 text-xl">Curated experiences you can't miss</p>
                 </div>
-                <a href="#" class="group flex items-center gap-3 text-purple-600 font-medium hover:text-purple-700 text-lg">
+                <a href="/event"
+                   class="group flex items-center gap-3 text-purple-600 font-medium hover:text-purple-700 text-lg
+                          relative overflow-hidden px-6 py-2 rounded-full hover:bg-purple-50 transition-all duration-300">
                     View all
-                    <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                {% for i in 1..8 %}
-                    <article class="group relative bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                {% for event in events %}
+                    <article class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl
+                                  transition-all duration-500 hover:-translate-y-2 border border-gray-100/50
+                                  relative">
+                        {# Premium Image Container with Dynamic Overlay #}
                         <div class="relative aspect-[4/3] overflow-hidden">
-                            <img src="https://source.unsplash.com/800x600/?event,festival"
-                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute top-6 left-6 flex gap-3">
-                                <span class="px-4 py-2 rounded-full text-sm font-semibold bg-purple-500 text-white shadow-lg backdrop-blur-md bg-opacity-90">Featured</span>
-                                <span class="px-4 py-2 rounded-full text-sm font-semibold bg-orange-500 text-white shadow-lg backdrop-blur-md bg-opacity-90">Limited</span>
+                            <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform
+                                      duration-700 filter group-hover:brightness-110"
+                                 src="{{ event.getPromotionalImage() }}"
+                                 alt="{{ event.getTitle() }}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent
+                                      opacity-80 group-hover:opacity-70 transition-opacity duration-300"></div>
+
+                            {# Enhanced Category Badge with Glow Effect #}
+                            <div class="absolute top-6 left-6 px-4 py-2 rounded-full text-sm font-semibold
+                                      bg-purple-500 text-white shadow-lg backdrop-blur-md bg-opacity-90
+                                      hover:bg-purple-400 transition-all duration-300 group-hover:shadow-purple-500/50">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                                    {{ event.getCategory().getName() }}
+                                </span>
                             </div>
-                            <button class="absolute top-6 right-6 p-3 rounded-full bg-white/30 backdrop-blur-md hover:bg-white/50 transition-colors">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                            </button>
+
+                            {# Dynamic Price Badge #}
+                            <div class="absolute top-6 right-6 px-4 py-2 bg-white/95 backdrop-blur-md text-gray-900
+                                      text-sm font-bold rounded-full shadow-lg group-hover:shadow-xl
+                                      transition-all duration-300 hover:scale-105">
+                                {{ event.getPrice() > 0 ? event.getPrice()|number_format(2) ~ ' USD' : 'Free' }}
+                            </div>
                         </div>
 
+                        {# Enhanced Content Section with Improved Typography #}
                         <div class="p-8">
-                            <div class="flex items-center gap-6 mb-6">
-                                <div class="flex items-center gap-2 text-purple-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                    <span class="text-sm font-medium">Mar 15, 2024</span>
-                                </div>
-                                <div class="flex items-center gap-2 text-gray-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
-                                    <span class="text-sm">7:00 PM</span>
-                                </div>
-                            </div>
-
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors leading-tight">
-                                Summer Music Festival 2024
-                            </h3>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4 line-clamp-2 group-hover:text-purple-600
+                                     transition-colors leading-tight">
+                                {{ event.getTitle() }}
+                            </h2>
 
                             <p class="text-gray-600 mb-8 line-clamp-2 text-base leading-relaxed">
-                                Experience an unforgettable night of music under the stars with world-class artists.
+                                {{ event.getDescription() }}
                             </p>
 
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex -space-x-4">
-                                        {% for j in 1..3 %}
-                                            <img class="w-10 h-10 rounded-full border-2 border-white shadow-md"
-                                                 src="https://source.unsplash.com/50x50/?person" alt="Attendee">
-                                        {% endfor %}
+                            {# Interactive Event Details #}
+                            <div class="space-y-5 mb-8">
+                                {# Location with Hover Effect #}
+                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900
+                                            transition-colors">
+                                    <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center mr-4
+                                                group-hover/item:bg-purple-100 transition-colors
+                                                group-hover/item:scale-110 duration-300">
+                                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
                                     </div>
-                                    <span class="text-sm text-gray-500">+3.2k going</span>
+                                    <span class="text-base truncate group-hover/item:text-purple-600
+                                               transition-colors duration-300">
+                                        {{ event.getLocation() }}
+                                    </span>
                                 </div>
-                                <div class="text-right">
-                                    <span class="block text-sm text-gray-500">from</span>
-                                    <span class="text-xl font-bold text-gray-900">£85.00</span>
+
+                                {# Date with Dynamic Animation #}
+                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900
+                                            transition-colors">
+                                    <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mr-4
+                                                group-hover/item:bg-orange-100 transition-colors
+                                                group-hover/item:scale-110 duration-300">
+                                        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-base group-hover/item:text-orange-600 transition-colors duration-300">
+                                        {{ event.getStartDate()|date('M d, Y') }} - {{ event.getEndDate()|date('M d, Y') }}
+                                    </span>
+                                </div>
+
+                                {# Capacity with Interactive Elements #}
+                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900
+                                            transition-colors">
+                                    <div class="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center mr-4
+                                                group-hover/item:bg-pink-100 transition-colors
+                                                group-hover/item:scale-110 duration-300">
+                                        <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-base group-hover/item:text-pink-600 transition-colors duration-300">
+                                        {{ event.getMaxCapacity() }} spots available
+                                    </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <a href="#" class="absolute inset-0 z-10" aria-label="View event details"></a>
+                            {# Premium Action Button with Advanced Hover Effects #}
+                            <a href="/event/{{ event.getId() }}"
+                               class="relative block w-full px-6 py-4 text-center text-white bg-gradient-to-r
+                                      from-purple-600 to-pink-600 rounded-xl transition-all duration-500
+                                      hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2
+                                      focus:ring-purple-500 focus:ring-offset-2 shadow-lg hover:shadow-xl
+                                      transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden group/btn">
+                                <span class="relative z-10 font-medium text-lg">View Details</span>
+                                <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full
+                                          group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                            </a>
+                        </div>
                     </article>
                 {% endfor %}
             </div>
         </div>
     </section>
 
-    {# Enhanced Categories Section with Modern 3D Cards #}
-    <section class="py-32 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-gray-900 mb-6 tracking-tight">Browse Categories</h2>
-            <p class="text-gray-600 text-xl mb-16">Find events that match your interests</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {% set categories = [
-                    {'name': 'Music Festivals', 'icon': '🎵', 'image': 'festival', 'count': '2.5k events'},
-                    {'name': 'Food & Wine', 'icon': '🍷', 'image': 'food', 'count': '1.8k events'},
-                    {'name': 'Art Galleries', 'icon': '🎨', 'image': 'art', 'count': '950 events'},
-                    {'name': 'Tech Conferences', 'icon': '💻', 'image': 'technology', 'count': '1.2k events'},
-                    {'name': 'Sports', 'icon': '⚽', 'image': 'sports', 'count': '3.1k events'},
-                    {'name': 'Theater', 'icon': '🎭', 'image': 'theater', 'count': '750 events'},
-                    {'name': 'Wellness', 'icon': '🧘', 'image': 'wellness', 'count': '1.5k events'},
-                    {'name': 'Business', 'icon': '💼', 'image': 'business', 'count': '2k events'}
-                ] %}
-
-                {% for category in categories %}
-                    <a href="#" class="group perspective">
-                        <div class="relative h-80 rounded-[2rem] overflow-hidden transform-gpu transition-all duration-500 group-hover:rotate-x-12 group-hover:scale-105 shadow-lg group-hover:shadow-2xl">
-                            <img src="https://source.unsplash.com/600x400/?{{ category.image }}"
-                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent group-hover:via-gray-900/70 transition-colors duration-300">
-                                <div class="absolute bottom-0 left-0 p-8">
-                                    <span class="text-4xl mb-4 block">{{ category.icon }}</span>
-                                    <h3 class="text-2xl font-bold text-white mb-2">{{ category.name }}</h3>
-                                    <p class="text-gray-300 text-base font-medium">{{ category.count }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    {# Enhanced Organizer CTA Section #}
+    {# Premium Organizer CTA Section with Enhanced Visual Effects #}
     <section class="container mx-auto py-24 px-4">
-        <div class="bg-gradient-to-r from-orange-500 to-pink-500 rounded-[2rem] p-12 md:p-16 text-white shadow-2xl relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('/Assets/noise.png')] mix-blend-overlay opacity-25"></div>
+        <div class="bg-gradient-to-r from-orange-500 to-pink-500 rounded-[2rem] p-12 md:p-16 text-white
+                    shadow-2xl relative overflow-hidden group hover:shadow-orange-500/25
+                    transition-all duration-500">
+            <div class="absolute inset-0 bg-[url('/Assets/noise.png')] mix-blend-overlay opacity-25
+                        animate-subtle-grain"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0
+                        transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%]
+                        transition-transform duration-1000"></div>
             <div class="relative z-10 max-w-2xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Create your own event</h2>
-                <p class="mb-8 text-xl opacity-90 leading-relaxed">Share your passion, build community, and earn money through unforgettable experiences.</p>
-                <button class="bg-white text-orange-500 px-10 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 text-lg">
-                    Get Started
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    Create your own event
+                </h2>
+                <p class="mb-8 text-xl opacity-90 leading-relaxed">
+                    Share your passion, build community, and earn money through unforgettable experiences.
+                </p>
+                <button class="bg-white text-orange-500 px-10 py-4 rounded-xl font-semibold
+                             hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl
+                             hover:scale-105 active:scale-95 text-lg relative overflow-hidden group/btn">
+                    <span class="relative z-10">Get Started</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-orange-100 to-pink-100 opacity-0
+                               group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 </button>
             </div>
         </div>
