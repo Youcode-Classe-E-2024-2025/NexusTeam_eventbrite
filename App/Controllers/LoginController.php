@@ -67,8 +67,10 @@ class LoginController {
             // Créer une session pour l'utilisateur connecté
             $_SESSION['user'] = [
                 'id' => $userData['id'], // Utiliser l'ID récupéré de la base
+                'fullName' => $userData['name'],
                 'email' => $userData['email'],
-                'role' => $userData['role']
+                'role' => $userData['role'],
+                'avatar' => $userData['avatar']
             ];
 
             echo "Connexion réussie.";
