@@ -847,6 +847,21 @@
   .h-48 {
     height: calc(var(--spacing) * 48);
   }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
+  .h-\[35vh\] {
+    height: 35vh;
+  }
+  .h-\[50vh\] {
+    height: 50vh;
+  }
+  .h-\[75vh\] {
+    height: 75vh;
+  }
+  .h-\[100vh\] {
+    height: 100vh;
+  }
   .h-full {
     height: 100%;
   }

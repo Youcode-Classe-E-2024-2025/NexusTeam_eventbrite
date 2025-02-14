@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\core\Model;
+use App\Core\Model;
 
 class Organizer extends Model
 {
