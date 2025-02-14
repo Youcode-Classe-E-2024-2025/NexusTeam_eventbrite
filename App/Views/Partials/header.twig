@@ -10,7 +10,7 @@
         {% if user is defined and user %}
             <span class="text-gray-300">Welcome, {{ user.fullName }}</span>
             <div class="flex items-center space-x-2 gap-3">
-                <a href="/avatar" class="text-gray-300 hover:text-white">
+                <a href="/profile" class="text-gray-300 hover:text-white">
                     {% if user.avatar %}
                     <img src="{{ 'app/uploads/' ~ user.avatar }}" alt="Avatar" class="w-8 h-8 rounded-full">
                     {% else %}
