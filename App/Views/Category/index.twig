@@ -1,144 +1,183 @@
-{# Views/Category/index.twig #}
 {% extends "base.twig" %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Category Management{% endblock %}
 
 {% block content %}
-    <div class="flex justify-center items-center h-full bg-gray-700 text-gray-200">
-        <main class="w-full max-w-4xl p-6">
-            <div class="bg-gray-800 rounded-lg shadow-lg p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold">Category List</h2>
-                    <button id="openModalBtn" class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition duration-200">
-                        Add New Category
-                    </button>
+<div class="min-h-screen bg-gray-900">
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {% set stats = [
+                {icon: 'folder', title: 'Total Categories', value: categories|length, color: 'purple'},
+                {icon: 'chart-pie', title: 'Active Categories', value: categories|length, color: 'pink'},
+                {icon: 'calendar-check', title: 'Events Categorized', value: '524', color: 'blue'}
+            ] %}
+            {% for stat in stats %}
+                <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <div class="inline-flex items-center justify-center p-3 rounded-xl bg-{{ stat.color }}-500/10 text-{{ stat.color }}-400">
+                            <i class="fas fa-{{ stat.icon }} w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <h3 class="mt-4 text-2xl font-bold text-white">{{ stat.value }}</h3>
+                    <p class="text-sm text-gray-400">{{ stat.title }}</p>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full bg-gray-700 rounded-lg overflow-hidden">
-                        <thead class="bg-gray-600 text-gray-300">
-                        <tr>
-                            <th class="py-3 px-4 text-left">ID</th>
-                            <th class="py-3 px-4 text-left">Name</th>
-                            <th class="py-3 px-4 text-left">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-600">
-                        {% if categories is defined and categories|length > 0 %}
-                            {% for category in categories %}
-                                <tr class="hover:bg-gray-600 transition">
-                                    <td class="py-3 px-4">{{ category.getId() }}</td>
-                                    <td class="py-3 px-4">{{ category.getName() }}</td>
-                                    <td class="py-3 px-4">
-                                        <a href="category/update/{{ category.getId() }}" class="text-primary-400 hover:text-primary-500">Edit</a>
-                                        <form action="category/delete/{{ category.getId() }}" method="post" class="inline">
-                                            <button type="submit" class="text-red-400 hover:text-red-500">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr>
-                                <td colspan="3" class="py-4 text-center text-gray-400">No categories available</td>
-                            </tr>
-                        {% endif %}
-                        </tbody>
-                    </table>
-                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Category List -->
+        <div class="bg-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-700 flex items-center justify-between">
+                <h2 class="text-xl font-semibold text-white">Category Management</h2>
+                <button id="openModalBtn" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-purple-500 transition-all duration-200">
+                    <i class="fas fa-plus mr-2"></i>
+                    Add New Category
+                </button>
             </div>
-        </main>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% if categories is defined and categories|length > 0 %}
+                    {% for category in categories %}
+                        <div class="group bg-gray-700/50 hover:bg-gray-700 rounded-xl p-6 border border-gray-600 transition-all duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="inline-flex items-center justify-center p-2 rounded-lg bg-purple-500/10 text-purple-400">
+                                        <i class="fas fa-folder"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-white">{{ category.getName() }}</span>
+                                </div>
+                                <div class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <a href="category/update/{{ category.getId() }}" class="p-1.5 rounded-lg text-purple-400 hover:bg-purple-400/10 transition-colors duration-200">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="category/delete/{{ category.getId() }}" method="post" class="inline">
+                                        <button type="submit" class="p-1.5 rounded-lg text-red-400 hover:bg-red-400/10 transition-colors duration-200">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <i class="fas fa-hashtag w-5 h-5 mr-2 text-gray-500"></i>
+                                <span>ID: {{ category.getId() }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-span-3 flex flex-col items-center justify-center py-12 text-gray-400">
+                        <div class="inline-flex items-center justify-center p-4 rounded-xl bg-gray-700/50 text-gray-400 mb-4">
+                            <i class="fas fa-folder-open text-4xl"></i>
+                        </div>
+                        <p class="text-lg">No categories available</p>
+                        <p class="text-sm mt-2">Click the "Add New Category" button to create one</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     {# Modal for Adding a Category #}
-    <div id="addCategoryModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-        <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-xl font-semibold mb-4">Add New Category</h2>
+    <div id="addCategoryModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center hidden">
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-96 border border-gray-700">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-white">Add New Category</h2>
+                <button type="button" id="closeModalBtn" class="text-gray-400 hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
             <form action="/category/create" method="POST">
-                <div class="mb-4">
-                    <label for="categoryName" class="block text-gray-300 mb-2">Category Name</label>
-                    <input type="text" id="categoryName" name="name" class="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-primary-500">
+                <div class="mb-6">
+                    <label for="categoryName" class="block text-sm font-medium text-gray-300 mb-2">Category Name</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-folder text-gray-400"></i>
+                        </div>
+                        <input type="text" id="categoryName" name="name" 
+                            class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                            placeholder="Enter category name">
+                    </div>
                 </div>
                 <div class="flex justify-end space-x-4">
-                    <button type="button" id="closeModalBtn" class="bg-gray-600 hover:bg-gray-500 text-white py-2 px-4 rounded-lg transition">
+                    <button type="button" id="closeModalBtn" 
+                        class="px-4 py-2 rounded-lg text-gray-300 hover:text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-600 transition-all duration-200">
                         Cancel
                     </button>
-                    <button type="submit" class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition">
-                        Save
+                    <button type="submit" 
+                        class="px-4 py-2 rounded-lg text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-purple-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Save Category
                     </button>
                 </div>
             </form>
         </div>
     </div>
-
+</div>
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modal = document.getElementById("addCategoryModal");
-            const openModalBtn = document.getElementById("openModalBtn");
-            const closeModalBtn = document.getElementById("closeModalBtn");
-            const input = document.getElementById("categoryName");
-            const errorMessage = document.createElement("p");
-            const submitBtn = document.querySelector("button[type='submit']");
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("addCategoryModal");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const input = document.getElementById("categoryName");
+        const errorMessage = document.createElement("p");
+        const submitBtn = document.querySelector("button[type='submit']");
 
-            errorMessage.classList.add("text-red-400", "mt-2", "text-sm");
-            input.insertAdjacentElement("afterend", errorMessage);
+        errorMessage.classList.add("text-red-400", "mt-2", "text-sm");
+        input.insertAdjacentElement("afterend", errorMessage);
 
-            openModalBtn.addEventListener("click", () => {
-                modal.classList.remove("hidden");
-                input.value = "";
-                errorMessage.textContent = "";
+        openModalBtn.addEventListener("click", () => {
+            modal.classList.remove("hidden");
+            input.value = "";
+            errorMessage.textContent = "";
+            submitBtn.disabled = true;
+            submitBtn.classList.add("opacity-50", "cursor-not-allowed");
+        });
+
+        closeModalBtn.addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.add("hidden");
+            }
+        });
+
+        let isValid = false;
+
+        modal.addEventListener("submit", (e) => {
+            e.stopPropagation();
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        const validate = (value) => {
+            const regex = /^[a-zA-Z\s]+$/;
+            if (value.length < 3) {
+                return "Category name must be at least 3 characters long.";
+            }
+            if (!regex.test(value)) {
+                return "Only letters and spaces are allowed.";
+            }
+            return "";
+        }
+
+        input.addEventListener("input", () => {
+            const error = validate(input.value);
+            if (error) {
+                isValid = false;
+                errorMessage.textContent = error;
                 submitBtn.disabled = true;
                 submitBtn.classList.add("opacity-50", "cursor-not-allowed");
-            });
-
-            closeModalBtn.addEventListener("click", () => {
-                modal.classList.add("hidden");
-            });
-
-            window.addEventListener("click", (e) => {
-                if (e.target === modal) {
-                    modal.classList.add("hidden");
-                }
-            });
-            let isValid = false;
-
-            modal.addEventListener("submit", (e) => {
-                e.stopPropagation();
-                if (!isValid){
-                    e.preventDefault();
-                }
-            });
-
-            const validate = (value) => {
-                const regex = /^[a-zA-Z\s]+$/;
-                if (value.length < 3) {
-                    return "Category name must be at least 3 characters long.";
-                }
-                if (!regex.test(value)) {
-                    return "Only letters, and spaces are allowed.";
-                }
-                return "";
+            } else {
+                isValid = true;
+                errorMessage.textContent = "";
+                submitBtn.disabled = false;
+                submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
             }
-
-            input.addEventListener("input", () => {
-                setTimeout(() => {
-
-                }, 250);
-                const error = validate(input.value);
-                if (error) {
-                    isValid = false;
-                    errorMessage.textContent = error;
-                    submitBtn.disabled = true;
-                    submitBtn.classList.add("opacity-50", "cursor-not-allowed");
-                } else {
-                    isValid = true;
-                    errorMessage.textContent = "";
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
-                }
-            });
-
         });
-    </script>
+    });
+</script>
 {% endblock %}
