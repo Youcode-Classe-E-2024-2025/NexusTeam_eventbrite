@@ -35,7 +35,7 @@ class Request
     }
 
     public function get($key){
-        return $this->data[$key];
+        return $this->data[$key] ?? null;
     }
 
     public function all(): array{
