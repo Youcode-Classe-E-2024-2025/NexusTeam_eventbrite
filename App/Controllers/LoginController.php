@@ -73,7 +73,6 @@ class LoginController {
                 'avatar' => $userData['avatar']
             ];
 
-            echo "Connexion réussie.";
 
             // Rediriger selon le rôle
             switch ($_SESSION['user']['role']) {
