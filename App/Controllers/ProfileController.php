@@ -53,63 +53,63 @@ class ProfileController {
     }
     
 
-    // public function updateProfileImage() {
-    //     if (session_status() === PHP_SESSION_NONE) {
-    //         session_start();
-    //     }
+    public function updateProfileImage() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    //     if (!isset($_SESSION['user'])) {
-    //         header("Location: /login");
-    //         exit;
-    //     }
+        if (!isset($_SESSION['user'])) {
+            header("Location: /login");
+            exit;
+        }
 
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile-image'])) {
-    //         try {
-    //             $userId = $_SESSION['user']['id'];
-    //             $user = new User(Database::getInstance()->getConnection());
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile-image'])) {
+            try {
+                $userId = $_SESSION['user']['id'];
+                $user = new User(Database::getInstance()->getConnection());
 
-    //             $file = $_FILES['profile-image'];
-    //             $fileName = $file['name'];
-    //             $fileTmpName = $file['tmp_name'];
-    //             $fileError = $file['error'];
-    //             $fileSize = $file['size'];
+                $file = $_FILES['profile-image'];
+                $fileName = $file['name'];
+                $fileTmpName = $file['tmp_name'];
+                $fileError = $file['error'];
+                $fileSize = $file['size'];
 
-    //             if ($fileError !== 0) {
-    //                 throw new Exception("Erreur lors du téléchargement de l'image.");
-    //             }
+                if ($fileError !== 0) {
+                    throw new Exception("Erreur lors du téléchargement de l'image.");
+                }
 
-    //             if ($fileSize > 5000000) {
-    //                 throw new Exception("L'image est trop grande. Max: 5 Mo.");
-    //             }
+                if ($fileSize > 5000000) {
+                    throw new Exception("L'image est trop grande. Max: 5 Mo.");
+                }
 
-    //             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-    //             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
-    //             if (!in_array($fileExt, $allowedExtensions)) {
-    //                 throw new Exception("Format non autorisé.");
-    //             }
+                if (!in_array($fileExt, $allowedExtensions)) {
+                    throw new Exception("Format non autorisé.");
+                }
 
-    //             $newFileName = uniqid('avatar_', true) . '.' . $fileExt;
-    //             $uploadDirectory = __DIR__ . '/../../app/uploads/';
-    //             $filePath = $uploadDirectory . $newFileName;
+                $newFileName = uniqid('avatar_', true) . '.' . $fileExt;
+                $uploadDirectory = __DIR__ . '/../../app/uploads/';
+                $filePath = $uploadDirectory . $newFileName;
 
-    //             if (!is_dir($uploadDirectory)) {
-    //                 mkdir($uploadDirectory, 0777, true);
-    //             }
+                if (!is_dir($uploadDirectory)) {
+                    mkdir($uploadDirectory, 0777, true);
+                }
 
-    //             if (!move_uploaded_file($fileTmpName, $filePath)) {
-    //                 throw new Exception("Erreur lors du déplacement du fichier.");
-    //             }
+                if (!move_uploaded_file($fileTmpName, $filePath)) {
+                    throw new Exception("Erreur lors du déplacement du fichier.");
+                }
 
-    //             $user->updateProfileImage($userId, $newFileName);
-    //             $_SESSION['user']['avatar'] = $newFileName;
+                $user->updateProfileImage($userId, $newFileName);
+                $_SESSION['user']['avatar'] = $newFileName;
 
-    //             header("Location: /profile");
-    //             exit;
+                header("Location: /profile");
+                exit;
 
-    //         } catch (Exception $e) {
-    //             echo "Erreur: " . $e->getMessage();
-    //         }
-    //     }
-    // }
+            } catch (Exception $e) {
+                echo "Erreur: " . $e->getMessage();
+            }
+        }
+    }
 }
