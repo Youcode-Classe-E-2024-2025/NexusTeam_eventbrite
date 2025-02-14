@@ -1,4 +1,4 @@
-{# Views/PromoCode/index.twig #}
+{# Views /organizer/PromoCode/index.twig #}
 {% extends "base.twig" %}
 
 {% block title %}Promo Codes{% endblock %}
@@ -34,8 +34,8 @@
                                     <td class="py-3 px-4">{{ promoCode.getDiscount() }}%</td>
                                     <td class="py-3 px-4">{{ promoCode.getExpiration()|date("Y-m-d H:i") }}</td>
                                     <td class="py-3 px-4 flex space-x-2">
-                                        <a href="/PromoCode/update/{{ promoCode.getId() }}" class="text-primary-400 hover:text-primary-500">Edit</a>
-                                        <form action="/PromoCode/delete/{{ promoCode.getId() }}" method="post" class="inline">
+                                        <a href=" /organizer/PromoCode/update/{{ promoCode.getId() }}" class="text-primary-400 hover:text-primary-500">Edit</a>
+                                        <form action=" /organizer/PromoCode/delete/{{ promoCode.getId() }}" method="post" class="inline">
                                             <button type="submit" class="text-red-400 hover:text-red-500">Delete</button>
                                         </form>
                                     </td>
@@ -57,7 +57,7 @@
     <div id="addPromoCodeModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
         <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
             <h2 class="text-xl font-semibold mb-4">Add New Promo Code</h2>
-            <form action="/PromoCode/create" method="POST">
+            <form action=" /organizer/PromoCode/create" method="POST">
                 <div class="mb-4">
                     <label for="promoCode" class="block text-gray-300 mb-2">Promo Code</label>
                     <input type="text" id="promoCode" name="code" class="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-primary-500">

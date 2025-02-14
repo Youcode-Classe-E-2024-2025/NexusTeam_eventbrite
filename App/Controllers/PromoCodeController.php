@@ -24,11 +24,11 @@ class PromoCodeController
         $promoCode = $promoCode->getById();
         if (!$promoCode) {
             Session::set('message', 'Promo code not found');
-            Views::redirect('/PromoCode');
+            Views::redirect('/organizer/PromoCode');
             return;
         }
 
-        if ($request->getUri() === "/PromoCode/update/" . $request->get('id')) {
+        if ($request->getUri() === "/organizer/PromoCode/update/" . $request->get('id')) {
             Views::render('PromoCode/edit', ['promocode' => $promoCode]);
         }
 
@@ -46,7 +46,7 @@ class PromoCodeController
 
         if (!empty(Validator::errors())) {
             Session::set('message', Validator::errors()[0]);
-            Views::redirect('/PromoCode');
+            Views::redirect('/organizer/PromoCode');
             return;
         }
 
@@ -59,7 +59,7 @@ class PromoCodeController
             Session::set('message', 'Promo code not created, try again');
         }
 
-        Views::redirect('/PromoCode');
+        Views::redirect('/organizer/PromoCode');
     }
 
     public function update(Request $request): void
@@ -73,7 +73,7 @@ class PromoCodeController
 
         if (!empty(Validator::errors())) {
             Session::set('message', Validator::errors()[0]);
-            Views::redirect('/PromoCode/update/' . $request->get('id'));
+            Views::redirect('/organizer/PromoCode/update/' . $request->get('id'));
             return;
         }
 
@@ -86,7 +86,7 @@ class PromoCodeController
             Session::set('message', 'Promo code not updated, try again');
         }
 
-        Views::redirect('/PromoCode');
+        Views::redirect('/organizer/PromoCode');
     }
 
     public function destroy(Request $request): void
@@ -100,6 +100,6 @@ class PromoCodeController
             Session::set('message', 'Promo code not deleted, try again');
         }
 
-        Views::redirect('/PromoCode');
+        Views::redirect('/organizer/PromoCode');
     }
 }
