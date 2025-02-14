@@ -29,7 +29,7 @@ class PaymentController {
             $session = Session::create([
                 "mode" => "payment",
                 "success_url" => "http://localhost/payment/success",
-                "cancel_url" => "http://localhost/cancel",
+                "cancel_url" => "http://localhost/event",
                 "line_items" => [[
                     "quantity" => 1,
                     "price_data" => [
