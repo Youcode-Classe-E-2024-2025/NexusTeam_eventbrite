@@ -712,6 +712,9 @@
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
   }
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
+  }
   .mt-auto {
     margin-top: auto;
   }
@@ -832,6 +835,9 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
   .h-24 {
     height: calc(var(--spacing) * 24);
   }
@@ -846,6 +852,9 @@
   }
   .min-h-\[80vh\] {
     min-height: 80vh;
+  }
+  .min-h-\[400px\] {
+    min-height: 400px;
   }
   .min-h-\[500px\] {
     min-height: 500px;
@@ -888,6 +897,9 @@
   }
   .w-16 {
     width: calc(var(--spacing) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
   }
   .w-24 {
     width: calc(var(--spacing) * 24);
@@ -1110,6 +1122,13 @@
       margin-block-end: calc(calc(var(--spacing) * 12) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+  .-space-x-px {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(-1px * var(--tw-space-x-reverse));
+      margin-inline-end: calc(-1px * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
   .space-x-2 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -1201,6 +1220,14 @@
   .rounded-xl {
     border-radius: var(--radius-xl);
   }
+  .rounded-l-md {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
+  .rounded-r-md {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -1245,6 +1272,9 @@
   .border-gray-200\/50 {
     border-color: color-mix(in oklab, var(--color-gray-200) 50%, transparent);
   }
+  .border-gray-300 {
+    border-color: var(--color-gray-300);
+  }
   .border-gray-600 {
     border-color: var(--color-gray-600);
   }
@@ -1271,6 +1301,9 @@
   }
   .border-purple-200 {
     border-color: var(--color-purple-200);
+  }
+  .border-purple-500 {
+    border-color: var(--color-purple-500);
   }
   .border-red-500 {
     border-color: var(--color-red-500);
@@ -1415,6 +1448,9 @@
   }
   .bg-\[url\(\'\/Assets\/noise\.png\'\)\] {
     background-image: url('/Assets/noise.png');
+  }
+  .bg-\[url\(\'\/Assets\/pattern\.svg\'\)\] {
+    background-image: url('/Assets/pattern.svg');
   }
   .from-gray-50 {
     --tw-gradient-from: var(--color-gray-50);
@@ -1604,6 +1640,9 @@
   }
   .bg-center {
     background-position: center;
+  }
+  .bg-repeat {
+    background-repeat: repeat;
   }
   .object-cover {
     object-fit: cover;
@@ -1920,6 +1959,9 @@
   .opacity-0 {
     opacity: 0%;
   }
+  .opacity-5 {
+    opacity: 5%;
+  }
   .opacity-10 {
     opacity: 10%;
   }
@@ -1934,6 +1976,9 @@
   }
   .opacity-50 {
     opacity: 50%;
+  }
+  .opacity-70 {
+    opacity: 70%;
   }
   .opacity-80 {
     opacity: 80%;
@@ -2149,6 +2194,13 @@
       }
     }
   }
+  .group-hover\:bg-purple-600 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        background-color: var(--color-purple-600);
+      }
+    }
+  }
   .group-hover\:from-pink-500 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -2200,6 +2252,13 @@
       }
     }
   }
+  .group-hover\:opacity-60 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        opacity: 60%;
+      }
+    }
+  }
   .group-hover\:opacity-70 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -2226,6 +2285,14 @@
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         --tw-shadow-color: color-mix(in oklab, var(--color-purple-500) 50%, transparent);
+      }
+    }
+  }
+  .group-hover\:brightness-105 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        --tw-brightness: brightness(105%);
+        filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
       }
     }
   }
@@ -2357,6 +2424,13 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-purple-300);
+      }
+    }
+  }
+  .hover\:border-purple-500\/20 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: color-mix(in oklab, var(--color-purple-500) 20%, transparent);
       }
     }
   }
@@ -2661,6 +2735,13 @@
       }
     }
   }
+  .hover\:shadow-purple-500\/10 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow-color: color-mix(in oklab, var(--color-purple-500) 10%, transparent);
+      }
+    }
+  }
   .focus\:not-sr-only {
     &:focus {
       position: static;
@@ -2779,9 +2860,34 @@
       margin-top: calc(var(--spacing) * 0);
     }
   }
+  .sm\:h-6 {
+    @media (width >= 40rem) {
+      height: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:h-24 {
+    @media (width >= 40rem) {
+      height: calc(var(--spacing) * 24);
+    }
+  }
   .sm\:w-1\/2 {
     @media (width >= 40rem) {
       width: calc(1/2 * 100%);
+    }
+  }
+  .sm\:w-6 {
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:w-24 {
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 24);
+    }
+  }
+  .sm\:grid-cols-1 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
   .sm\:grid-cols-2 {
@@ -2792,6 +2898,11 @@
   .sm\:flex-row {
     @media (width >= 40rem) {
       flex-direction: row;
+    }
+  }
+  .sm\:gap-10 {
+    @media (width >= 40rem) {
+      gap: calc(var(--spacing) * 10);
     }
   }
   .sm\:space-y-0 {
@@ -2817,9 +2928,24 @@
       padding: calc(var(--spacing) * 8);
     }
   }
+  .sm\:p-16 {
+    @media (width >= 40rem) {
+      padding: calc(var(--spacing) * 16);
+    }
+  }
   .sm\:px-6 {
     @media (width >= 40rem) {
       padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:px-8 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 8);
+    }
+  }
+  .sm\:py-5 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--spacing) * 5);
     }
   }
   .sm\:py-24 {
@@ -2827,10 +2953,45 @@
       padding-block: calc(var(--spacing) * 24);
     }
   }
+  .sm\:py-32 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--spacing) * 32);
+    }
+  }
+  .sm\:text-2xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
+    }
+  }
   .sm\:text-5xl {
     @media (width >= 40rem) {
       font-size: var(--text-5xl);
       line-height: var(--tw-leading, var(--text-5xl--line-height));
+    }
+  }
+  .sm\:text-6xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-6xl);
+      line-height: var(--tw-leading, var(--text-6xl--line-height));
+    }
+  }
+  .sm\:text-base {
+    @media (width >= 40rem) {
+      font-size: var(--text-base);
+      line-height: var(--tw-leading, var(--text-base--line-height));
+    }
+  }
+  .sm\:text-lg {
+    @media (width >= 40rem) {
+      font-size: var(--text-lg);
+      line-height: var(--tw-leading, var(--text-lg--line-height));
+    }
+  }
+  .sm\:text-sm {
+    @media (width >= 40rem) {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
     }
   }
   .sm\:text-xl {
@@ -3063,16 +3224,58 @@
       width: calc(1/3 * 100%);
     }
   }
+  .xl\:grid-cols-3 {
+    @media (width >= 80rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
   .xl\:grid-cols-4 {
     @media (width >= 80rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
-  .\32 xl\:grid-cols-3 {
-    @media (width >= 96rem) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes gradientX {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradientX 15s ease infinite;
+}
+.delay-200 {
+  animation-delay: 0.2s;
 }
 @keyframes spin {
   to {
