@@ -91,21 +91,28 @@
     </div>
 
     {# Premium Featured Events Grid #}
-    <section class="py-32 bg-gradient-to-b from-gray-50 to-white">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-end mb-20">
-                <div>
-                    <h2 class="text-5xl font-bold text-gray-900 mb-6 tracking-tight relative inline-block">
+    <section class="py-24 md:py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        {# Background decorative elements #}
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -top-1/2 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-purple-200 to-pink-200 rounded-full opacity-20 blur-3xl"></div>
+            <div class="absolute -bottom-1/2 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-orange-200 to-yellow-200 rounded-full opacity-20 blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight relative inline-block">
                         Featured Events
                         <div class="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
                     </h2>
-                    <p class="text-gray-600 text-xl">Curated experiences you can't miss</p>
+                    <p class="text-gray-600 text-lg md:text-xl max-w-2xl">Curated experiences you can't miss</p>
                 </div>
                 <a href="/event"
-                   class="group flex items-center gap-3 text-purple-600 font-medium hover:text-purple-700 text-lg
-                          relative overflow-hidden px-6 py-2 rounded-full hover:bg-purple-50 transition-all duration-300">
+                   class="group flex items-center gap-3 text-purple-600 font-medium hover:text-purple-700 text-base md:text-lg
+                      relative overflow-hidden px-6 py-2 rounded-full hover:bg-purple-50 transition-all duration-300
+                      border border-purple-200 hover:border-purple-300 shadow-sm hover:shadow-md">
                     View all
-                    <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none"
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none"
                          stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -113,116 +120,82 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
                 {% for event in events %}
-                    <article class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl
-                                  transition-all duration-500 hover:-translate-y-2 border border-gray-100/50
-                                  relative">
+                    <article class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl
+                              transition-all duration-500 hover:-translate-y-2 border border-gray-100
+                              relative flex flex-col h-full transform perspective-1000">
                         {# Premium Image Container with Dynamic Overlay #}
                         <div class="relative aspect-[4/3] overflow-hidden">
                             <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform
-                                      duration-700 filter group-hover:brightness-110"
+                                  duration-700 filter group-hover:brightness-110"
                                  src="{{ event.getPromotionalImage() }}"
-                                 alt="{{ event.getTitle() }}">
+                                 alt="{{ event.getTitle() }}"
+                                 loading="lazy">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent
-                                      opacity-80 group-hover:opacity-70 transition-opacity duration-300"></div>
+                                  opacity-80 group-hover:opacity-70 transition-opacity duration-300"></div>
 
                             {# Enhanced Category Badge with Glow Effect #}
-                            <div class="absolute top-6 left-6 px-4 py-2 rounded-full text-sm font-semibold
-                                      bg-purple-500 text-white shadow-lg backdrop-blur-md bg-opacity-90
-                                      hover:bg-purple-400 transition-all duration-300 group-hover:shadow-purple-500/50">
-                                <span class="flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                                    {{ event.getCategory().getName() }}
-                                </span>
+                            <div class="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold
+                                  bg-purple-500 text-white shadow-lg backdrop-blur-md bg-opacity-90
+                                  hover:bg-purple-400 transition-all duration-300 group-hover:shadow-purple-500/50">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                {{ event.getCategory().getName() }}
+                            </span>
                             </div>
 
                             {# Dynamic Price Badge #}
-                            <div class="absolute top-6 right-6 px-4 py-2 bg-white/95 backdrop-blur-md text-gray-900
-                                      text-sm font-bold rounded-full shadow-lg group-hover:shadow-xl
-                                      transition-all duration-300 hover:scale-105">
+                            <div class="absolute top-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur-md text-gray-900
+                                  text-xs md:text-sm font-bold rounded-full shadow-lg group-hover:shadow-xl
+                                  transition-all duration-300 hover:scale-105">
                                 {{ event.getPrice() > 0 ? event.getPrice()|number_format(2) ~ ' USD' : 'Free' }}
                             </div>
                         </div>
 
                         {# Enhanced Content Section with Improved Typography #}
-                        <div class="p-8">
-                            <h2 class="text-2xl font-bold text-gray-900 mb-4 line-clamp-2 group-hover:text-purple-600
-                                     transition-colors leading-tight">
+                        <div class="p-6 md:p-8 flex-grow flex flex-col">
+                            <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-purple-600
+                                 transition-colors leading-tight">
                                 {{ event.getTitle() }}
                             </h2>
 
-                            <p class="text-gray-600 mb-8 line-clamp-2 text-base leading-relaxed">
+                            <p class="text-gray-600 mb-6 line-clamp-2 text-sm md:text-base leading-relaxed">
                                 {{ event.getDescription() }}
                             </p>
 
                             {# Interactive Event Details #}
-                            <div class="space-y-5 mb-8">
-                                {# Location with Hover Effect #}
-                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900
-                                            transition-colors">
-                                    <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center mr-4
-                                                group-hover/item:bg-purple-100 transition-colors
+                            <div class="space-y-4 mb-6 mt-auto">
+                                {% for detail in [
+                                    {icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', label: event.getLocation(), bg: 'bg-purple-50', color: 'text-purple-600'},
+                                    {icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', label: event.getStartDate()|date('M d, Y') ~ ' - ' ~ event.getEndDate()|date('M d, Y'), bg: 'bg-orange-50', color: 'text-orange-600'},
+                                    {icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', label: event.getMaxCapacity() ~ ' spots available', bg: 'bg-pink-50', color: 'text-pink-600'}
+                                ] %}
+                                    <div class="flex items-center text-gray-600 group/item hover:text-gray-900 transition-colors">
+                                        <div class="w-8 h-8 rounded-full {{ detail.bg }} flex items-center justify-center mr-3
+                                                group-hover/item:{{ detail.bg|replace({'50': '100'}) }} transition-colors
                                                 group-hover/item:scale-110 duration-300">
-                                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor"
-                                             viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        </svg>
-                                    </div>
-                                    <span class="text-base truncate group-hover/item:text-purple-600
-                                               transition-colors duration-300">
-                                        {{ event.getLocation() }}
+                                            <svg class="w-4 h-4 {{ detail.color }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="{{ detail.icon }}"/>
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm md:text-base truncate group-hover/item:{{ detail.color }} transition-colors duration-300">
+                                        {{ detail.label }}
                                     </span>
-                                </div>
-
-                                {# Date with Dynamic Animation #}
-                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900
-                                            transition-colors">
-                                    <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mr-4
-                                                group-hover/item:bg-orange-100 transition-colors
-                                                group-hover/item:scale-110 duration-300">
-                                        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor"
-                                             viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                        </svg>
                                     </div>
-                                    <span class="text-base group-hover/item:text-orange-600 transition-colors duration-300">
-                                        {{ event.getStartDate()|date('M d, Y') }} - {{ event.getEndDate()|date('M d, Y') }}
-                                    </span>
-                                </div>
-
-                                {# Capacity with Interactive Elements #}
-                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900
-                                            transition-colors">
-                                    <div class="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center mr-4
-                                                group-hover/item:bg-pink-100 transition-colors
-                                                group-hover/item:scale-110 duration-300">
-                                        <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor"
-                                             viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                        </svg>
-                                    </div>
-                                    <span class="text-base group-hover/item:text-pink-600 transition-colors duration-300">
-                                        {{ event.getMaxCapacity() }} spots available
-                                    </span>
-                                </div>
+                                {% endfor %}
                             </div>
 
                             {# Premium Action Button with Advanced Hover Effects #}
                             <a href="/event/{{ event.getId() }}"
-                               class="relative block w-full px-6 py-4 text-center text-white bg-gradient-to-r
-                                      from-purple-600 to-pink-600 rounded-xl transition-all duration-500
-                                      hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2
-                                      focus:ring-purple-500 focus:ring-offset-2 shadow-lg hover:shadow-xl
-                                      transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden group/btn">
-                                <span class="relative z-10 font-medium text-lg">View Details</span>
+                               class="relative block w-full px-6 py-3 text-center text-white bg-gradient-to-r
+                                  from-purple-600 to-pink-600 rounded-xl transition-all duration-500
+                                  hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2
+                                  focus:ring-purple-500 focus:ring-offset-2 shadow-md hover:shadow-lg
+                                  transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden group/btn">
+                                <span class="relative z-10 font-medium text-sm md:text-base">View Details</span>
                                 <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full
-                                          group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                                      group-hover/btn:translate-x-full transition-transform duration-700"></div>
                             </a>
                         </div>
                     </article>
