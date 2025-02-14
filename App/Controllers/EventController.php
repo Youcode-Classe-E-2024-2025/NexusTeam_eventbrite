@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Core\Database;
 use App\Core\Request;
 use App\Core\Session;
 use App\Core\Upload;
@@ -16,13 +15,14 @@ use App\Models\Tag;
 class EventController
 {
 
-    public function index(): void
+    public function index(Request $request): void
     {
+
         $event = new Event();
-        $data = $event->getAll();
+        $data = $event->getAll(6, $request->get('p') ?? 1);
         $tags = [];
 
-        foreach ($data as $event) {
+        foreach ($data['events'] as $event) {
             $imagePath = $event->getPromotionalImage();
             if (!file_exists($imagePath) || empty($imagePath)) {
                 $event->imageUrl = '/Assets/default_event.webp';
@@ -34,7 +34,7 @@ class EventController
             $tags[$event->getId()] = $tagEvent->getTagsByEvent();
         }
 
-        Views::render("Events/index", ['events' => $data, 'tags' => $tags]);
+        Views::render("Events/index", ['events' => $data['events'], 'tags' => $tags, 'pagination' => $data['pagination']]);
     }
 
     public function show(Request $request): void
