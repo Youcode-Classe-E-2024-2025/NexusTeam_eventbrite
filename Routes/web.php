@@ -17,7 +17,7 @@ $router->add("GET", "/organizer/MyEvents/eventStats/{id}", "OrganizerController@
 $router->add("GET", "/participant", "ParticipantController@index");
 
 //profile routes
-$router->add("GET", "/avatar", "ProfileController@index");
+$router->add("GET", "/profile", "ProfileController@index");
 $router->add("POST", "/avatar", "ProfileController@updateProfileImage");
 
 
