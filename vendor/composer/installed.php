@@ -314,9 +314,9 @@
             'dev_requirement' => false,
         ),
         'twig/twig' => array(
-            'pretty_version' => 'v3.7.0',
-            'version' => '3.7.0.0',
-            'reference' => '5cf942bbab3df42afa918caeba947f1b690af64b',
+            'pretty_version' => 'v3.20.0',
+            'version' => '3.20.0.0',
+            'reference' => '3468920399451a384bef53cf7996965f7cd40183',
             'type' => 'library',
             'install_path' => __DIR__ . '/../twig/twig',
             'aliases' => array(),

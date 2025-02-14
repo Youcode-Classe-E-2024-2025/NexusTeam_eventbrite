@@ -1,19 +1,19 @@
-{# Views/Events/add.twig #}
+{# Views/Events/edit.twig #}
 {% extends "base.twig" %}
 
-{% block title %}Add Event{% endblock %}
+{% block title %}Edit Event{% endblock %}
 
 {% block content %}
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
             {# Form Header #}
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Create a New Event</h2>
-                <p class="text-gray-600">Fill in the details below to create your event</p>
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Edit Event</h2>
+                <p class="text-gray-600">Update the details of your event</p>
             </div>
 
             {# Main Form #}
-            <form id="addEvent" action="/event" method="POST" enctype="multipart/form-data" class="bg-white shadow-lg rounded-xl p-8 space-y-6">
+            <form id="editEvent" action="/event/update/{{ event.getId() }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-lg rounded-xl p-8 space-y-6">
                 {# Title Section #}
                 <div>
                     <label class="block text-sm font-medium text-gray-900 mb-2" for="title">
@@ -21,7 +21,8 @@
                     </label>
                     <input type="text" id="title" name="title" required
                            class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900 placeholder-gray-400"
-                           placeholder="Give your event a catchy title">
+                           placeholder="Give your event a catchy title"
+                           value="{{ event.getTitle() }}">
                 </div>
 
                 {# Description Section #}
@@ -31,7 +32,7 @@
                     </label>
                     <textarea id="description" name="description" rows="4" required
                               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900 placeholder-gray-400"
-                              placeholder="Describe your event..."></textarea>
+                              placeholder="Describe your event...">{{ event.getDescription() }}</textarea>
                 </div>
 
                 {# Date and Time Section #}
@@ -41,7 +42,8 @@
                             Start Date & Time
                         </label>
                         <input type="datetime-local" id="start_date" name="start_date" required
-                               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900">
+                               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900"
+                               value="{{ event.getStartDate()|date('Y-m-d\\TH:i') }}">
                     </div>
 
                     <div>
@@ -49,7 +51,8 @@
                             End Date & Time
                         </label>
                         <input type="datetime-local" id="end_date" name="end_date" required
-                               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900">
+                               class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900"
+                               value="{{ event.getEndDate()|date('Y-m-d\\TH:i') }}">
                     </div>
                 </div>
 
@@ -60,7 +63,8 @@
                     </label>
                     <input type="text" id="location" name="location" required
                            class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900 placeholder-gray-400"
-                           placeholder="Where will your event take place?">
+                           placeholder="Where will your event take place?"
+                           value="{{ event.getLocation() }}">
                 </div>
 
                 {# Price and Capacity Section #}
@@ -73,7 +77,8 @@
                             <span class="absolute left-3 top-9 transform -translate-y-1/2 text-gray-500">$</span>
                             <input type="number" id="price" name="price" step="0.01" required
                                    class="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900"
-                                   placeholder="0.00">
+                                   placeholder="0.00"
+                                   value="{{ event.getPrice() }}">
                         </div>
                     </div>
 
@@ -83,7 +88,8 @@
                         </label>
                         <input type="number" id="max_capacity" name="max_capacity" required
                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900"
-                               placeholder="Number of attendees">
+                               placeholder="Number of attendees"
+                               value="{{ event.getMaxCapacity() }}">
                     </div>
                 </div>
 
@@ -118,7 +124,9 @@
                                 class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900">
                             {% if categories is defined %}
                                 {% for category in categories %}
-                                    <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+                                    <option value="{{ category.getId() }}" {{ category.getId() == event.getCategoryId() ? 'selected' : '' }}>
+                                        {{ category.getName() }}
+                                    </option>
                                 {% endfor %}
                             {% endif %}
                         </select>
@@ -132,20 +140,22 @@
                                 class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200 text-gray-900">
                             {% if tags is defined %}
                                 {% for tag in tags %}
-                                    <option value="{{ tag.getId() }}">{{ tag.getName() }}</option>
+                                    <option value="{{ tag.getId() }}" {{ tag.getId() in event.getTagIds() ? 'selected' : '' }}>
+                                        {{ tag.getName() }}
+                                    </option>
                                 {% endfor %}
                             {% endif %}
                         </select>
                     </div>
                 </div>
 
-                <input type="hidden" name="organizer_id" value="1">
+                <input type="hidden" name="organizer_id" value="{{ event.getOrganizerId() }}">
 
                 {# Submit Button #}
                 <div class="pt-6">
                     <button type="submit"
                             class="w-full bg-orange-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition duration-200">
-                        Create Event
+                        Update Event
                     </button>
                 </div>
             </form>
@@ -156,7 +166,7 @@
 {% block scripts %}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector("#addEvent");
+            const form = document.querySelector("#editEvent");
 
             const inputs = form.querySelectorAll('input, textarea, select');
 
