@@ -8,11 +8,15 @@
 
     <div class="flex items-center space-x-4">
         {% if user is defined and user %}
-            <span class="text-gray-300">Welcome, {{ user.name }}</span>
+            <span class="text-gray-300">Welcome, {{ user.fullName }}</span>
             <div class="flex items-center space-x-2 gap-3">
-                <a href="/profile" class="text-gray-300 hover:text-white">
-                    <!-- Icône de profil -->
-                    <i class="fa fa-user-circle text-2xl"></i>
+                <a href="/avatar" class="text-gray-300 hover:text-white">
+                    {% if user.avatar %}
+                    <img src="{{ 'app/uploads/' ~ user.avatar }}" alt="Avatar" class="w-8 h-8 rounded-full">
+                    {% else %}
+                        <!-- Icône de profil si l'utilisateur n'a pas d'avatar -->
+                        <i class="fa fa-user-circle text-2xl"></i>
+                    {% endif %}
                 </a>
                 <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-200">
                     Logout
