@@ -84,6 +84,7 @@ class SignUpController
             if ($user->createUser()) {
                 $_SESSION['user'] = [
                     'id' => $user->getId(),
+                    'fullName' => $user->getFullName(),
                     'email' => $user->getEmail(),
                     'role' => $user->getRole()
                 ];
