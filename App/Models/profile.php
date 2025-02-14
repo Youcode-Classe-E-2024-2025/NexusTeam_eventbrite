@@ -18,21 +18,21 @@ class Profile {
      * @return array
      * @throws Exception
      */
-    // public function getUserEvents(int $userId): array {
-    //     try {
-    //         $query = "
-    //             SELECT e.id, e.title, e.start_date, e.location, e.description, e.promotional_image, t.ticket_type, t.price, t.status
-    //             FROM tickets t
-    //             JOIN events e ON t.event_id = e.id
-    //             WHERE t.participant_id = :userId
-    //             ORDER BY e.start_date DESC
-    //         ";
+    public function getUserEvents(int $userId): array {
+        try {
+            $query = "
+                SELECT e.id, e.title, e.start_date, e.location, e.description, e.promotional_image, t.ticket_type, t.price, t.status
+                FROM tickets t
+                JOIN events e ON t.event_id = e.id
+                WHERE t.participant_id = :userId
+                ORDER BY e.start_date DESC
+            ";
     
-    //         return $this->db->fetchAll($query, [':userId' => $userId]);
-    //     } catch (Exception $e) {
-    //         throw new Exception("Erreur lors de la récupération des événements : " . $e->getMessage());
-    //     }
-    // }
+            return $this->db->fetchAll($query, [':userId' => $userId]);
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la récupération des événements : " . $e->getMessage());
+        }
+    }
     
     
 }
