@@ -189,10 +189,10 @@ class Event
     }
 
 
-    public function getAll(): array
+    public function getAll(int $limit = 6): array
     {
-        $sql = "SELECT * FROM events";
-        $results = $this->pdo->fetchAll($sql);
+        $sql = "SELECT * FROM events LIMIT :limit";
+        $results = $this->pdo->fetchAll($sql, [':limit' => $limit]);
 
         $events = [];
 
