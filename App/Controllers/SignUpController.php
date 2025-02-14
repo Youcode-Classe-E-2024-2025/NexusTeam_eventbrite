@@ -37,6 +37,7 @@ class SignUpController
 
     public function register()
     {
+       
         try {
             // Démarrer la session si ce n'est pas déjà fait
             if (session_status() === PHP_SESSION_NONE) {
@@ -86,7 +87,8 @@ class SignUpController
                     'id' => $user->getId(),
                     'fullName' => $user->getFullName(),
                     'email' => $user->getEmail(),
-                    'role' => $user->getRole()
+                    'role' => $user->getRole(),
+                    'avatar' => $user->getAvatar()
                 ];
 
                 echo "Inscription réussie. Vous êtes connecté.";
@@ -96,11 +98,11 @@ class SignUpController
                         header("Location: /admin-dashboard");
                         break;
                     case 'organizer':
-                        header("Location: /organizer");
+                        header("Location: /login");
                         break;
                     case 'participant':
                     default:
-                    header("Location: /participant");
+                    header("Location: /login");
                     break;
                 }
                 exit;
