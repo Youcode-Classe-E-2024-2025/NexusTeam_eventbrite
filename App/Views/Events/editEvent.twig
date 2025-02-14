@@ -4,86 +4,87 @@
 {% block title %}Update Event{% endblock %}
 
 {% block content %}
-    <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md text-black">
-        <h2 class="text-2xl font-bold mb-4">Update Event</h2>
+    <div class="max-w-2xl mx-auto mt-8 p-8 bg-white rounded-xl shadow-lg">
+        <h2 class="text-3xl font-bold mb-6 text-orange-600">Update Event</h2>
 
-        <form action="/event/{{ event.getId() }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-            <input type="hidden" name="_method" value="PUT">  {# This is for PUT method override #}
+        <form id="editEvent" action="/event/{{ event.getId() }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <input type="hidden" name="_method" value="PUT">
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" for="title">
+                <label class="block text-sm font-semibold text-orange-700 mb-2" for="title">
                     Title
                 </label>
                 <input type="text" id="title" name="title" value="{{ event.getTitle() }}" required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                       class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" for="description">
+                <label class="block text-sm font-semibold text-orange-700 mb-2" for="description">
                     Description
                 </label>
                 <textarea id="description" name="description" rows="4" required
-                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">{{ event.getDescription() }}</textarea>
+                          class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">{{ event.getDescription() }}</textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="start_date">
+                    <label class="block text-sm font-semibold text-orange-700 mb-2" for="start_date">
                         Start Date
                     </label>
-                    <input type="datetime-local" id="start_date" name="start_date" value="{{ event.getStartDate()|date('Y-m-d\TH:i') }}" required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="datetime-local" id="start_date" name="start_date" value="{{ event.getStartDate()|date('Y-m-d\\TH:i') }}" required
+                           class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="end_date">
+                    <label class="block text-sm font-semibold text-orange-700 mb-2" for="end_date">
                         End Date
                     </label>
-                    <input type="datetime-local" id="end_date" name="end_date" value="{{ event.getEndDate()|date('Y-m-d\TH:i') }}" required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="datetime-local" id="end_date" name="end_date" value="{{ event.getEndDate()|date('Y-m-d\\TH:i') }}" required
+                           class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" for="location">
+                <label class="block text-sm font-semibold text-orange-700 mb-2" for="location">
                     Location
                 </label>
                 <input type="text" id="location" name="location" value="{{ event.getLocation() }}" required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                       class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="price">
+                    <label class="block text-sm font-semibold text-orange-700 mb-2" for="price">
                         Price
                     </label>
                     <input type="number" id="price" name="price" step="0.01" value="{{ event.getPrice() }}" required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="max_capacity">
+                    <label class="block text-sm font-semibold text-orange-700 mb-2" for="max_capacity">
                         Maximum Capacity
                     </label>
                     <input type="number" id="max_capacity" name="max_capacity" value="{{ event.getMaxCapacity() }}" required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" for="image">
-                    Promotional Image (Leave empty to keep existing)
+                <label class="block text-sm font-semibold text-orange-700 mb-2" for="image">
+                    Promotional Image
+                    <span class="text-orange-400 text-xs">(Leave empty to keep existing)</span>
                 </label>
                 <input type="file" id="image" name="image" accept="image/*"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                       class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" for="category_id">
+                <label class="block text-sm font-semibold text-orange-700 mb-2" for="category_id">
                     Category
                 </label>
                 <select id="category_id" name="category_id" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-200">
                     <option value="1" {% if event.getCategoryId() == 1 %}selected{% endif %}>Category 1</option>
                     <option value="2" {% if event.getCategoryId() == 2 %}selected{% endif %}>Category 2</option>
                     <option value="3" {% if event.getCategoryId() == 3 %}selected{% endif %}>Category 3</option>
@@ -92,12 +93,102 @@
 
             <input type="hidden" name="organizer_id" value="{{ event.getOrganizerId() }}">
 
-            <div class="mt-6">
+            <div class="mt-8">
                 <button type="submit"
-                        class="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        class="w-full bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                     Update Event
                 </button>
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector("#editEvent");
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            const inputs = form.querySelectorAll('input, textarea, select');
+
+            const stringFields = ['title', 'description', 'location'];
+            const numberFields = ['price', 'max_capacity'];
+            const dateFields = ['start_date', 'end_date'];
+
+            let isValid = true;
+
+            const validateField = (input) => {
+                let errorMessage = '';
+                const errorElement = input.nextElementSibling;
+
+                if (input.type === 'file') return true; // Skip file input validation
+
+                if (!input.value && input.required) {
+                    errorMessage = 'This field is required.';
+                } else if (stringFields.includes(input.name)) {
+                    if (input.value.trim().length < 8) {
+                        errorMessage = 'This field must be at least 8 characters long.';
+                    }
+                } else if (numberFields.includes(input.name)) {
+                    if (input.value <= 0) {
+                        errorMessage = 'This field must be a positive number.';
+                    }
+                } else if (dateFields.includes(input.name)) {
+                    if (new Date(input.value) < new Date()) {
+                        errorMessage = 'The date must be in the future.';
+                    }
+                }
+
+                if (errorMessage) {
+                    input.classList.add('border-red-500');
+                    input.classList.remove('border-orange-200');
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.remove('hidden');
+                    return false;
+                } else {
+                    input.classList.remove('border-red-500');
+                    input.classList.add('border-orange-200');
+                    errorElement.textContent = '';
+                    errorElement.classList.add('hidden');
+                    return true;
+                }
+            };
+
+            // Add error elements and set up validation
+            inputs.forEach(input => {
+                if (input.type === 'hidden') return;
+
+                const errorElement = document.createElement('p');
+                errorElement.classList.add('text-red-500', 'mt-1', 'text-sm', 'hidden');
+                input.insertAdjacentElement('afterend', errorElement);
+
+                input.addEventListener('input', () => {
+                    validateField(input);
+
+                    // Check all fields and update submit button state
+                    const allValid = Array.from(inputs).every(input =>
+                        input.type === 'hidden' || input.type === 'file' || validateField(input)
+                    );
+                    submitButton.disabled = !allValid;
+                });
+
+                // Initial validation
+                validateField(input);
+            });
+
+            form.addEventListener('submit', (e) => {
+                const allValid = Array.from(inputs).every(input =>
+                    input.type === 'hidden' || input.type === 'file' || validateField(input)
+                );
+
+                if (!allValid) {
+                    e.preventDefault();
+                    const firstInvalid = Array.from(inputs).find(input =>
+                        !validateField(input) && input.type !== 'hidden' && input.type !== 'file'
+                    );
+                    if (firstInvalid) firstInvalid.focus();
+                }
+            });
+        });
+    </script>
 {% endblock %}

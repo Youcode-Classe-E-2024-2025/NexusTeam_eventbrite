@@ -26,12 +26,14 @@ class Tag
         return $this->name;
     }
 
-    public function setName(string $name): void {
+    public function setName(string $name): self {
         $this->name = $name;
+        return $this;
     }
 
-    public function setId(int $id): void {
+    public function setId(int $id): self {
         $this->id = $id;
+        return $this;
     }
 
     public function save(): bool {
@@ -41,7 +43,17 @@ class Tag
 
     public function getAll(): array {
         $sql = "SELECT * FROM tags";
-        return $this->db->fetchAll($sql) ?? [];
+
+        $result = $this->db->fetchAll($sql);
+
+        $tags = [];
+
+        foreach ($result as $tag){
+            $new = new Tag($tag['id'], $tag['name']);
+            $tags[] = $new;
+        }
+
+        return $tags;
     }
 
     public function getById(): Tag {
