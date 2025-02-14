@@ -1,6 +1,7 @@
 {# views/partials/message.twig #}
 {% if message is defined %}
- <div class="mb-4 p-4 rounded-lg text-white text-center bg-gray-600">
-  {{ message }}
- </div>
+    <div id="toast-message"
+         class="mb-4 p-4 rounded-lg font-bold text-white text-center bg-orange-400/80 backdrop-blur-lg border border-orange-400 mx-auto mt-4">
+        {{ message }}
+    </div>
 {% endif %}

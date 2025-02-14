@@ -17,7 +17,7 @@ CREATE TYPE ticket_status AS ENUM ('active', 'canceled');
 CREATE TYPE payment_method AS ENUM ('PayPal', 'Stripe');
 CREATE TYPE payment_status AS ENUM ('successful', 'failed', 'refunded');
 CREATE TYPE report_status AS ENUM ('pending', 'processed');
-
+CREATE TYPE user_status AS ENUM ('active', 'banned');
 -------------------------------------------------
 -- Users Table
 -------------------------------------------------
@@ -26,6 +26,7 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    status user_status NOT NULL DEFAULT 'active';
     role user_role NOT NULL DEFAULT 'participant',
     avatar VARCHAR(255),
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -101,19 +102,19 @@ CREATE TABLE payments (
 -------------------------------------------------
 -- Promo Codes Table and Relationship with Tickets
 -------------------------------------------------
-CREATE TABLE promo_codes (
-    id SERIAL PRIMARY KEY,
-    code VARCHAR(50) UNIQUE NOT NULL,
-    discount DECIMAL(10,2) NOT NULL CHECK (discount >= 0 AND discount <= 100),
-    expiration TIMESTAMP NOT NULL,
-    event_id INTEGER REFERENCES events(id) ON DELETE SET NULL
-);
+    CREATE TABLE promo_codes (
+        id SERIAL PRIMARY KEY,
+        code VARCHAR(50) UNIQUE NOT NULL,
+        discount DECIMAL(10,2) NOT NULL CHECK (discount >= 0 AND discount <= 100),
+        expiration TIMESTAMP NOT NULL,
+        event_id INTEGER REFERENCES events(id) ON DELETE SET NULL
+    );
 
-CREATE TABLE tickets_promo (
-    ticket_id INTEGER REFERENCES tickets(id) ON DELETE CASCADE,
-    promo_code_id INTEGER REFERENCES promo_codes(id) ON DELETE CASCADE,
-    PRIMARY KEY (ticket_id, promo_code_id)
-);
+    CREATE TABLE tickets_promo (
+        ticket_id INTEGER REFERENCES tickets(id) ON DELETE CASCADE,
+        promo_code_id INTEGER REFERENCES promo_codes(id) ON DELETE CASCADE,
+        PRIMARY KEY (ticket_id, promo_code_id)
+    );
 
 -------------------------------------------------
 -- Statistics Views
