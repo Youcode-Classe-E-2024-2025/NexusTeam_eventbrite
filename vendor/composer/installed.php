@@ -3,7 +3,7 @@
         'name' => 'kyojin/eventbrite',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fbfa0e418305a97b5617e1f2288385e7b1f834c1',
+        'reference' => '6c5fc578bbd0f1d7a8ad59494d49affcd0e80e74',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -103,7 +103,7 @@
         'kyojin/eventbrite' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fbfa0e418305a97b5617e1f2288385e7b1f834c1',
+            'reference' => '6c5fc578bbd0f1d7a8ad59494d49affcd0e80e74',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
