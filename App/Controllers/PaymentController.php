@@ -81,25 +81,59 @@ class PaymentController {
         $options = new Options();
         $options->set('defaultFont', 'Arial');
         $options->set('isHtml5ParserEnabled', true);
-        $options->set('isRemoteEnabled', true);
+        $options->set('isRemoteEnabled', true); // Activer le support des images distantes
         $dompdf = new Dompdf($options);
 
+        $imagePath = __DIR__ . "/../../Assets/image/image.png"; // Chemin absolu
+        $randomName = "Client_" . uniqid();
+        if (file_exists($imagePath)) {
+            $imageData = base64_encode(file_get_contents($imagePath));
+            $imageSrc = 'data:image/png;base64,' . $imageData; // Encodage Base64
+        } else {
+            die("Erreur : L'image n'existe pas.");
+        }
+
+
         $html = "
-            <h1>Confirmation de Réservation</h1>
-            <p><strong>Réservation ID:</strong> $reservationId</p>
-            <p><strong>Montant Payé:</strong> " . number_format($price, 2) . " USD</p>
+        <style>
+            h1 { color: #2c3e50; text-align: center; }
+            p { font-size: 14px; }
+            .box {
+                border: 2px solid #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                background-color: #f8f9fa;
+                text-align: center;
+            }
+            .highlight {
+                color: #e74c3c;
+                font-weight: bold;
+            }
+            img {
+                width: 150px;
+                height: auto;
+                margin-top: 10px;
+            }
+        </style>
+
+        <h1>Confirmation de Réservation</h1>
+        <div class='box'>
+            <p><strong>Réservation ID :</strong> <span class='highlight'>$reservationId</span></p>
+            <p><strong>Nom du Client :</strong> $randomName</p> <!-- Nom généré automatiquement -->            <p><strong>Montant Payé :</strong> <span class='highlight'>" . number_format($price, 2) . " USD</span></p>
+            <img src='$imageSrc' alt='QR Code'>
             <p>Merci pour votre réservation !</p>
+        </div>
         ";
 
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
 
-        // Envoie le PDF au navigateur
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="Confirmation_Reservation.pdf"');
         echo $dompdf->output();
         exit();
+
     }
 }
 
