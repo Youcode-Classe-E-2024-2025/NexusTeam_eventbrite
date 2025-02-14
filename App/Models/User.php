@@ -69,12 +69,14 @@ class User {
     }
 
     // Récupérer un utilisateur par ID
-    public function getUserById($id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id_user = :id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getUserById($id)
+    {
+        $query = "SELECT * FROM users WHERE id = :id"; // Utilise 'id' au lieu de 'id_user'
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
-
     // Créer un nouvel utilisateur dans la base de données
     public function createUser(): bool {
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, role, avatar) VALUES (:full_name, :email, :password, :role, :avatar)");
@@ -85,5 +87,14 @@ class User {
             'role' => $this->role,
             'avatar' => $this->avatar
         ]);
+    }
+
+    public function updateProfileImage($userId, $imageName)
+    {
+        $query = "UPDATE users SET avatar = :avatar WHERE id = :id"; // Utiliser 'avatar' au lieu de 'profile_image'
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':avatar', $imageName, \PDO::PARAM_STR);
+        $stmt->bindParam(':id', $userId, \PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }
