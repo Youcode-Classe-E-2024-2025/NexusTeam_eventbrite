@@ -134,16 +134,16 @@
             <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">You Might Also Like</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for relatedEvent in [
-                    {title: 'Tech Conference 2023', date: 'Sep 15, 2023', image: '/Assets/images/event1.jpg'},
-                    {title: 'Digital Marketing Summit', date: 'Oct 5, 2023', image: '/Assets/images/event2.jpg'},
-                    {title: 'AI & Machine Learning Expo', date: 'Nov 20, 2023', image: '/Assets/images/event3.jpg'}
+                    {title: 'Tech Conference 2023', date: 'Sep 15, 2023', image: '/Assets/default_event.webp'},
+                    {title: 'Digital Marketing Summit', date: 'Oct 5, 2023', image: '/Assets/default_event.webp'},
+                    {title: 'AI & Machine Learning Expo', date: 'Nov 20, 2023', image: '/Assets/default_event.webp'}
                 ] %}
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
                         <img src="{{ relatedEvent.image }}" alt="{{ relatedEvent.title }}" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ relatedEvent.title }}</h3>
                             <p class="text-gray-600">{{ relatedEvent.date }}</p>
-                            <a href="#" class="mt-4 inline-block px-6 py-2 bg-orange-500 text-white rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors duration-300">
+                            <a href="/event" class="mt-4 inline-block px-6 py-2 bg-orange-500 text-white rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors duration-300">
                                 Learn More
                             </a>
                         </div>
