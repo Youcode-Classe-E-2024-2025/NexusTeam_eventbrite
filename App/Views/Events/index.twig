@@ -1,136 +1,122 @@
 {% extends "base.twig" %}
 
-{% block title %}Discover Amazing Events{% endblock %}
+{% block title %}Discover Extraordinary Events{% endblock %}
 
 {% block content %}
-    {# Enhanced Hero Section with Gradient Background #}
+    {# Enhanced Hero Section with Dynamic Background #}
     <div class="relative overflow-hidden bg-gradient-to-r from-purple-50 via-orange-50 to-pink-50">
         <div class="absolute inset-0 bg-[url('/Assets/noise.png')] mix-blend-overlay opacity-10"></div>
-        <div class="container mx-auto px-4 py-24">
+        <div class="absolute inset-0 bg-[url('/Assets/pattern.svg')] bg-repeat opacity-5"></div>
+        <div class="container mx-auto px-4 py-24 sm:py-32 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-6xl md:text-7xl font-black text-gray-900 mb-8 leading-tight tracking-tighter animate-fade-in">
+                <h1 class="text-5xl sm:text-6xl md:text-7xl font-black text-gray-900 mb-8 leading-tight tracking-tighter animate-fade-in">
                     Discover
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-orange-500 to-pink-600 animate-gradient-x inline-block">
-                        Amazing
+                        Extraordinary
                     </span>
                     Events
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-600 mb-12 font-light animate-fade-in-up leading-relaxed">
-                    Find and join extraordinary experiences that match your interests
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-12 font-light animate-fade-in-up leading-relaxed max-w-3xl mx-auto">
+                    Uncover unique experiences that resonate with your passions and create lasting memories
                 </p>
 
-                {# Enhanced Search with Glassmorphism #}
+                {# Enhanced Search with Glassmorphism and Animation #}
                 <div class="relative max-w-3xl mx-auto animate-fade-in-up delay-200">
-                    <div class="backdrop-blur-xl bg-white/80 p-3 rounded-2xl shadow-2xl border border-white/20">
+                    <div class="backdrop-blur-xl bg-white/80 p-3 rounded-2xl shadow-2xl border border-white/20 transition-all duration-300 hover:shadow-purple-500/10 hover:border-purple-500/20">
                         <input
                                 id="searchEvents"
                                 type="text"
                                 name="query"
-                                placeholder="Search events..."
-                                class="w-full px-8 py-5 text-lg text-gray-700 bg-white/90 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500/50 pr-14 placeholder-gray-400"
+                                placeholder="Search for events, categories, or locations..."
+                                class="w-full px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg text-gray-700 bg-white/90 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500/50 pr-14 placeholder-gray-400 transition-all duration-300"
                         >
-                        <div class="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button class="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
     </div>
 
-    <div class="container mx-auto px-4 py-20">
-        <div id="eventContainer" class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3">
+    {# Event Grid Section #}
+    <div class="container mx-auto px-4 py-16 sm:py-24">
+        <div id="eventContainer" class="grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
             {% if events is empty %}
-                <div class="col-span-full min-h-[500px] flex flex-col items-center justify-center p-16 bg-white rounded-[2rem] shadow-sm border border-gray-100">
+                <div class="col-span-full min-h-[400px] flex flex-col items-center justify-center p-8 sm:p-16 bg-white rounded-3xl shadow-sm border border-gray-100">
                     <span class="text-6xl text-gray-300 mb-8 animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 sm:w-24 sm:h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 2h12a2 2 0 012 2v16a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z M8 7h8 M8 11h8 M8 15h4"/>
                         </svg>
                     </span>
                     <p class="text-2xl text-gray-600 text-center font-medium mb-3">No events found</p>
-                    <p class="text-gray-500 text-lg text-center">Check back later for upcoming events!</p>
+                    <p class="text-gray-500 text-lg text-center">Check back later for exciting upcoming events!</p>
                 </div>
             {% endif %}
 
             {% for event in events %}
-                <article class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50">
+                <article class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 flex flex-col">
                     {# Image Container with Enhanced Overlay #}
                     <div class="relative aspect-[4/3] overflow-hidden">
                         <img
-                                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 filter group-hover:brightness-105"
                                 src="{{ event.imageUrl }}"
                                 alt="{{ event.getTitle() }}"
+                                loading="lazy"
                         >
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent opacity-70 group-hover:opacity-60 transition-opacity duration-300"></div>
 
                         {# Enhanced Category Badge #}
-                        <div class="absolute top-6 left-6 px-4 py-2 rounded-full text-sm font-semibold bg-purple-500 text-white shadow-lg backdrop-blur-md bg-opacity-90">
-                            <span class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                        <div class="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-purple-500 text-white shadow-lg backdrop-blur-md bg-opacity-90 group-hover:bg-purple-600 transition-all duration-300">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                                 {{ event.getCategory().getName() }}
                             </span>
                         </div>
 
                         {# Enhanced Price Badge #}
-                        <div class="absolute top-6 right-6 px-4 py-2 bg-white/95 backdrop-blur-md text-gray-900 text-sm font-bold rounded-full shadow-lg">
+                        <div class="absolute top-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur-md text-gray-900 text-xs sm:text-sm font-bold rounded-full shadow-lg group-hover:shadow-xl transition-all duration-300">
                             {{ event.getPrice() > 0 ? event.getPrice()|number_format(2) ~ ' USD' : 'Free' }}
                         </div>
                     </div>
 
                     {# Enhanced Content Section #}
-                    <div class="p-8">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4 line-clamp-2 group-hover:text-purple-600 transition-colors leading-tight">
+                    <div class="p-6 sm:p-8 flex-grow flex flex-col">
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors leading-tight">
                             {{ event.getTitle() }}
                         </h2>
 
-                        <p class="text-gray-600 mb-8 line-clamp-2 text-base leading-relaxed">
+                        <p class="text-gray-600 mb-6 line-clamp-2 text-sm sm:text-base leading-relaxed">
                             {{ event.getDescription() }}
                         </p>
 
                         {# Event Details with Enhanced Icons #}
-                        <div class="space-y-5 mb-8">
-                            {# Location #}
-                            <div class="flex items-center text-gray-600 group/item hover:text-gray-900 transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center mr-4 group-hover/item:bg-purple-100 transition-colors">
-                                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    </svg>
+                        <div class="space-y-4 mb-6 mt-auto">
+                            {% for detail in [
+                                {icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', label: event.getLocation(), bg: 'bg-purple-50', color: 'text-purple-600'},
+                                {icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', label: event.getStartDate()|date('M d, Y') ~ ' - ' ~ event.getEndDate()|date('M d, Y'), bg: 'bg-orange-50', color: 'text-orange-600'},
+                                {icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', label: event.getMaxCapacity() ~ ' spots available', bg: 'bg-pink-50', color: 'text-pink-600'}
+                            ] %}
+                                <div class="flex items-center text-gray-600 group/item hover:text-gray-900 transition-colors">
+                                    <div class="w-8 h-8 rounded-full {{ detail.bg }} flex items-center justify-center mr-3 group-hover/item:{{ detail.bg|replace({'50': '100'}) }} transition-colors group-hover/item:scale-110 duration-300">
+                                        <svg class="w-4 h-4 {{ detail.color }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="{{ detail.icon }}"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm sm:text-base truncate group-hover/item:{{ detail.color }} transition-colors duration-300">{{ detail.label }}</span>
                                 </div>
-                                <span class="text-base truncate">{{ event.getLocation() }}</span>
-                            </div>
-
-                            {# Date #}
-                            <div class="flex items-center text-gray-600 group/item hover:text-gray-900 transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mr-4 group-hover/item:bg-orange-100 transition-colors">
-                                    <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                    </svg>
-                                </div>
-                                <span class="text-base">
-                                    {{ event.getStartDate()|date('M d, Y') }} - {{ event.getEndDate()|date('M d, Y') }}
-                                </span>
-                            </div>
-
-                            {# Capacity #}
-                            <div class="flex items-center text-gray-600 group/item hover:text-gray-900 transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center mr-4 group-hover/item:bg-pink-100 transition-colors">
-                                    <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                    </svg>
-                                </div>
-                                <span class="text-base">{{ event.getMaxCapacity() }} spots available</span>
-                            </div>
+                            {% endfor %}
                         </div>
 
                         {# Enhanced Tags Section #}
-                        <div class="flex flex-wrap gap-2 mb-8">
+                        <div class="flex flex-wrap gap-2 mb-6">
                             {% if tags[event.getId()] is defined %}
                                 {% for tag in tags[event.getId()] %}
-                                    <span class="px-4 py-2 text-sm font-medium bg-purple-50 text-purple-700 rounded-xl border border-purple-100 hover:bg-purple-100 transition-colors">
-                                        {{ tag.getName() }}
+                                    <span class="px-3 py-1 text-xs sm:text-sm font-medium bg-purple-50 text-purple-700 rounded-full border border-purple-100 hover:bg-purple-100 transition-colors">
+                                        #{{ tag.getName() }}
                                     </span>
                                 {% endfor %}
                             {% endif %}
@@ -139,15 +125,44 @@
                         {# Enhanced Action Button #}
                         <a
                                 href="/event/{{ event.getId() }}"
-                                class="relative block w-full px-6 py-4 text-center text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl transition-all duration-300 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden group"
+                                class="relative block w-full px-6 py-3 text-center text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl transition-all duration-300 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden group"
                         >
-                            <span class="relative z-10 font-medium text-lg">View Details</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <span class="relative z-10 font-medium text-sm sm:text-base">View Details</span>
+                            <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                         </a>
                     </div>
                 </article>
             {% endfor %}
         </div>
+    </div>
+
+    {# Enhanced Pagination #}
+    <div class="flex justify-center mt-12 mb-16">
+        <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+            {% if pagination.page > 1 %}
+                <a href="/event?p={{ pagination.page - 1 }}" class="relative inline-flex items-center px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors duration-300">
+                    <span class="sr-only">Previous</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            {% endif %}
+
+            {% for i in max(1, pagination.page - 2)..min(pagination.totalPages, pagination.page + 2) %}
+                <a href="/event?p={{ i }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium {% if i == pagination.page %}text-purple-600 bg-purple-50 border-purple-500{% else %}text-gray-700 hover:bg-gray-50{% endif %} transition-colors duration-300">
+                    {{ i }}
+                </a>
+            {% endfor %}
+
+            {% if pagination.page < pagination.totalPages %}
+                <a href="/event?p={{ pagination.page + 1 }}" class="relative inline-flex items-center px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors duration-300">
+                    <span class="sr-only">Next</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            {% endif %}
+        </nav>
     </div>
 {% endblock %}
 

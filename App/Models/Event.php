@@ -189,10 +189,17 @@ class Event
     }
 
 
-    public function getAll(): array
+    public function getAll(int $limit = 6, int $page = 1): array
     {
-        $sql = "SELECT * FROM events";
-        $results = $this->pdo->fetchAll($sql);
+        $offset = ($page - 1) * $limit;
+
+        $sql = "SELECT * FROM events LIMIT :limit OFFSET :offset";
+        $results = $this->pdo->fetchAll($sql, [':limit' => $limit, ':offset' => $offset]);
+
+        $totalCount = 'SELECT COUNT(*) FROM events ';
+        $totalCount = $this->pdo->fetch($totalCount)['count'];
+
+        $pageCount = (int)ceil($totalCount / $limit);
 
         $events = [];
 
@@ -208,7 +215,13 @@ class Event
             $events[] = $event;
         }
 
-        return $events;
+        return [
+            'events' => $events,
+            'pagination' => [
+                'page' => $page,
+                'totalPages' => $pageCount,
+            ]
+        ];
     }
 
     public function getById(): self
