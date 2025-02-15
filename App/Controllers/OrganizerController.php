@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-use App\core\views;
+use App\Core\Views;
 use App\Models\Organizer;
 use App\Core\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

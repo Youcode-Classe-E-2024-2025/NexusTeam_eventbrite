@@ -121,7 +121,7 @@
                 let errorMessage = '';
                 const errorElement = input.nextElementSibling;
 
-                if (input.type === 'file') return true; // Skip file input validation
+                if (input.type === 'file') return true;
 
                 if (!input.value && input.required) {
                     errorMessage = 'This field is required.';
@@ -130,7 +130,7 @@
                         errorMessage = 'This field must be at least 8 characters long.';
                     }
                 } else if (numberFields.includes(input.name)) {
-                    if (input.value <= 0) {
+                    if (input.value <= -1) {
                         errorMessage = 'This field must be a positive number.';
                     }
                 } else if (dateFields.includes(input.name)) {
@@ -154,7 +154,6 @@
                 }
             };
 
-            // Add error elements and set up validation
             inputs.forEach(input => {
                 if (input.type === 'hidden') return;
 
@@ -165,14 +164,12 @@
                 input.addEventListener('input', () => {
                     validateField(input);
 
-                    // Check all fields and update submit button state
                     const allValid = Array.from(inputs).every(input =>
                         input.type === 'hidden' || input.type === 'file' || validateField(input)
                     );
                     submitButton.disabled = !allValid;
                 });
 
-                // Initial validation
                 validateField(input);
             });
 

@@ -57,6 +57,13 @@ $router->add("POST", '/category/create', 'CategoryController@store');
 $router->add("POST", '/category/update/{id}', 'CategoryController@update');
 $router->add("POST", '/category/delete/{id}', 'CategoryController@destroy');
 
+//PromoCode routes
+$router->add("GET", '/organizer/PromoCode', 'PromoCodeController@index');
+$router->add("GET", '/organizer/PromoCode/update/{id}', 'PromoCodeController@show');
+$router->add("POST", '/organizer/PromoCode/create', 'PromoCodeController@store');
+$router->add("POST", '/organizer/PromoCode/update/{id}', 'PromoCodeController@update');
+$router->add("POST", '/organizer/PromoCode/delete/{id}', 'PromoCodeController@destroy');
+
 //tag routes
 $router->add("GET", '/tags', 'TagController@index');
 $router->add("GET", '/tags/update/{id}', 'TagController@show');

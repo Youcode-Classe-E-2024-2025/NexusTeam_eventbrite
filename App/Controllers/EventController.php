@@ -106,12 +106,11 @@ class EventController
             $upload = new Upload($request->get('files'));
             $upload = $upload->save();
             if (!$upload) {
-                Session::set('message', 'Media not uploaded');
-                Views::redirect('/event/add');
-                return;
+                Session::set('message', 'Media not uploaded, but event added');
+                Views::render('/event/add');
             }
 
-            $event->setPromotionalImage($upload);
+            $event->setPromotionalImage($upload ?? null);
 
             if ($event->create()) {
                 Session::set('message', 'Event created successfully');
