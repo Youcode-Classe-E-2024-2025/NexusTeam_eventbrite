@@ -119,7 +119,7 @@
 
             <div class="p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {% for user in users %}
+                      {% for user in users %}
                     <div class="group">
                         <div class="bg-slate-950/50 rounded-2xl p-5 backdrop-blur transition-all duration-300 hover:ring-1 hover:ring-blue-400/50 hover:bg-slate-900/50">
                             <div class="flex items-center justify-between">
@@ -135,10 +135,16 @@
                             </div>
 
                             <div class="flex items-center justify-between mt-4">
-                                <span class="inline-flex items-center px-3 py-1 text-sm rounded-lg {% if user.role == 'admin' %}bg-purple-500/10 text-purple-400{% else %}bg-blue-500/10 text-blue-400{% endif %}">
-                                    <i class="fas {% if user.role == 'admin' %}fa-user-shield{% else %}fa-user{% endif %} mr-2"></i>
-                                    {{ user.role }}
-                                </span>
+                                <form action="/user/update-role/{{user.id}}" method="POST" class="flex-1 mr-2">
+                                    <select name="role" 
+                                            onchange="this.form.submit()" 
+                                            class="w-full bg-slate-800 text-slate-200 rounded-lg px-3 py-1 text-sm border border-slate-700 focus:ring-2 focus:ring-blue-400/50 focus:border-transparent transition-all">
+                                        {# <option>Role</option>#}
+									    <option value="participent" {% if user.role == 'participent' %}selected{% endif %}>participent</option>
+                                        <option value="organizer" {% if user.role == 'organizer' %}selected{% endif %}>organizer</option>
+                                        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+                                    </select>
+                                </form>
                                 
                                 <span class="inline-flex items-center px-3 py-1 text-sm rounded-lg {% if user.status == 'active' %}bg-emerald-500/10 text-emerald-400{% else %}bg-red-500/10 text-red-400{% endif %}">
                                     <i class="fas {% if user.status == 'active' %}fa-check-circle{% else %}fa-ban{% endif %} mr-2"></i>
@@ -177,4 +183,7 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
+

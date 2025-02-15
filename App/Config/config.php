@@ -18,6 +18,10 @@ CREATE TYPE payment_method AS ENUM ('PayPal', 'Stripe');
 CREATE TYPE payment_status AS ENUM ('successful', 'failed', 'refunded');
 CREATE TYPE report_status AS ENUM ('pending', 'processed');
 CREATE TYPE user_status AS ENUM ('active', 'banned');
+CREATE TYPE comment_status AS ENUM ('pending', 'approved', 'rejected');
+CREATE TYPE report_reason AS ENUM ('spam', 'insult', 'harassment', 'other');
+CREATE TYPE moderation_action AS ENUM ('approve', 'reject', 'delete');
+
 -------------------------------------------------
 -- Users Table
 -------------------------------------------------
@@ -164,4 +168,44 @@ CREATE TABLE reports (
     status report_status NOT NULL DEFAULT 'pending',
     admin_id INTEGER REFERENCES users(id) ON DELETE SET NULL
 );
-";
+
+
+
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL, 
+    content TEXT NOT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status comment_status DEFAULT 'pending', 
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Table des signalements
+CREATE TABLE reports (
+    id SERIAL PRIMARY KEY,
+    comment_id INT NOT NULL, -- Le commentaire signalé
+    user_id INT NOT NULL, -- L'utilisateur qui a signalé
+    reason report_reason NOT NULL, -- Motif du signalement
+    description TEXT, -- Détails supplémentaires
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE moderation (
+    id SERIAL PRIMARY KEY,
+    comment_id INT NOT NULL, 
+    moderator_id INT NOT NULL,
+    action moderation_action NOT NULL, 
+    reason TEXT, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (moderator_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+
+
+
