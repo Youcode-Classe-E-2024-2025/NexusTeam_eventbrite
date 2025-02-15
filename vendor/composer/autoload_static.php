@@ -16,10 +16,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        '89efb1254ef2d1c5d80096acd12c4098' => __DIR__ . '/..' . '/twig/twig/src/Resources/core.php',
-        'ffecb95d45175fd40f75be8a23b34f90' => __DIR__ . '/..' . '/twig/twig/src/Resources/debug.php',
-        'c7baa00073ee9c61edf148c51917cfb4' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
-        'f844ccf1d25df8663951193c3fc307c8' => __DIR__ . '/..' . '/twig/twig/src/Resources/string_loader.php',
         'cea98799a362ab48d08b30c6896f078a' => __DIR__ . '/../..' . '/App/Config/config.php',
         '7166b6cfea6cf44f740814aed3104b73' => __DIR__ . '/../..' . '/App/Helpers/dd.php',
     );
@@ -28,10 +24,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'p' => 
         array (
             'phpseclib3\\' => 11,
-        ),
-        'Z' => 
-        array (
-            'ZipStream\\' => 10,
         ),
         'T' => 
         array (
@@ -45,19 +37,16 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         ),
         'P' => 
         array (
-            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
             'PhpOption\\' => 10,
-            'PhpOffice\\PhpSpreadsheet\\' => 25,
             'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
-            'Matrix\\' => 7,
         ),
         'G' => 
         array (
@@ -78,11 +67,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         array (
             'Dotenv\\' => 7,
         ),
-        'C' => 
-        array (
-            'Composer\\Pcre\\' => 14,
-            'Complex\\' => 8,
-        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -93,10 +77,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
-        ),
-        'ZipStream\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
         ),
         'Twig\\' => 
         array (
@@ -113,10 +93,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-        ),
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -139,10 +115,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'PhpOffice\\PhpSpreadsheet\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
-        ),
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
@@ -150,10 +122,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
-        ),
-        'Matrix\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -194,14 +162,6 @@ class ComposerStaticInit3352c1753548af5e62b692b7d149ca72
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
-        ),
-        'Composer\\Pcre\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/pcre/src',
-        ),
-        'Complex\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
         'App\\' => 
         array (

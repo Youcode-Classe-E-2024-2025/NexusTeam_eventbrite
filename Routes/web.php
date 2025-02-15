@@ -21,6 +21,14 @@ $router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant", "Organize
 $router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant/csv", "OrganizerController@csv");
 $router->add("GET", "/organizer/MyEvents/eventStats/{id}/participant/excel", "OrganizerController@excel");
 
+//participant routes
+$router->add("GET", "/participant", "ParticipantController@index");
+
+//profile routes
+$router->add("GET", "/profile", "ProfileController@index");
+$router->add("POST", "/avatar", "ProfileController@updateProfileImage");
+
+
 //auth routes
 $router->add("GET", "/signup", "SignUpController@signUp");
 $router->add("GET", "/login", "LoginController@login");
@@ -57,6 +65,20 @@ $router->add("POST", '/tags/update/{id}', 'TagController@update');
 $router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
 
 
+// Serving upload files
+$router->add("GET", "/uploads/{filename}", function ($filename) {
+    $filePath = __DIR__ . "/../app/uploads/" . $filename;
+
+    if (file_exists($filePath)) {
+        header("Content-Type: " . mime_content_type($filePath));
+        readfile($filePath);
+        exit;
+    } else {
+        http_response_code(404);
+        echo "Fichier introuvable : " . $filePath; // Debug
+        exit;
+    }
+});
 $router->add("GET", "/dashboard/admin", "DashboardUserController@index");
 $router->add("POST", "/user/delete/{id}", "DashboardUserController@DeleteUser");
 $router->add("Post","/user/ban/{id}", "DashboardUserController@BanUser");

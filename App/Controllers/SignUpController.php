@@ -37,6 +37,7 @@ class SignUpController
 
     public function register()
     {
+       
         try {
             // Démarrer la session si ce n'est pas déjà fait
             if (session_status() === PHP_SESSION_NONE) {
@@ -82,23 +83,27 @@ class SignUpController
 
             // Créer l'utilisateur dans la base de données
             if ($user->createUser()) {
-                $_SESSION['user_id'] = $user->getId();
-                $_SESSION['user_email'] = $user->getEmail();
-                $_SESSION['user_role'] = $user->getRole();
+                $_SESSION['user'] = [
+                    'id' => $user->getId(),
+                    'fullName' => $user->getFullName(),
+                    'email' => $user->getEmail(),
+                    'role' => $user->getRole(),
+                    'avatar' => $user->getAvatar()
+                ];
 
                 echo "Inscription réussie. Vous êtes connecté.";
                 // Rediriger selon le rôle
-                switch ($_SESSION['user_role']) {
+                switch ($_SESSION['user']['role']) {
                     case 'admin':
                         header("Location: /admin-dashboard");
                         break;
-                    case 'organisateur':
-                        header("Location: /organisateur-dashboard");
+                    case 'organizer':
+                        header("Location: /login");
                         break;
                     case 'participant':
                     default:
-                        header("Location: /participant-dashboard");
-                        break;
+                    header("Location: /login");
+                    break;
                 }
                 exit;
 
