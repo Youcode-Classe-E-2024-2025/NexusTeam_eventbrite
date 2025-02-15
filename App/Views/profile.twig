@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gradient-to-b from-gray-900 to-gray-700 text-white min-h-screen flex items-center justify-center">
+    <div class="bg-black-100">
+        <div class="container mx-auto py-8">
+            <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
+                <div class="col-span-4 sm:col-span-3">
+                    <div class="bg-gray-800 shadow rounded-lg p-6">
+                        <div class="flex flex-col items-center">
+                            <a id="avatar" class="text-gray-300 hover:text-white">
+                                {% if user.avatar %}
+                                    <img src="{{ 'app/uploads/' ~ user.avatar }}" alt="Avatar" class="w-24 h-24 rounded-full">
+                                {% else %}
+                                    <!-- Icône de profil si l'utilisateur n'a pas d'avatar -->
+                                    <i class="fa fa-user-circle text-2xl"></i>
+                                {% endif %}
+                            </a>
+                            <h1 class="text-xl font-bold text-white">{{ user.name }}</h1>
+                            <p class="text-white">{{ user.role }}</p> <!-- Affichage dynamique du rôle -->
+                        </div>
+                        <hr class="my-6 border-t border-gray-300">
+                    </div>
+                </div>
+                
+                <div class="col-span-4 sm:col-span-9">
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h2 class="text-xl font-bold mb-4 text-black">About Me</h2>
+                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est
+                            vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus non velit egestas
+                            suscipit. Nunc finibus vel ante id euismod. Vestibulum ante ipsum primis in faucibus orci luctus
+                            et ultrices posuere cubilia Curae; Aliquam erat volutpat. Nulla vulputate pharetra tellus, in
+                            luctus risus rhoncus id.
+                        </p>
+                
+                        <h3 class="font-semibold text-center mt-3 -mb-2 text-black">
+                            Find me on
+                        </h3>
+                        <div class="flex justify-center items-center gap-6 my-6">
+                            <!-- Icônes sociales ici -->
+                        </div>
+                
+                        <h2 class="text-xl font-bold mt-6 mb-4 text-black">Booking History</h2>
+                        <div class="mb-6">
+                            {% if user.role == 'participant' %}
+                                {% if events is empty %}
+                                    <p class="text-gray-500">You have no bookings yet.</p>
+                                {% else %}
+                                    <ul class="space-y-4">
+                                        {% for event in events %}
+                                            <li class="p-4 border rounded-lg shadow-sm bg-white">
+                                                <h3 class="text-lg font-semibold text-black">{{ event.title }}</h3>
+                                                {% if event.promotional_image %}
+                                                    <img src="{{ event.promotional_image }}" alt="Event Image" class="w-full h-auto mb-4 rounded-lg">
+                                                {% else %}
+                                                    <img src="/path/to/default-image.jpg" alt="Default Event Image" class="w-full h-auto mb-4 rounded-lg">
+                                                {% endif %}
+                                                <p class="text-gray-600"><i class="fas fa-calendar-day text-blue-500"></i> Date: {{ event.start_date }}</p>
+                                                <p class="text-gray-600"><i class="fas fa-map-marker-alt text-green-500"></i> Location: {{ event.location }}</p>
+                                                <p class="text-gray-600"><i class="fas fa-dollar-sign text-orange-500"></i> Price: ${{ event.price }}</p>
+                                                <p class="text-gray-600"><i class="fas fa-ticket-alt text-yellow-500"></i> Ticket Type: {{ event.ticket_type }}</p>
+                                                <p class="text-gray-500 text-sm">Status: 
+                                                    <span class="{% if event.status == 'active' %}text-green-500{% else %}text-red-500{% endif %}">
+                                                        {{ event.status }}
+                                                    </span>
+                                                </p>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% elseif user.role == 'organizer' %}
+                                <p class="text-gray-500">You are an organizer. Manage your events here.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const avatar = document.getElementById("avatar");
+        const modal = document.createElement("div");
+        
+        // Structure du modal
+        modal.innerHTML = `
+            <div id="avatar-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+                    <h2 class="text-white text-lg font-bold mb-4">Update avatar</h2>
+                    <form action="/avatar" method="POST" enctype="multipart/form-data"> 
+                        <div class="mb-4">
+                            <label for="profile-image" class="block text-gray-400 font-medium mb-2">Choose an image</label>
+                            <input type="file" name="profile-image" id="profile-image"
+                                class="w-full py-2 px-3 border border-gray-600 bg-gray-900 text-gray-100 rounded-lg"
+                                accept="image/*" required>
+                        </div>
+                        <div class="flex justify-end space-x-2">
+                            <button type="button" id="close-modal"
+                                class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
+                                Close
+                            </button>
+                            <button type="submit"
+                                class="bg-blue-900 hover:bg-blue-800 text-white py-2 px-4 rounded-lg">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        const avatarModal = document.getElementById("avatar-modal");
+        const closeModal = document.getElementById("close-modal");
+
+        // Afficher le modal au clic sur l'avatar
+        avatar.addEventListener("click", function (event) {
+            event.stopPropagation(); // Empêche la propagation pour éviter la fermeture immédiate
+            avatarModal.classList.remove("hidden");
+        });
+
+        // Cacher le modal au clic en dehors
+        document.addEventListener("click", function (event) {
+            if (!avatarModal.contains(event.target) && event.target !== avatar) {
+                avatarModal.classList.add("hidden");
+            }
+        });
+
+        // Cacher le modal au clic sur "Close"
+        closeModal.addEventListener("click", function () {
+            avatarModal.classList.add("hidden");
+        });
+    });
+</script>
+
+</html>

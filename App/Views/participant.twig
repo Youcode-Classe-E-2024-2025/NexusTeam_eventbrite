@@ -1,0 +1,22 @@
+{# Views/home.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Eventbrite{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+
+<!-- Section Événements populaires -->
+<section class="container mx-auto py-12">
+    <h2 class="text-2xl font-bold mb-6 text-blue-400">Événements populaires</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <img src="https://source.unsplash.com/400x300/?concert" class="w-full">
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-blue-400">First event</h3>
+                <p class="text-gray-400">Paris - 20 Février</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
