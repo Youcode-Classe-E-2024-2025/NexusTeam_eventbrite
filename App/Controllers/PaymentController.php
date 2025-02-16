@@ -15,15 +15,14 @@ class PaymentController {
     public function pay() {
         session_start();
         
-        if (!isset($_SESSION["reservation_id"]) || !isset($_SESSION["price"])) {
+        if (!isset($_POST["reservation_id"]) || !isset($_POST["price"])) {
             die("Réservation introuvable.");
         }
 
-        $price = $_SESSION["price"];
+        $price = $_POST["price"];
 
         // Charger la configuration
-        $config = require __DIR__ . "/../Config/config.php";
-        Stripe::setApiKey($config["STRIPE_SECRET_KEY"]);
+        Stripe::setApiKey(STRIPE_SECRET_KEY);
 
         try {
             $session = Session::create([
@@ -85,7 +84,7 @@ class PaymentController {
         $dompdf = new Dompdf($options);
 
         $imagePath = __DIR__ . "/../../Assets/image/image.png"; // Chemin absolu
-        $randomName = "Client_" . uniqid();
+        $randomName = "Client_" . uniqid('', true);
         if (file_exists($imagePath)) {
             $imageData = base64_encode(file_get_contents($imagePath));
             $imageSrc = 'data:image/png;base64,' . $imageData; // Encodage Base64
