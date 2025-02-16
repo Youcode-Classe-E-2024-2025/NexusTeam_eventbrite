@@ -1728,6 +1728,9 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
+  .p-9 {
+    padding: calc(var(--spacing) * 9);
+  }
   .p-12 {
     padding: calc(var(--spacing) * 12);
   }
