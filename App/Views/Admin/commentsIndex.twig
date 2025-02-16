@@ -1,239 +1,173 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Comments & Reports Management - Admin Dashboard</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="bg-gray-900">
-        <!-- Sidebar -->
-        <aside class="fixed inset-y-0 left-0 w-64 bg-gray-800 shadow-lg">
-            <div class="flex items-center h-16 px-6 border-b border-gray-700">
-                <h1 class="text-xl font-semibold text-gray-100">
-                    Admin Portal
-                </h1>
-            </div>
+{# Views/Admin/commentsReportsIndex.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Comments & Reports Management{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-slate-950">
+    <!-- Sidebar -->
+    <div class="fixed w-64 h-full bg-slate-900 shadow-lg">
+        <div class="flex items-center justify-center h-20">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                NexusTeam
+            </h1>
+        </div>
+        
+        <nav class="mt-6 px-3">
+            <a href="admin-users.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-users"></i>
+                <span class="ml-3">Users</span>
+            </a>
             
-            <nav class="p-4 space-y-1">
-                <a href="admin-users.html" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md group">
-                    <i class="fas fa-users w-5 h-5"></i>
-                    <span class="ml-3 text-sm">Users</span>
-                </a>
-                
-                <a href="#" class="flex items-center px-4 py-2 text-blue-400 bg-gray-700 rounded-md">
-                    <i class="fas fa-comments w-5 h-5"></i>
-                    <span class="ml-3 text-sm font-medium">Comments & Reports</span>
-                </a>
-                
-                <a href="admin-categories.html" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md group">
-                    <i class="fas fa-th-large w-5 h-5"></i>
-                    <span class="ml-3 text-sm">Categories</span>
-                </a>
-            </nav>
-        </aside>
+            <a href="#" class="flex items-center px-4 py-3 mb-2 text-slate-100 bg-slate-800/50 rounded-lg">
+                <i class="fas fa-comments text-blue-400"></i>
+                <span class="ml-3 font-medium">Comments & Reports</span>
+            </a>
+            
+            <a href="admin-categories.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-th-large"></i>
+                <span class="ml-3">Categories</span>
+            </a>
+        </nav>
+    </div>
 
-        <!-- Main Content -->
-        <main class="ml-64 min-h-screen">
-            <div class="p-8">
-                <!-- Header -->
-                <header class="mb-8">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-100">Comments & Reports</h2>
-                            <p class="mt-1 text-sm text-gray-400">Manage and moderate user interactions</p>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-sm text-gray-300 hover:bg-gray-700">
-                                Export Data
-                            </button>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">
-                                Generate Report
-                            </button>
-                        </div>
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Comments -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-blue-500/10 rounded-xl">
+                        <i class="fas fa-comments text-blue-400 text-2xl"></i>
                     </div>
-                </header>
-
-                <!-- Statistics Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <!-- Total Comments -->
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                        <div class="flex items-center">
-                            <div class="p-3 bg-blue-900 rounded-md">
-                                <i class="fas fa-comments text-blue-400"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-400">Total Comments</p>
-                                <div class="flex items-baseline">
-                                    <h3 class="text-xl font-semibold text-gray-100">3,247</h3>
-                                    <span class="ml-2 text-sm text-green-400">+24%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Active Reports -->
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                        <div class="flex items-center">
-                            <div class="p-3 bg-red-900 rounded-md">
-                                <i class="fas fa-flag text-red-400"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-400">Active Reports</p>
-                                <div class="flex items-baseline">
-                                    <h3 class="text-xl font-semibold text-gray-100">28</h3>
-                                    <span class="ml-2 text-sm text-red-400">8 new</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Resolution Rate -->
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                        <div class="flex items-center">
-                            <div class="p-3 bg-green-900 rounded-md">
-                                <i class="fas fa-check-circle text-green-400"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-400">Resolution Rate</p>
-                                <div class="flex items-baseline">
-                                    <h3 class="text-xl font-semibold text-gray-100">95%</h3>
-                                    <span class="ml-2 text-sm text-green-400">+2.5%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Spam Detection -->
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                        <div class="flex items-center">
-                            <div class="p-3 bg-yellow-900 rounded-md">
-                                <i class="fas fa-shield-alt text-yellow-400"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-400">Spam Detected</p>
-                                <div class="flex items-baseline">
-                                    <h3 class="text-xl font-semibold text-gray-100">142</h3>
-                                    <span class="ml-2 text-sm text-green-400">-12%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tabs -->
-                <div class="bg-gray-800 rounded-lg shadow-lg mb-6">
-                    <div class="border-b border-gray-700">
-                        <nav class="flex" aria-label="Tabs">
-                            <button class="px-6 py-3 text-sm font-medium text-blue-400 border-b-2 border-blue-400 bg-gray-700">
-                                Recent Reports
-                            </button>
-                            <button class="px-6 py-3 text-sm font-medium text-gray-400 hover:text-gray-300">
-                                All Comments
-                            </button>
-                            <button class="px-6 py-3 text-sm font-medium text-gray-400 hover:text-gray-300">
-                                Spam Queue
-                            </button>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- Reports List -->
-                <div class="space-y-4">
-                    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
-                        <div class="flex items-start justify-between">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-10 h-10 flex-shrink-0 bg-red-900 rounded-md flex items-center justify-center">
-                                    <i class="fas fa-flag text-red-400"></i>
-                                </div>
-                                <div>
-                                    <div class="flex items-center space-x-2">
-                                        <h3 class="text-base font-medium text-gray-100">Content Report #2847</h3>
-                                        <span class="px-2 py-1 text-xs font-medium rounded-md bg-red-900 text-red-300">
-                                            High Priority
-                                        </span>
-                                    </div>
-                                    <p class="mt-1 text-sm text-gray-400">Reported for inappropriate content</p>
-                                    
-                                    <!-- Reported Comment -->
-                                    <div class="mt-3 p-4 bg-gray-700 rounded-md border border-gray-600">
-                                        <div class="flex items-center space-x-2 mb-2">
-                                            <span class="text-sm font-medium text-gray-100">John Smith</span>
-                                            <span class="text-sm text-gray-400">2 hours ago</span>
-                                        </div>
-                                        <p class="text-sm text-gray-300">Comment content that requires review...</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex space-x-2">
-                                <button class="p-2 rounded-md hover:bg-gray-700 text-gray-400 hover:text-gray-300" title="Dismiss">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <button class="p-2 rounded-md hover:bg-red-900 text-red-400" title="Delete">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="p-2 rounded-md hover:bg-yellow-900 text-yellow-400" title="Warn">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </button>
-                                <button class="p-2 rounded-md hover:bg-gray-700 text-gray-400" title="More Actions">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Report Details -->
-                        <div class="mt-4 flex items-center space-x-6 text-sm text-gray-400">
-                            <span class="flex items-center">
-                                <i class="fas fa-user mr-2"></i>
-                                Reported by: Admin User
-                            </span>
-                            <span class="flex items-center">
-                                <i class="fas fa-clock mr-2"></i>
-                                Created: Jan 15, 2024
-                            </span>
-                            <span class="flex items-center">
-                                <i class="fas fa-flag mr-2"></i>
-                                Status: Under Review
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pagination -->
-                <div class="mt-6 flex items-center justify-between border-t border-gray-700 bg-gray-800 px-4 py-3 sm:px-6 rounded-lg">
-                    <div class="flex flex-1 justify-between sm:hidden">
-                        <button class="relative inline-flex items-center rounded-md border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700">Previous</button>
-                        <button class="relative ml-3 inline-flex items-center rounded-md border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700">Next</button>
-                    </div>
-                    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                        <div>
-                            <p class="text-sm text-gray-400">
-                                Showing <span class="font-medium text-gray-300">1</span> to <span class="font-medium text-gray-300">10</span> of <span class="font-medium text-gray-300">97</span> results
-                            </p>
-                        </div>
-                        <div>
-                            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                                <button class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-600 hover:bg-gray-700">
-                                    <span class="sr-only">Previous</span>
-                                    <i class="fas fa-chevron-left h-5 w-5"></i>
-                                </button>
-                                <button class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-400 ring-1 ring-inset ring-gray-600 bg-gray-700">1</button>
-                                <button class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-600 hover:bg-gray-700">2</button>
-                                <button class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-600 hover:bg-gray-700">3</button>
-                                <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-inset ring-gray-600">...</span>
-                                <button class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-300 ring-1 ring-inset ring-gray-600 hover:bg-gray-700">8</button>
-                                <button class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-600 hover:bg-gray-700">
-                                    <span class="sr-only">Next</span>
-                                    <i class="fas fa-chevron-right h-5 w-5"></i>
-                                </button>
-                            </nav>
-                        </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Total Comments</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ total_comments }}</h3>
                     </div>
                 </div>
             </div>
-        </main>
-    </body>
-    </html>
+
+            <!-- Active Reports -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-red-500/10 rounded-xl">
+                        <i class="fas fa-flag text-red-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Active Reports</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ pending_reports }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resolved Reports -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-emerald-500/10 rounded-xl">
+                        <i class="fas fa-check-circle text-emerald-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Resolved Reports</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ resolved_reports }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Comments -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-yellow-500/10 rounded-xl">
+                        <i class="fas fa-clock text-yellow-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Pending Comments</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ pending_comments }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-slate-900/50 backdrop-blur rounded-2xl mb-8">
+            <div class="border-b border-slate-800">
+                <nav class="flex space-x-4 px-6" aria-label="Tabs">
+                    <button class="px-4 py-3 text-sm font-medium text-blue-400 border-b-2 border-blue-400">
+                        Recent Reports
+                    </button>
+                    <button class="px-4 py-3 text-sm font-medium text-slate-400 hover:text-slate-300">
+                        All Comments
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Reports List -->
+        <div class="space-y-4">
+            {% for report in reports %}
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6 hover:ring-1 hover:ring-blue-400/50 transition-all">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
+                            <i class="fas fa-flag text-white"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <h3 class="text-lg font-medium text-slate-100">{{ report.reason }}</h3>
+                            </div>
+                            
+                            <!-- Reported Comment -->
+                            <div class="mt-4 p-4 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="text-sm font-medium text-slate-300">{{ report.comment.user.username }}</span>
+                                    <span class="text-sm text-slate-500">{{ report.comment.created_at|date("M d, Y H:i") }}</span>
+                                </div>
+                                <p class="text-slate-300">{{ report.comment.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-2">
+                        <form action="{{ path('admin_report_dismiss', {'id': report.id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-all" title="Dismiss Report">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_comment_delete', {'id': report.comment_id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-red-500/10 text-red-400 transition-all" title="Delete Comment">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_user_warn', {'id': report.comment.user_id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-yellow-500/10 text-yellow-400 transition-all" title="Warn User">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_user_ban', {'id': report.comment.user_id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-purple-500/10 text-purple-400 transition-all" title="Ban User">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Report Details -->
+                <div class="mt-4 flex items-center space-x-4 text-sm text-slate-400">
+                    <span><i class="fas fa-user mr-1"></i> Reported by {{ report.user.username }}</span>
+                    <span><i class="fas fa-clock mr-1"></i> {{ report.created_at|date("M d, Y H:i") }}</span>
+                    <span><i class="fas fa-flag mr-1"></i> Status: {{ report.status }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+            <nav class="flex items-center space-x-2" aria-label="Pagination">
+                {{ knp_pagination_render(reports) }}
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

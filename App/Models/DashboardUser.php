@@ -19,7 +19,7 @@ class DashboardUser extends Model
         $this->primaryKey = "id";
         $this->table = "users";
         return $this->findAll();
-
+        
     }
 
 
