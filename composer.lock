@@ -979,7 +979,6 @@
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
                 "reference": "5cf942bbab3df42afa918caeba947f1b690af64b"
-                "reference": "5cf942bbab3df42afa918caeba947f1b690af64b"
             },
             "dist": {
                 "type": "zip",
@@ -997,7 +996,6 @@
             },
             "require-dev": {
                 "psr/container": "^1.0|^2.0",
-                "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
                 "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
             },
             "type": "library",
@@ -1035,7 +1033,6 @@
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
                 "source": "https://github.com/twigphp/Twig/tree/v3.7.0"
-                "source": "https://github.com/twigphp/Twig/tree/v3.7.0"
             },
             "funding": [
                 {
@@ -1047,7 +1044,6 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-26T07:16:09+00:00"
             "time": "2023-07-26T07:16:09+00:00"
         },
         {

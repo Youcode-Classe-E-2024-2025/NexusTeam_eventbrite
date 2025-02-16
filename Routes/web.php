@@ -79,7 +79,7 @@ $router->add("POST", "/reservation", "TicketController@store");
 $router->add( "POST" , '/payment/create-session', 'PaymentController@createSession');
 $router->add( "GET" , '/payment/success', 'PaymentController@success');
 $router->add( "GET" , '/payment/cancel', 'PaymentController@cancel');
-$router->add( "GET","/payment", "PaymentController@pay");
+$router->add( "POST","/payment", "PaymentController@pay");
 $router->add("GET", "/dashboard/admin", "DashboardUserController@index");
 $router->add("POST", "/user/delete/{id}", "DashboardUserController@DeleteUser");
 $router->add("Post","/user/ban/{id}", "DashboardUserController@BanUser");

@@ -2,9 +2,12 @@
 
 CONST DB_HOST = 'localhost';
 CONST DB_USER = 'postgres';
-CONST DB_PASS = 'rca1234';
+CONST DB_PASS = 'root';
 CONST DB_NAME = 'eventbrite';
 CONST DB_PORT = '5432';
+
+CONST STRIPE_SECRET_KEY = 'sk_test_51QrbPMHJPYFGRJh3tDjZkwDmu5HXNOvFMqPJ0cOLfflUb84BLvCnqwTIFnEauZNjDDQgAqeNb4rOo2lQOkNmtaq300seUQw3W7';
+CONST STRIPE_PUBLIC_KEY = 'pk_test_51QrbPMHJPYFGRJh3IWoOfZOOjuwCw6fiwXH4uoMEveseLEXPUjb8fa4lcVLe13FDHyScNrG0oDjyyfdSqV3xdTJ7001xbLD3Pp';
 
 CONST TABLES = "
 -------------------------------------------------
@@ -168,9 +171,3 @@ CREATE TABLE reports (
 
 // define('STRIPE_SECRET_KEY', 'sk_test_51QrbPMHJPYFGRJh3tDjZkwDmu5HXNOvFMqPJ0cOLfflUb84BLvCnqwTIFnEauZNjDDQgAqeNb4rOo2lQOkNmtaq300seUQw3W7');  
 // define('STRIPE_PUBLIC_KEY', 'pk_test_51QrbPMHJPYFGRJh3IWoOfZOOjuwCw6fiwXH4uoMEveseLEXPUjb8fa4lcVLe13FDHyScNrG0oDjyyfdSqV3xdTJ7001xbLD3Pp');
-
-
-return [
-    'STRIPE_SECRET_KEY' => 'sk_test_51QrbPMHJPYFGRJh3tDjZkwDmu5HXNOvFMqPJ0cOLfflUb84BLvCnqwTIFnEauZNjDDQgAqeNb4rOo2lQOkNmtaq300seUQw3W7',
-    'STRIPE_PUBLIC_KEY' => 'pk_test_51QrbPMHJPYFGRJh3IWoOfZOOjuwCw6fiwXH4uoMEveseLEXPUjb8fa4lcVLe13FDHyScNrG0oDjyyfdSqV3xdTJ7001xbLD3Pp'
-];
