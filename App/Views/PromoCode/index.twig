@@ -1,0 +1,160 @@
+{# Views /organizer/PromoCode/index.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Promo Codes{% endblock %}
+
+{% block content %}
+    <div class="flex justify-center items-center h-full bg-gray-700 text-gray-200">
+        <main class="w-full max-w-4xl p-6">
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold">Promo Code List</h2>
+                    <button id="openModalBtn" class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition duration-200">
+                        Add New Promo Code
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full bg-gray-700 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-600 text-gray-300">
+                        <tr>
+                            <th class="py-3 px-4 text-left">ID</th>
+                            <th class="py-3 px-4 text-left">Code</th>
+                            <th class="py-3 px-4 text-left">Discount (%)</th>
+                            <th class="py-3 px-4 text-left">Expiration</th>
+                            <th class="py-3 px-4 text-left">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-600">
+                        {% if promoCodes is defined and promoCodes|length > 0 %}
+                            {% for promoCode in promoCodes %}
+                                <tr class="hover:bg-gray-600 transition">
+                                    <td class="py-3 px-4">{{ promoCode.getId() }}</td>
+                                    <td class="py-3 px-4">{{ promoCode.getCode() }}</td>
+                                    <td class="py-3 px-4">{{ promoCode.getDiscount() }}%</td>
+                                    <td class="py-3 px-4">{{ promoCode.getExpiration()|date("Y-m-d H:i") }}</td>
+                                    <td class="py-3 px-4 flex space-x-2">
+                                        <a href=" /organizer/PromoCode/update/{{ promoCode.getId() }}" class="text-primary-400 hover:text-primary-500">Edit</a>
+                                        <form action=" /organizer/PromoCode/delete/{{ promoCode.getId() }}" method="post" class="inline">
+                                            <button type="submit" class="text-red-400 hover:text-red-500">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="py-4 text-center text-gray-400">No promo codes available</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    {# Modal for Adding a Promo Code #}
+    <div id="addPromoCodeModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-xl font-semibold mb-4">Add New Promo Code</h2>
+            <form action=" /organizer/PromoCode/create" method="POST">
+                <div class="mb-4">
+                    <label for="promoCode" class="block text-gray-300 mb-2">Promo Code</label>
+                    <input type="text" id="promoCode" name="code" class="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-primary-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="discount" class="block text-gray-300 mb-2">Discount (%)</label>
+                    <input type="number" id="discount" name="discount" min="0" max="100" class="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-primary-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="expiration" class="block text-gray-300 mb-2">Expiration Date</label>
+                    <input type="datetime-local" id="expiration" name="expiration" class="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-primary-500">
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="closeModalBtn" class="bg-gray-600 hover:bg-gray-500 text-white py-2 px-4 rounded-lg transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("addPromoCodeModal");
+            const openModalBtn = document.getElementById("openModalBtn");
+            const closeModalBtn = document.getElementById("closeModalBtn");
+            const input = document.getElementById("promoCode");
+            const errorMessage = document.createElement("p");
+            const submitBtn = document.querySelector("button[type='submit']");
+
+            errorMessage.classList.add("text-red-400", "mt-2", "text-sm");
+            input.insertAdjacentElement("afterend", errorMessage);
+
+            openModalBtn.addEventListener("click", () => {
+                modal.classList.remove("hidden");
+                input.value = "";
+                errorMessage.textContent = "";
+                submitBtn.disabled = true;
+                submitBtn.classList.add("opacity-50", "cursor-not-allowed");
+            });
+
+            closeModalBtn.addEventListener("click", () => {
+                modal.classList.add("hidden");
+            });
+
+            window.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.classList.add("hidden");
+                }
+            });
+
+            let isValid = false;
+
+            modal.addEventListener("submit", (e) => {
+                e.stopPropagation();
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+
+            const validate = (value) => {
+                const regex = /^[a-zA-Z0-9_-]+$/;
+                if (value.length < 3) {
+                    return "Promo code must be at least 3 characters long.";
+                }
+                if (!regex.test(value)) {
+                    return "Only letters, numbers, underscores, and dashes are allowed.";
+                }
+                return "";
+            };
+
+            input.addEventListener("input", () => {
+                setTimeout(() => {
+
+                }, 250);
+                const error = validate(input.value);
+                if (error) {
+                    isValid = false;
+                    errorMessage.textContent = error;
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add("opacity-50", "cursor-not-allowed");
+                } else {
+                    isValid = true;
+                    errorMessage.textContent = "";
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
+                }
+            });
+        });
+    </script>
+{% endblock %}

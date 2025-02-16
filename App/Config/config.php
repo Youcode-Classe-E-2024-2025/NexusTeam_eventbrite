@@ -2,7 +2,7 @@
 
 CONST DB_HOST = 'localhost';
 CONST DB_USER = 'postgres';
-CONST DB_PASS = 'root';
+CONST DB_PASS = 'rca1234';
 CONST DB_NAME = 'eventbrite';
 CONST DB_PORT = '5432';
 
@@ -165,3 +165,12 @@ CREATE TABLE reports (
     admin_id INTEGER REFERENCES users(id) ON DELETE SET NULL
 );
 ";
+
+// define('STRIPE_SECRET_KEY', 'sk_test_51QrbPMHJPYFGRJh3tDjZkwDmu5HXNOvFMqPJ0cOLfflUb84BLvCnqwTIFnEauZNjDDQgAqeNb4rOo2lQOkNmtaq300seUQw3W7');  
+// define('STRIPE_PUBLIC_KEY', 'pk_test_51QrbPMHJPYFGRJh3IWoOfZOOjuwCw6fiwXH4uoMEveseLEXPUjb8fa4lcVLe13FDHyScNrG0oDjyyfdSqV3xdTJ7001xbLD3Pp');
+
+
+return [
+    'STRIPE_SECRET_KEY' => 'sk_test_51QrbPMHJPYFGRJh3tDjZkwDmu5HXNOvFMqPJ0cOLfflUb84BLvCnqwTIFnEauZNjDDQgAqeNb4rOo2lQOkNmtaq300seUQw3W7',
+    'STRIPE_PUBLIC_KEY' => 'pk_test_51QrbPMHJPYFGRJh3IWoOfZOOjuwCw6fiwXH4uoMEveseLEXPUjb8fa4lcVLe13FDHyScNrG0oDjyyfdSqV3xdTJ7001xbLD3Pp'
+];

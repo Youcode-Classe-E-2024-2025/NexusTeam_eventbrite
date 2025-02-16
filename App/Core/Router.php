@@ -42,18 +42,12 @@ class Router
             'path' => $path,
             'handler' => $handler
         ];
-
         $this->request = new Request();
     }
 
-    /**
-     * Dispatches the request by matching it to a defined route.
-     *
-     * @throws RuntimeException If the handler format is invalid or the controller/method does not exist.
-     * 
-     * @return void
-     */
-    public function dispatch(): void
+    // 'GET', '/home', 'HomeController@index'
+
+    public function dispatch()
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
