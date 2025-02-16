@@ -16,9 +16,11 @@
         }
     ],
     "require": {
-        "twig/twig": "3.7",
-        "google/apiclient": "^2.18",
-        "facebook/graph-sdk": "^5.1",
-        "vlucas/phpdotenv": "^5.6"
+        "twig/twig": "^3.19",
+      "ext-gd": "*",
+        "endroid/qr-code": "^6.0",
+        "stripe/stripe-php": "^16.5",
+        "vlucas/phpdotenv": "^5.6",
+        "dompdf/dompdf": "^3.1"
     }
 }

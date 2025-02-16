@@ -72,20 +72,14 @@ $router->add("POST", '/tags/update/{id}', 'TagController@update');
 $router->add("POST", '/tags/delete/{id}', 'TagController@destroy');
 
 
-// Serving upload files
-$router->add("GET", "/uploads/{filename}", function ($filename) {
-    $filePath = __DIR__ . "/../app/uploads/" . $filename;
+$router->add("GET", "/reservation", "TicketController@index");
+$router->add("POST", "/reservation", "TicketController@store");
 
-    if (file_exists($filePath)) {
-        header("Content-Type: " . mime_content_type($filePath));
-        readfile($filePath);
-        exit;
-    } else {
-        http_response_code(404);
-        echo "Fichier introuvable : " . $filePath; // Debug
-        exit;
-    }
-});
+
+$router->add( "POST" , '/payment/create-session', 'PaymentController@createSession');
+$router->add( "GET" , '/payment/success', 'PaymentController@success');
+$router->add( "GET" , '/payment/cancel', 'PaymentController@cancel');
+$router->add( "GET","/payment", "PaymentController@pay");
 $router->add("GET", "/dashboard/admin", "DashboardUserController@index");
 $router->add("POST", "/user/delete/{id}", "DashboardUserController@DeleteUser");
 $router->add("Post","/user/ban/{id}", "DashboardUserController@BanUser");
