@@ -30,7 +30,7 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    status user_status NOT NULL DEFAULT 'active';
+    status user_status NOT NULL DEFAULT 'active',
     role user_role NOT NULL DEFAULT 'participant',
     avatar VARCHAR(255),
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -172,14 +172,7 @@ CREATE TABLE reports (
 
 
 
-CREATE TABLE comments (
-    id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL, 
-    content TEXT NOT NULL, 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status comment_status DEFAULT 'pending', 
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+
 
 -- Table des signalements
 CREATE TABLE reports (
@@ -204,8 +197,5 @@ CREATE TABLE moderation (
     FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
     FOREIGN KEY (moderator_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
-
-
-
-
+ 
+";
