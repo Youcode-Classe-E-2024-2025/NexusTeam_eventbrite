@@ -1,132 +1,161 @@
-{# Views/Admin/usersIndex.twig #}
 {% extends "base.twig" %}
 
-{% block title %}Events Management
-{% endblock %}
+{% block title %}Events Management{% endblock %}
 
 {% block content %}
-	<div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
-		<div class="fixed flex flex-col top-0 left-0 w-[15%] bg-white h-full border-r">
-			<div class="flex items-center justify-center h-14 border-b">
-				<div class="text-2xl font-bold text-primary-600">NexusTeam</div>
-			</div>
-			<div class="overflow-y-auto overflow-x-hidden flex-grow">
-				<ul class="flex flex-col py-4 space-y-1">
-					<li class="px-5">
-						<div class="flex flex-row items-center h-8">
-							<div class="text-sm font-light tracking-wide text-gray-500">Menu</div>
-						</div>
-					</li>
-					<li>
-						<a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-							<span class="inline-flex justify-center items-center ml-4">
-								<i class="fas fa-users text-primary-500"></i>
-							</span>
-							<span class="ml-2 text-sm tracking-wide truncate">Users</span>
-						</a>
-					</li>
-					<li>
-						<a href="admin-categories.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-							<span class="inline-flex justify-center items-center ml-4">
-								<i class="fas fa-th-large"></i>
-							</span>
-							<span class="ml-2 text-sm tracking-wide truncate">Categories</span>
-						</a>
-					</li>
-					<li>
-						<a href="admin-tags.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-							<span class="inline-flex justify-center items-center ml-4">
-								<i class="fas fa-tags"></i>
-							</span>
-							<span class="ml-2 text-sm tracking-wide truncate">Tags</span>
-						</a>
-					</li>
-					<li>
-						<a href="admin-courses.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-							<span class="inline-flex justify-center items-center ml-4">
-								<i class="fas fa-book"></i>
-							</span>
-							<span class="ml-2 text-sm tracking-wide truncate">Courses</span>
-						</a>
-					</li>
-					<li>
-						<a href="admin-events.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-							<span class="inline-flex justify-center items-center ml-4">
-								<i class="fas fa-calendar-alt"></i>
-							</span>
-							<span class="ml-2 text-sm tracking-wide truncate">Events</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="ml-64 flex-1">
-			<header class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-				<h1 class="text-2xl font-semibold text-gray-800">Manage Events</h1>
-				<div class="flex items-center space-x-4">
-					<span class="text-gray-600">Welcome, Admin</span>
-					<button class="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition duration-200">
-						Logout
-					</button>
-				</div>
-			</header>
-			<main class="p-6">
-				<div class="bg-white rounded-lg shadow-md p-6">
-					<div class="flex justify-between items-center mb-6">
-						<h2 class="text-xl font-semibold text-gray-800">Event List</h2>
-					</div>
-					<div class="overflow-x-auto">
-						<table class="min-w-full bg-white">
-							<thead class="bg-gray-100">
-								<tr>
-									<th class="py-3 px-4 text-left">Organizer</th>
-									<th class="py-3 px-4 text-left">Title</th>
-									<th class="py-3 px-4 text-left">Start date</th>
-									<th class="py-3 px-4 text-left">End date</th>
-									<th class="py-3 px-4 text-left">Location</th>
-									<th class="py-3 px-4 text-left">Price</th>
-									<th class="py-3 px-4 text-left">Max Capacity</th>
-									<th class="py-3 px-4 text-left">Status</th>
-									<th class="py-3 px-4 text-left">Category</th>
-									<th class="py-3 px-4 text-left">Actions</th>
-								</tr>
-							</thead>
-							<tbody class="divide-y divide-gray-200">
-								{% for event in events %}
-									<tr>
-										<td class="py-3 px-8">{{ event.id }}</td>
-										<td class="py-3 px-4">{{ event.title }}</td>
-										<td class="py-3 px-4">{{ event.start_date|date("d/m/Y") }}</td>
-										<td class="py-3 px-4">{{ event.end_date|date("d/m/Y") }}</td>
-										<td class="py-3 px-4">{{ event.location }}</td>
-										<td class="py-3 px-4">{{ event.price }}</td>
-										<td class="py-3 px-4">{{ event.max_capacity }}</td>
-										<td class="py-3 px-4">
-											<span class="bg-green-100 text-green-800 py-1 px-2 rounded-full text-sm">{{ event.state }}</span>
-										</td>
-										<td class="py-3 px-4">{{ event.category_id}}</td>
-										<td
-											class="py-3 px-4 flex flex-column gap-4">
-											{% if event.state == 'approved' %}
-											<form action="/event/suspend/{{event.id}}" method="POST">
-												<button class="text-orange-500 hover:text-orange-700 mr-2">Reject</button>
-											</form>
-											{% endif %}
+<div class="min-h-screen bg-gray-900 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 min-h-screen bg-gray-800 border-r border-gray-700">
+        <div class="flex items-center p-6 border-b border-gray-700">
+            <div class="relative">
+                <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">NexusTeam</h2>
+                <div class="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-purple-400 to-pink-400"></div>
+            </div>
+        </div>
+        <nav class="p-4 space-y-1">
+            {% set menu_items = [
+                { icon: 'users', text: 'Users', href: '#', active: true },
+                { icon: 'th-large', text: 'Categories', href: 'admin-categories.html' },
+                { icon: 'tags', text: 'Tags', href: 'admin-tags.html' },
+                { icon: 'book', text: 'Courses', href: 'admin-courses.html' },
+                { icon: 'calendar-alt', text: 'Events', href: 'admin-events.html' }
+            ] %}
+            {% for item in menu_items %}
+                <a href="{{ item.href }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ item.active ? 'bg-gray-700 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white' }}">
+                    <i class="fas fa-{{ item.icon }} w-5 h-5 {{ item.active ? 'text-purple-400' : 'text-gray-400 group-hover:text-purple-400' }}"></i>
+                    <span class="ml-3">{{ item.text }}</span>
+                    {% if item.active %}
+                        <span class="ml-auto w-2 h-2 rounded-full bg-purple-400"></span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </nav>
+    </aside>
 
-											{% if event.state == 'pending' %}
-											<form action="/event/approve/{{event.id}}" method="POST">
-												<button class="text-green-500 hover:text-green-700">Approve</button>
-											</form>
-											{% endif %}
+    <!-- Main Content -->
+    <div class="flex-1">
+        <!-- Top Navigation -->
+        <header class="bg-gray-800/80 backdrop-blur-sm border-b border-gray-700">
+            <div class="px-4 sm:px-6">
+                <div class="flex items-center justify-between h-16">
+                    <h1 class="text-2xl font-semibold text-white">Manage Events</h1>
+                    <div class="flex items-center space-x-4">
+                        <div class="hidden sm:flex items-center space-x-2">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <span class="text-sm text-gray-300">Welcome, Admin</span>
+                        </div>
+                        <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-purple-500 transition-all duration-200">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-											<form action="/event/suspend/{{event.id}}" method="POST">
-												<button class="text-red-500 hover:text-red-700">Delete</button>
-											</form>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
+        <!-- Main Content Area -->
+        <main class="p-4 sm:p-6 lg:p-8">
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {% set stats = [
+                    {icon: 'calendar-check', title: 'Total Events', value: '524', change: '+12.5%', color: 'purple'},
+                    {icon: 'user-friends', title: 'Active Users', value: '2,847', change: '+3.2%', color: 'pink'},
+                    {icon: 'clock', title: 'Pending Events', value: '38', change: '-2.4%', color: 'blue'},
+                    {icon: 'chart-line', title: 'Revenue', value: '$12,875', change: '+8.1%', color: 'green'}
+                ] %}
+                {% for stat in stats %}
+                    <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                        <div class="flex items-center justify-between">
+                            <div class="inline-flex items-center justify-center p-3 rounded-xl bg-{{ stat.color }}-500/10 text-{{ stat.color }}-400">
+                                <i class="fas fa-{{ stat.icon }} w-6 h-6"></i>
+                            </div>
+                            <span class="text-sm font-medium {{ stat.change[0] == '+' ? 'text-green-400' : 'text-red-400' }}">
+                                {{ stat.change }}
+                            </span>
+                        </div>
+                        <h3 class="mt-4 text-2xl font-bold text-white">{{ stat.value }}</h3>
+                        <p class="text-sm text-gray-400">{{ stat.title }}</p>
+                    </div>
+                {% endfor %}
+            </div>
 
-					</div>
-				{% endblock %}
+            <!-- Events Grid -->
+            <div class="bg-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
+                <div class="px-6 py-5 border-b border-gray-700 flex items-center justify-between">
+                    <h2 class="text-xl font-semibold text-white">Event List</h2>
+                    <div class="flex space-x-3">
+                        <button class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-600 transition-all duration-200">
+                            <i class="fas fa-filter mr-2 text-gray-400"></i>
+                            Filter
+                        </button>
+                        <button class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-600 transition-all duration-200">
+                            <i class="fas fa-download mr-2 text-gray-400"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for event in events %}
+                        <div class="group bg-gray-700/50 hover:bg-gray-700 rounded-xl p-6 border border-gray-600 transition-all duration-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ event.state == 'approved' ? 'bg-green-400/10 text-green-400' : 'bg-yellow-400/10 text-yellow-400' }}">
+                                    <span class="w-1.5 h-1.5 rounded-full {{ event.state == 'approved' ? 'bg-green-400' : 'bg-yellow-400' }} mr-1.5"></span>
+                                    {{ event.state }}
+                                </span>
+                                <div class="flex items-center space-x-2">
+                                    {% if event.state == 'approved' %}
+                                        <form action="/event/suspend/{{event.id}}" method="POST">
+                                            <button class="p-1.5 rounded-lg text-orange-400 hover:bg-orange-400/10 transition-colors duration-200">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    {% if event.state == 'pending' %}
+                                        <form action="/event/approve/{{event.id}}" method="POST">
+                                            <button class="p-1.5 rounded-lg text-green-400 hover:bg-green-400/10 transition-colors duration-200">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    <form action="/event/suspend/{{event.id}}" method="POST">
+                                        <button class="p-1.5 rounded-lg text-red-400 hover:bg-red-400/10 transition-colors duration-200">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">{{ event.title }}</h3>
+                            <div class="space-y-2 text-sm text-gray-400">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar-day w-5 h-5 mr-2 text-gray-500"></i>
+                                    <span>{{ event.start_date|date("d/m/Y") }} - {{ event.end_date|date("d/m/Y") }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt w-5 h-5 mr-2 text-gray-500"></i>
+                                    <span>{{ event.location }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-tag w-5 h-5 mr-2 text-gray-500"></i>
+                                    <span>{{ event.price }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-users w-5 h-5 mr-2 text-gray-500"></i>
+                                    <span>{{ event.max_capacity }} attendees</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-600">
+                                <span class="inline-flex items-center px-3 py-1 rounded-lg bg-gray-600 text-gray-300 text-sm">
+                                    Category: {{ event.category_id }}
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

@@ -4,120 +4,186 @@
 {% block title %}Users Management{% endblock %}
 
 {% block content %}
+<div class="min-h-screen bg-slate-950">
+    <!-- Refined Sidebar -->
+    <div class="fixed w-64 z-30 h-full bg-slate-900 shadow-lg">
+        <div class="flex items-center justify-center h-20">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                NexusTeam
+            </h1>
+        </div>
+        
+        <nav class="mt-6 px-3">
+            <a href="#" class="flex items-center px-4 py-3 mb-2 text-slate-100 bg-slate-800/50 rounded-lg">
+                <i class="fas fa-users text-blue-400"></i>
+                <span class="ml-3 font-medium">Users</span>
+            </a>
+            
+            <a href="admin-categories.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-th-large"></i>
+                <span class="ml-3">Categories</span>
+            </a>
+            
+            <a href="admin-tags.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-tags"></i>
+                <span class="ml-3">Tags</span>
+            </a>
+            
+            <a href="admin-courses.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-book"></i>
+                <span class="ml-3">Courses</span>
+            </a>
+            
+            <a href="admin-events.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="ml-3">Events</span>
+            </a>
+        </nav>
+    </div>
 
-<div class="h-full flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
-	<div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
-		<div class="flex items-center justify-center h-14 border-b">
-			<div class="text-2xl font-bold text-primary-600">NexusTeam Admin</div>
-		</div>
-		<div class="overflow-y-auto overflow-x-hidden flex-grow">
-			<ul class="flex flex-col py-4 space-y-1">
-				<li class="px-5">
-					<div class="flex flex-row items-center h-8">
-						<div class="text-sm font-light tracking-wide text-gray-500">Menu</div>
-					</div>
-				</li>
-				<li>
-					<a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-						<span class="inline-flex justify-center items-center ml-4">
-							<i class="fas fa-users text-primary-500"></i>
-						</span>
-						<span class="ml-2 text-sm tracking-wide truncate">Users</span>
-					</a>
-				</li>
-				<li>
-					<a href="admin-categories.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-						<span class="inline-flex justify-center items-center ml-4">
-							<i class="fas fa-th-large"></i>
-						</span>
-						<span class="ml-2 text-sm tracking-wide truncate">Categories</span>
-					</a>
-				</li>
-				<li>
-					<a href="admin-tags.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-						<span class="inline-flex justify-center items-center ml-4">
-							<i class="fas fa-tags"></i>
-						</span>
-						<span class="ml-2 text-sm tracking-wide truncate">Tags</span>
-					</a>
-				</li>
-				<li>
-					<a href="admin-courses.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-						<span class="inline-flex justify-center items-center ml-4">
-							<i class="fas fa-book"></i>
-						</span>
-						<span class="ml-2 text-sm tracking-wide truncate">Courses</span>
-					</a>
-				</li>
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Users -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-blue-500/10 rounded-xl">
+                        <i class="fas fa-users text-blue-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Total Users</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ users|length }}</h3>
+                        <p class="text-blue-400 text-sm mt-1">
+                            <i class="fas fa-arrow-up text-xs mr-1"></i>12% increase
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-				   <li>
-                        <a href="admin-events.html" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-primary-500 pr-6">
-                            <span class="inline-flex justify-center items-center ml-4">
-                                <i class="fas fa-calendar-alt"></i>
-                            </span>
-                            <span class="ml-2 text-sm tracking-wide truncate">Events</span>
-                        </a>
-                    </li>
-			</ul>
-		</div>
-	</div>
-	<div class="ml-64 flex-1">
+            <!-- Active Users -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-emerald-500/10 rounded-xl">
+                        <i class="fas fa-user-check text-emerald-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Active Users</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ users|filter(user => user.status == 'active')|length }}</h3>
+                        <p class="text-emerald-400 text-sm mt-1">
+                            <i class="fas fa-arrow-up text-xs mr-1"></i>8% increase
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-		<main class="p-6 min-h-[80vh]">
-			<div class="bg-white rounded-lg shadow-md p-6">
-				<div class="flex justify-between items-center mb-6">
-					<h2 class="text-xl font-semibold text-gray-800">User List</h2>
+            <!-- Admin Users -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-purple-500/10 rounded-xl">
+                        <i class="fas fa-user-shield text-purple-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Admins</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ users|filter(user => user.role == 'admin')|length }}</h3>
+                        <p class="text-purple-400 text-sm mt-1">
+                            <i class="fas fa-equals text-xs mr-1"></i>No change
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-				</div>
-				<div class="overflow-x-auto">
-					<table class="min-w-full bg-white">
-						<thead class="bg-gray-100">
-							<tr>
-								<th class="py-3 px-4 text-left">ID</th>
-								<th class="py-3 px-4 text-left">Name</th>
-								<th class="py-3 px-4 text-left">Email</th>
-								<th class="py-3 px-4 text-left">Role</th>
-								<th class="py-3 px-4 text-left">Status</th>
-								<th class="py-3 px-4 text-left">Actions</th>
-							</tr>
-						</thead>
-						<tbody class="divide-y divide-gray-200">
-							{% for user in users %}
-								<tr>
-									<td class="py-3 px-4">{{ user.id}}</td>
-									<td class="py-3 px-4">{{ user.name}}</td>
-									<td class="py-3 px-4">{{ user.email}}</td>
-									<td class="py-3 px-4">{{ user.role}}</td>
-									<td class="py-3 px-4">
-										<span class="bg-green-100 text-green-800 py-1 px-2 rounded-full text-sm">{{ user.status}}</span>
-									</td>
-									<td class="py-3 px-4 flex flex-column gap-4">
+            <!-- Banned Users -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-red-500/10 rounded-xl">
+                        <i class="fas fa-user-slash text-red-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Banned Users</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ users|filter(user => user.status == 'banned')|length }}</h3>
+                        <p class="text-red-400 text-sm mt-1">
+                            <i class="fas fa-arrow-down text-xs mr-1"></i>3% decrease
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Users Grid -->
+        <div class="bg-slate-900/50 backdrop-blur rounded-2xl">
+            <div class="px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold text-slate-100">User Management</h2>
+           
+            </div>
 
-										{% if user.status == 'active' %}
-										<form action="/user/ban/{{user.id}}" method="POST">
-											<button class="text-orange-500 hover:text-orange-700 mr-2">Ban</button>
-										</form>
-										{% endif %}
-										
-									     {% if user.status == 'banned' %}
-										<form action="/user/unban/{{user.id}}" method="POST">
-											<button class="text-green-500 hover:text-green-700">Unban</button>
-										</form>
-										{% endif %}
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {% for user in users %}
+                    <div class="group">
+                        <div class="bg-slate-950/50 rounded-2xl p-5 backdrop-blur transition-all duration-300 hover:ring-1 hover:ring-blue-400/50 hover:bg-slate-900/50">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                                        <span class="text-lg font-bold text-white">{{ user.name|slice(0,1)|upper }}</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-medium text-slate-100">{{ user.name }}</h3>
+                                        <p class="text-sm text-slate-400">{{ user.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
 
-										<form action="/user/delete/{{user.id}}" method="POST">
-											<button class="text-red-500 hover:text-red-700">Delete</button>
-										</form>
-									</td>
-								</tr>
-							</td>
-						</tbody>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+                            <div class="flex items-center justify-between mt-4">
+                                <form action="/user/update-role/{{user.id}}" method="POST" class="flex-1 mr-2">
+                                    <select name="role" 
+                                            onchange="this.form.submit()" 
+                                            class="w-full bg-slate-800 text-slate-200 rounded-lg px-3 py-1 text-sm border border-slate-700 focus:ring-2 focus:ring-blue-400/50 focus:border-transparent transition-all">
+                                        {# <option>Role</option>#}
+									    <option value="participent" {% if user.role == 'participent' %}selected{% endif %}>participent</option>
+                                        <option value="organizer" {% if user.role == 'organizer' %}selected{% endif %}>organizer</option>
+                                        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+                                    </select>
+                                </form>
+                                
+                                <span class="inline-flex items-center px-3 py-1 text-sm rounded-lg {% if user.status == 'active' %}bg-emerald-500/10 text-emerald-400{% else %}bg-red-500/10 text-red-400{% endif %}">
+                                    <i class="fas {% if user.status == 'active' %}fa-check-circle{% else %}fa-ban{% endif %} mr-2"></i>
+                                    {{ user.status }}
+                                </span>
+                            </div>
+
+                            <div class="flex justify-end mt-4 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                {% if user.status == 'active' %}
+                                <form action="/user/ban/{{user.id}}" method="POST">
+                                    <button class="p-2 rounded-lg hover:bg-yellow-500/10 text-yellow-400 transition-all" title="Ban User">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+
+                                {% if user.status == 'banned' %}
+                                <form action="/user/unban/{{user.id}}" method="POST">
+                                    <button class="p-2 rounded-lg hover:bg-emerald-500/10 text-emerald-400 transition-all" title="Unban User">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+
+                                <form action="/user/delete/{{user.id}}" method="POST">
+                                    <button class="p-2 rounded-lg hover:bg-red-500/10 text-red-400 transition-all" title="Delete User">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+
 {% endblock %}
+

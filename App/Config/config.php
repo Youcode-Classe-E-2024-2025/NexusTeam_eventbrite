@@ -21,6 +21,10 @@ CREATE TYPE payment_method AS ENUM ('PayPal', 'Stripe');
 CREATE TYPE payment_status AS ENUM ('successful', 'failed', 'refunded');
 CREATE TYPE report_status AS ENUM ('pending', 'processed');
 CREATE TYPE user_status AS ENUM ('active', 'banned');
+CREATE TYPE comment_status AS ENUM ('pending', 'approved', 'rejected');
+CREATE TYPE report_reason AS ENUM ('spam', 'insult', 'harassment', 'other');
+CREATE TYPE moderation_action AS ENUM ('approve', 'reject', 'delete');
+
 -------------------------------------------------
 -- Users Table
 -------------------------------------------------
@@ -29,7 +33,7 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    status user_status NOT NULL DEFAULT 'active';
+    status user_status NOT NULL DEFAULT 'active',
     role user_role NOT NULL DEFAULT 'participant',
     avatar VARCHAR(255),
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -149,10 +153,13 @@ GROUP BY u.id;
 -------------------------------------------------
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_id INT NOT NULL, 
+    event_id INT NOT NULL, 
+    content TEXT NOT NULL, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status comment_status DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
 );
 
 -------------------------------------------------
@@ -167,7 +174,34 @@ CREATE TABLE reports (
     status report_status NOT NULL DEFAULT 'pending',
     admin_id INTEGER REFERENCES users(id) ON DELETE SET NULL
 );
-";
 
-// define('STRIPE_SECRET_KEY', 'sk_test_51QrbPMHJPYFGRJh3tDjZkwDmu5HXNOvFMqPJ0cOLfflUb84BLvCnqwTIFnEauZNjDDQgAqeNb4rOo2lQOkNmtaq300seUQw3W7');  
-// define('STRIPE_PUBLIC_KEY', 'pk_test_51QrbPMHJPYFGRJh3IWoOfZOOjuwCw6fiwXH4uoMEveseLEXPUjb8fa4lcVLe13FDHyScNrG0oDjyyfdSqV3xdTJ7001xbLD3Pp');
+
+
+
+
+
+-- Table des signalements
+CREATE TABLE reports (
+    id SERIAL PRIMARY KEY,
+    comment_id INT NOT NULL, -- Le commentaire signalé
+    user_id INT NOT NULL, -- L'utilisateur qui a signalé
+    reason report_reason NOT NULL, -- Motif du signalement
+    description TEXT, -- Détails supplémentaires
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE moderation (
+    id SERIAL PRIMARY KEY,
+    comment_id INT NOT NULL, 
+    moderator_id INT NOT NULL,
+    action moderation_action NOT NULL, 
+    reason TEXT, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (moderator_id) REFERENCES users(id) ON DELETE CASCADE
+);
+ 
+";

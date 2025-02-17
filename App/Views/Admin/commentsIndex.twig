@@ -1,0 +1,173 @@
+{# Views/Admin/commentsReportsIndex.twig #}
+{% extends "base.twig" %}
+
+{% block title %}Comments & Reports Management{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-slate-950">
+    <!-- Sidebar -->
+    <div class="fixed w-64 h-full bg-slate-900 shadow-lg">
+        <div class="flex items-center justify-center h-20">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                NexusTeam
+            </h1>
+        </div>
+        
+        <nav class="mt-6 px-3">
+            <a href="admin-users.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-users"></i>
+                <span class="ml-3">Users</span>
+            </a>
+            
+            <a href="#" class="flex items-center px-4 py-3 mb-2 text-slate-100 bg-slate-800/50 rounded-lg">
+                <i class="fas fa-comments text-blue-400"></i>
+                <span class="ml-3 font-medium">Comments & Reports</span>
+            </a>
+            
+            <a href="admin-categories.html" class="flex items-center px-4 py-3 mb-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/30 rounded-lg transition-all">
+                <i class="fas fa-th-large"></i>
+                <span class="ml-3">Categories</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Comments -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-blue-500/10 rounded-xl">
+                        <i class="fas fa-comments text-blue-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Total Comments</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ total_comments }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Reports -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-red-500/10 rounded-xl">
+                        <i class="fas fa-flag text-red-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Active Reports</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ pending_reports }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resolved Reports -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-emerald-500/10 rounded-xl">
+                        <i class="fas fa-check-circle text-emerald-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Resolved Reports</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ resolved_reports }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Comments -->
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6">
+                <div class="flex items-center">
+                    <div class="p-4 bg-yellow-500/10 rounded-xl">
+                        <i class="fas fa-clock text-yellow-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-slate-400 text-sm">Pending Comments</p>
+                        <h3 class="text-3xl font-bold text-slate-100">{{ pending_comments }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-slate-900/50 backdrop-blur rounded-2xl mb-8">
+            <div class="border-b border-slate-800">
+                <nav class="flex space-x-4 px-6" aria-label="Tabs">
+                    <button class="px-4 py-3 text-sm font-medium text-blue-400 border-b-2 border-blue-400">
+                        Recent Reports
+                    </button>
+                    <button class="px-4 py-3 text-sm font-medium text-slate-400 hover:text-slate-300">
+                        All Comments
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Reports List -->
+        <div class="space-y-4">
+            {% for report in reports %}
+            <div class="bg-slate-900/50 backdrop-blur rounded-2xl p-6 hover:ring-1 hover:ring-blue-400/50 transition-all">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
+                            <i class="fas fa-flag text-white"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <h3 class="text-lg font-medium text-slate-100">{{ report.reason }}</h3>
+                            </div>
+                            
+                            <!-- Reported Comment -->
+                            <div class="mt-4 p-4 bg-slate-950 rounded-xl border border-slate-800">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="text-sm font-medium text-slate-300">{{ report.comment.user.username }}</span>
+                                    <span class="text-sm text-slate-500">{{ report.comment.created_at|date("M d, Y H:i") }}</span>
+                                </div>
+                                <p class="text-slate-300">{{ report.comment.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-2">
+                        <form action="{{ path('admin_report_dismiss', {'id': report.id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-all" title="Dismiss Report">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_comment_delete', {'id': report.comment_id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-red-500/10 text-red-400 transition-all" title="Delete Comment">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_user_warn', {'id': report.comment.user_id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-yellow-500/10 text-yellow-400 transition-all" title="Warn User">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </button>
+                        </form>
+                        <form action="{{ path('admin_user_ban', {'id': report.comment.user_id}) }}" method="POST">
+                            <button class="p-2 rounded-lg hover:bg-purple-500/10 text-purple-400 transition-all" title="Ban User">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Report Details -->
+                <div class="mt-4 flex items-center space-x-4 text-sm text-slate-400">
+                    <span><i class="fas fa-user mr-1"></i> Reported by {{ report.user.username }}</span>
+                    <span><i class="fas fa-clock mr-1"></i> {{ report.created_at|date("M d, Y H:i") }}</span>
+                    <span><i class="fas fa-flag mr-1"></i> Status: {{ report.status }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+            <nav class="flex items-center space-x-2" aria-label="Pagination">
+                {{ knp_pagination_render(reports) }}
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
